@@ -1,4 +1,5 @@
-var cur = { "hv assembling machine": 1};
+var cur = { "basic circuit" : 7
+};
 
 function simpl(basket, src, dst) {
     if (src in basket) {
@@ -14,9 +15,13 @@ function simpl(basket, src, dst) {
     }
 }
 
+simpl(cur, "maintenance hatch", {"lv hull":1});
+
 simpl(cur, "hv laser engraver", {"gold cable x1": 2, "hv hull": 1, "advanced circuit":3, "hv piston":2, "hv emitter": 1});
 simpl(cur, "hv forming press", {"gold cable x1": 4, "hv hull": 1, "advanced circuit":2, "hv piston":2});
 simpl(cur, "hv assembling machine", {"gold cable x1": 2, "hv hull": 1, "advanced circuit":2, "hv conveyor":2, "hv robot arm": 2});
+
+simpl(cur, "vacuum freezer", {"frost proof casing": 1, "hv pump": 3, "gold cable x1":2, "data control circuit": 3});
 
 simpl(cur, "mv diesel generator", {"copper cable x1": 1, "mv hull": 1, "mv motor": 2, "good circuit" : 1, "aluminum gear" : 2, "mv piston" : 2});
 simpl(cur, "mv fluid canner", {"copper cable x1": 2, "mv hull": 1, "mv pump": 2, "good circuit" : 2, "glass": 2});
@@ -24,14 +29,18 @@ simpl(cur, "mv chemical reactor", {"copper cable x1": 2, "mv hull": 1, "mv motor
 simpl(cur, "mv chemical bath", {"copper cable x1": 1, "mv hull": 1, "mv pump": 1, "good circuit" : 2, "glass": 2, "mv conveyor": 2});
 simpl(cur, "mv centrifuge", {"copper cable x1": 2, "mv hull": 1, "mv motor": 2, "good circuit" : 4});
 simpl(cur, "mv compressor", {"copper cable x1": 2, "mv hull": 1, "mv piston": 2, "good circuit" : 2});
+simpl(cur, "mv gas turbine", {"good circuit": 2, "bronze rotor":3, "mv motor":2, "copper cable x1": 1, "mv hull":1});
+simpl(cur, "mv energy hatch", {"copper cable x1": 1, "mv hull":1});
+
+simpl(cur, "ulv input bus", {"ulv hull": 1, "chest": 1});
+simpl(cur, "ulv output bus", {"ulv hull": 1, "chest": 1});
 
 simpl(cur, "hv emitter", {"chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2});
-
 simpl(cur, "hv hull", {"gold cable x1": 2, "hv casing": 1 });
 simpl(cur, "hv casing", {"stainless steel plate": 8 });
 simpl(cur, "hv robot arm", {"stainless steel rod": 2, "hv piston":1, "hv motor":2, "gold cable x1": 3, "advanced circuit": 1});
 simpl(cur, "hv conveyor", {"gold cable x1": 1, "rubber plate": 6, "hv motor": 2});
-simpl(cur, "hv pump", {"bronze rotor": 1, "bronze screw":1, "gold cable x1": 1, "rubber ring": 2, "steel fluid pipe": 1, "hv motor" : 1});
+simpl(cur, "hv pump", {"steel rotor": 1, "steel screw":1, "gold cable x1": 1, "rubber ring": 2, "stainless steel fluid pipe": 1, "hv motor" : 1});
 simpl(cur, "hv piston", {"stainless steel rod": 2, "hv motor":1, "gold cable x1": 2, "stainless steel plate": 3, "stainless steel gear":1});
 simpl(cur, "hv motor", {"stainless steel rod": 2, "magnetic steel rod":1, "gold cable x1": 2, "copper wire x4": 4});
 
@@ -42,27 +51,46 @@ simpl(cur, "mv pump", {"bronze rotor": 1, "bronze screw":1, "copper cable x1": 1
 simpl(cur, "mv piston", {"aluminum rod": 2, "mv motor":1, "copper cable x1": 2, "aluminum plate": 3, "aluminum gear":1});
 simpl(cur, "mv motor", {"aluminum rod": 2, "magnetic steel rod":1, "copper cable x1": 2, "copper wire x2": 4});
 
-simpl(cur, "good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 });
-simpl(cur, "basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 });
-simpl(cur, "basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
+simpl(cur, "lv hull", {"tin cable x1": 2, "lv casing": 1 });
+simpl(cur, "lv casing", {"steel plate": 8 });
+
+simpl(cur, "ulv hull", {"ulv casing": 1, "lead cable x1": 2});
+simpl(cur, "ulv casing", {"steel plate": 4});
+
+simpl(cur, "data control circuit", { "processor board": 1, "data storage chip" : 3, "soldering alloy": 1 });
+simpl(cur, "processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
+simpl(cur, "data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "soldering alloy": 0.5 });
+simpl(cur, "engraved crystal chip", { "olivine plate": 1 });
 
 simpl(cur, "advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "soldering alloy": 0.5 });
 simpl(cur, "advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 });
 simpl(cur, "advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
 
+simpl(cur, "good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 });
+simpl(cur, "basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 });
+simpl(cur, "basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
+
 simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 1, "soldering alloy": 0.125 });
 
+simpl(cur, "etched ev wiring", { "platinum foil": 1 });
 simpl(cur, "etched hv wiring", { "gold foil": 1 });
 simpl(cur, "etched mv wiring", { "copper foil": 1 });
 
+simpl(cur, "frost proof casing", {"aluminum plate": 6, "aluminum frame box":1 });
+simpl(cur, "aluminum frame box", {"aluminum rod": 4});
+
 simpl(cur, "bronze rotor", {"bronze plate": 4, "bronze screw":1, "bronze ring" : 1});
+simpl(cur, "steel rotor", {"steel plate": 4, "steel screw":1, "steel ring" : 1});
 
 simpl(cur, "rubber ring", {"rubber": 0.25 });
 simpl(cur, "bronze ring", {"bronze": 0.25 });
+simpl(cur, "steel ring", {"steel": 0.25 });
 
 simpl(cur, "bronze screw", {"bronze bolt": 1});
+simpl(cur, "steel screw", {"steel bolt": 1});
 
 simpl(cur, "bronze bolt", {"bronze": 0.125});
+simpl(cur, "steel bolt", {"steel": 0.125});
 
 simpl(cur, "magnetic steel rod", {"steel rod": 1 });
 simpl(cur, "steel rod", {"steel": 0.5 });
@@ -73,8 +101,10 @@ simpl(cur, "chrome rod", {"chrome": 0.5 });
 simpl(cur, "stainless steel gear", {"stainless steel" : 4});
 simpl(cur, "aluminum gear", {"aluminum" : 4});
 
+simpl(cur, "stainless steel fluid pipe", {"stainless steel plate": 3});
 simpl(cur, "steel fluid pipe", {"steel plate": 3});
 
+simpl(cur, "platinum foil", { "platinum plate": 0.25 });
 simpl(cur, "gold foil", { "gold plate": 0.25 });
 simpl(cur, "copper foil", { "copper plate": 0.25 });
 
@@ -87,11 +117,24 @@ simpl(cur, "copper cable x1", { "copper wire x1": 1, "rubber plate" : 1});
 simpl(cur, "copper wire x4", { "copper wire x2": 2 });
 simpl(cur, "copper wire x2", { "copper wire x1": 2 });
 simpl(cur, "copper wire x1", { "copper": 0.5 });
+
+simpl(cur, "tin cable x1", { "tin wire x1": 1, "rubber plate" : 1});
+simpl(cur, "tin wire x4", { "tin wire x2": 2 });
+simpl(cur, "tin wire x2", { "tin wire x1": 2 });
+simpl(cur, "tin wire x1", { "tin": 0.5 });
+
+simpl(cur, "lead cable x1", { "lead wire x1": 1, "rubber plate" : 1});
+simpl(cur, "lead wire x4", { "lead wire x2": 2 });
+simpl(cur, "lead wire x2", { "lead wire x1": 2 });
+simpl(cur, "lead wire x1", { "lead": 0.5 });
+
 simpl(cur, "red alloy wire x1", { "red alloy": 0.5 });
 
 simpl(cur, "steel item casing", {"steel": 0.5 });
 
+simpl(cur, "olivine plate", { "olivine dust": 1 });
 simpl(cur, "stainless steel plate", {"stainless steel": 1 });
+simpl(cur, "platinum plate", {"platinum": 1 });
 simpl(cur, "gold plate", {"gold": 1 });
 simpl(cur, "lapis plate", {"lapis dust": 1 });
 simpl(cur, "chrome plate", {"chrome": 1 });
@@ -103,6 +146,8 @@ simpl(cur, "bronze plate", {"bronze": 1});
 simpl(cur, "rubber plate", {"rubber": 1});
 
 simpl(cur, "red alloy", {"copper": 1, "redstone": 4});
+
+simpl(cur, "chest", {"plank": 8});
 
 for (var k in cur) {
     console.log(k + ": " + cur[k]);
