@@ -1,4 +1,4 @@
-var cur = { "basic circuit" : 7
+var cur = { "lv scanner":1, "basic circuit": -7
 };
 
 function simpl(basket, src, dst) {
@@ -32,7 +32,9 @@ simpl(cur, "mv compressor", {"copper cable x1": 2, "mv hull": 1, "mv piston": 2,
 simpl(cur, "mv gas turbine", {"good circuit": 2, "bronze rotor":3, "mv motor":2, "copper cable x1": 1, "mv hull":1});
 simpl(cur, "mv energy hatch", {"copper cable x1": 1, "mv hull":1});
 
-simpl(cur, "ulv input bus", {"ulv hull": 1, "chest": 1});
+simpl(cur, "lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
+
+simpl(cur, "ulv input bus", { "ulv hull": 1, "chest": 1 });
 simpl(cur, "ulv output bus", {"ulv hull": 1, "chest": 1});
 
 simpl(cur, "hv emitter", {"chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2});
@@ -51,7 +53,9 @@ simpl(cur, "mv pump", {"bronze rotor": 1, "bronze screw":1, "copper cable x1": 1
 simpl(cur, "mv piston", {"aluminum rod": 2, "mv motor":1, "copper cable x1": 2, "aluminum plate": 3, "aluminum gear":1});
 simpl(cur, "mv motor", {"aluminum rod": 2, "magnetic steel rod":1, "copper cable x1": 2, "copper wire x2": 4});
 
-simpl(cur, "lv hull", {"tin cable x1": 2, "lv casing": 1 });
+simpl(cur, "lv sensor", { "brass rod": 1, "basic circuit": 1, "quartzite": 1, "steel plate": 4 });
+simpl(cur, "lv emitter", { "brass rod": 4, "basic circuit": 2, "quartzite": 1, "tin cable x1": 2 });
+simpl(cur, "lv hull", { "tin cable x1": 2, "lv casing": 1 });
 simpl(cur, "lv casing", {"steel plate": 8 });
 
 simpl(cur, "ulv hull", {"ulv casing": 1, "lead cable x1": 2});
