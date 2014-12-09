@@ -1,4 +1,4 @@
-var cur = { "lv scanner":1, "basic circuit": -7
+var cur = {    "implosion compressor multi": 1
 };
 
 function simpl(basket, src, dst) {
@@ -14,6 +14,18 @@ function simpl(basket, src, dst) {
         console.log("Craft " + n + " " + src);
     }
 }
+
+simpl(cur, "implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
+
+simpl(cur, "implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminium cable":2,"advanced circuit":2 });
+simpl(cur, "lv energy hatch", { "tin cable": 1, "lv hull":1 });
+simpl(cur, "lv input bus", { "lv hull": 1, "chest": 1 });
+simpl(cur, "lv output bus", { "lv hull": 1, "chest":1 });
+simpl(cur, "lv muffler hatch", { "lv hull": 1, "steel fluid pipe": 1 });
+
+simpl(cur, "solid steel casing", { "steel plate": 6, "steel frame box": 1 });
+simpl(cur, "steel frame box", { "steel rod":4 });
+
 
 simpl(cur, "maintenance hatch", {"lv hull":1});
 
