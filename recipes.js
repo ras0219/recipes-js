@@ -1,5 +1,5 @@
 var cur = {
-    "basic circuit": 1
+    "mutatron": 1, "mutagen producer":1
 };
 
 function simpl(basket, src, dst) {
@@ -16,6 +16,19 @@ function simpl(basket, src, dst) {
     }
 }
 
+
+simpl(cur, "mutagen producer", {"aluminum plate":2, "aluminum gear":2,"hv hull":1, "small bronze fluid pipe":1, "power module":2,"mutagen tank":1 });
+simpl(cur, "mutatron", { "aluminum gear": 2, "hv hull": 1, "bee receptacle": 3, "mutagen tank": 1, "power module": 1, "genetics processor": 1 })
+
+simpl(cur, "mutagen tank", { "aluminum plate": 6, "glass pane": 3 });
+
+simpl(cur, "power module", { "aluminum gear": 4, "gold": 2, "nand": 2, "block of redstone": 1 });
+simpl(cur, "bee receptacle", { "aluminum": 5, "block of redstone":2, "glass pane":1, "weighted pressure plate(light)":1 });
+simpl(cur, "weighted pressure plate(light)", { "gold plate": 2 });
+simpl(cur, "genetics processor", { "nether quartz": 4, "diamond":4, "pulsating chipset":1 });
+
+
+simpl(cur, "glass pane", { "glass": 2.66 });
 simpl(cur, "implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
 
 simpl(cur, "implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminium cable":2,"advanced circuit":2 });
@@ -162,7 +175,8 @@ simpl(cur, "steel plate", {"steel": 1});
 simpl(cur, "bronze plate", {"bronze": 1});
 simpl(cur, "rubber plate", {"rubber": 1});
 
-simpl(cur, "red alloy", {"copper": 1, "redstone": 4});
+simpl(cur, "red alloy", { "copper": 1, "redstone": 4 });
+simpl(cur, "block of redstone", {  "redstone": 9 });
 
 simpl(cur, "chest", {"plank": 8});
 
