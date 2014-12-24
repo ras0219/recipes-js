@@ -1,4 +1,5 @@
-var cur = {    "implosion compressor multi": 1
+var cur = {
+    "basic circuit": 1
 };
 
 function simpl(basket, src, dst) {
