@@ -1,5 +1,5 @@
 var cur = {
-    "mutatron": 1, "mutagen producer":1
+    "industrial apiary": 1
 };
 
 function simpl(basket, src, dst) {
@@ -16,7 +16,9 @@ function simpl(basket, src, dst) {
     }
 }
 
-
+simpl(cur, "industrial apiary", { "aluminum gear": 2, "power module": 2, "hv hull": 1, "bee receptacle": 1, "genetics processor": 1, "swarmer": 2 });
+simpl(cur, "swarmer", { "gold": 2, "diamantine electron tube": 4, "alveary": 1 });
+simpl(cur, "diamantine electron tube", {"redstone":0.5, "molten glass":0.25,"diamond":0.8});
 simpl(cur, "mutagen producer", {"aluminum plate":2, "aluminum gear":2,"hv hull":1, "small bronze fluid pipe":1, "power module":2,"mutagen tank":1 });
 simpl(cur, "mutatron", { "aluminum gear": 2, "hv hull": 1, "bee receptacle": 3, "mutagen tank": 1, "power module": 1, "genetics processor": 1 })
 
