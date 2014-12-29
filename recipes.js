@@ -1,5 +1,5 @@
 var cur = {
-    "industrial apiary": 1
+    "advanced photovoltaic cell": 1
 };
 
 function simpl(basket, src, dst) {
@@ -15,10 +15,25 @@ function simpl(basket, src, dst) {
         console.log("Craft " + n + " " + src);
     }
 }
+//ENDER IO
+simpl(cur, "advanced photovoltaic cell", { "daylight sensor": 1, "double capacitor": 2, "enlightened fused quartz": 2, "vibrant alloy": 2, "pulsating iron": 2 });
+simpl(cur, "pulsating iron", {"iron":1, "ender pearl":1});
+simpl(cur, "vibrant alloy", { "energetic alloy": 1, "ender pearl":1 });
 
+simpl(cur, "enlightened fused quartz", { "fused quartz": 4, "glowstone": 4 });
+simpl(cur, "fused quartz", { "nether quartz": 4 });
+
+simpl(cur, "double capacitor", { "basic capacitor": 2, "coal dust": 1, "energetic alloy": 6 });
+simpl(cur, "basic capacitor", { "redstone": 2, "gold": 4, "red alloy": 1 });
+simpl(cur, "energetic alloy", {"gold":1, "redstone":1, "glowstone":1});
+
+//END ENDERIO
+
+simpl(cur, "daylight sensor", { "glass": 3, "wood slab":3, "nether quartz": 3 });
+//GENDUSTRY
 simpl(cur, "industrial apiary", { "aluminum gear": 2, "power module": 2, "hv hull": 1, "bee receptacle": 1, "genetics processor": 1, "swarmer": 2 });
 simpl(cur, "swarmer", { "gold": 2, "diamantine electron tube": 4, "alveary": 1 });
-simpl(cur, "diamantine electron tube", {"redstone":0.5, "molten glass":0.25,"diamond":0.8});
+simpl(cur, "diamantine electron tube", {"redstone":0.5, "molten glass":0.25,"diamond":1.25});
 simpl(cur, "mutagen producer", {"aluminum plate":2, "aluminum gear":2,"hv hull":1, "small bronze fluid pipe":1, "power module":2,"mutagen tank":1 });
 simpl(cur, "mutatron", { "aluminum gear": 2, "hv hull": 1, "bee receptacle": 3, "mutagen tank": 1, "power module": 1, "genetics processor": 1 })
 
@@ -29,7 +44,7 @@ simpl(cur, "bee receptacle", { "aluminum": 5, "block of redstone":2, "glass pane
 simpl(cur, "weighted pressure plate(light)", { "gold plate": 2 });
 simpl(cur, "genetics processor", { "nether quartz": 4, "diamond":4, "pulsating chipset":1 });
 
-
+//END GENDUSTRY
 simpl(cur, "glass pane", { "glass": 2.66 });
 simpl(cur, "implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
 
@@ -51,6 +66,7 @@ simpl(cur, "hv assembling machine", {"gold cable x1": 2, "hv hull": 1, "advanced
 
 simpl(cur, "vacuum freezer", {"frost proof casing": 1, "hv pump": 3, "gold cable x1":2, "data control circuit": 3});
 
+simpl(cur, "mv fluid extractor", {"glass":2, "copper cable x1":2, "mv hull":1, "mv piston":1,"mv pump":1, "good circuit":2});
 simpl(cur, "mv diesel generator", {"copper cable x1": 1, "mv hull": 1, "mv motor": 2, "good circuit" : 1, "aluminum gear" : 2, "mv piston" : 2});
 simpl(cur, "mv fluid canner", {"copper cable x1": 2, "mv hull": 1, "mv pump": 2, "good circuit" : 2, "glass": 2});
 simpl(cur, "mv chemical reactor", {"copper cable x1": 2, "mv hull": 1, "mv motor": 1, "good circuit" : 2, "glass": 2, "bronze rotor": 1});
