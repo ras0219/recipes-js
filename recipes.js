@@ -1,5 +1,5 @@
 var cur = {
-    "advanced photovoltaic cell": 1
+    "dark soularium jetplate":1
 };
 
 function simpl(basket, src, dst) {
@@ -16,6 +16,17 @@ function simpl(basket, src, dst) {
     }
 }
 //ENDER IO
+simpl(cur, "dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
+simpl(cur, "reinforced glider wing", { "enriched soularium alloy": 3, "conductive iron armor plating": 3 });
+simpl(cur, "vibrant jetpack_104", { "vibrant jetpack": 1, "dark steel armor plating": 1 });
+simpl(cur, "vibrant jetpack", { "vibrant alloy": 4, "vibrant thrusters": 2, "octadic capacitor": 1, "energetic jetpack": 1 });
+simpl(cur, "dark soularium thrusters", { "enriched soularium alloy": 2, "octadic capacitor": 2, "flight control unit": 1, "vibrant thrusters": 1 });
+simpl(cur, "octadic capacitor pack_104", { "electrical steel armor plating": 1, "octadic capacitor pack": 1 });
+simpl(cur, "octadic capacitor pack", {"octadic capacitor": 3, "vibrant crystal": 1, "vibrant alloy": 2,"vibrant capacitor bank":2});
+
+simpl(cur, "enriched soularium alloy", { "dark steel": 1, "soularium": 1, "pulsating crystal": 1 });
+
+
 simpl(cur, "advanced photovoltaic cell", { "daylight sensor": 1, "double capacitor": 2, "enlightened fused quartz": 2, "vibrant alloy": 2, "pulsating iron": 2 });
 simpl(cur, "pulsating iron", {"iron":1, "ender pearl":1});
 simpl(cur, "vibrant alloy", { "energetic alloy": 1, "ender pearl":1 });
@@ -31,6 +42,13 @@ simpl(cur, "energetic alloy", {"gold":1, "redstone":1, "glowstone":1});
 
 simpl(cur, "daylight sensor", { "glass": 3, "wood slab":3, "nether quartz": 3 });
 //GENDUSTRY
+simpl(cur, "dna extractor", { "aluminum gear": 4, "genetics processor": 2, "mutagen tank": 1, "power module": 1, "hv hull": 1 });
+simpl(cur, "protein liquifier", {"aluminum gear":5,"aluminum":1,"mutagen tank":1,"power module":1,"hv hull":1});
+simpl(cur, "genetic replicator", { "aluminum gear": 4, "genetics processor": 2, "power module": 2, "hv hull": 1 });
+simpl(cur, "genetic sampler", {"bronze gear":4, "genetics processor":1,"diamond":1,"bee receptacle":1, "sturdy casing":1,"power module":1});
+simpl(cur, "genetic transposer", { "hv hull": 1, "aluminum gear": 2, "power module": 1, "mutagen tank": 1, "genetics processor": 2, "small bronze fluid pipe": 2});
+simpl(cur, "imprinter", { "aluminum gear": 4, "genetics processor": 1, "power module": 1, "hv hull": 1, "bee receptacle": 2 });
+
 simpl(cur, "industrial apiary", { "aluminum gear": 2, "power module": 2, "hv hull": 1, "bee receptacle": 1, "genetics processor": 1, "swarmer": 2 });
 simpl(cur, "swarmer", { "gold": 2, "diamantine electron tube": 4, "alveary": 1 });
 simpl(cur, "diamantine electron tube", {"redstone":0.5, "molten glass":0.25,"diamond":1.25});
@@ -79,8 +97,9 @@ simpl(cur, "mv energy hatch", {"copper cable x1": 1, "mv hull":1});
 simpl(cur, "lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
 
 simpl(cur, "ulv input bus", { "ulv hull": 1, "chest": 1 });
-simpl(cur, "ulv output bus", {"ulv hull": 1, "chest": 1});
+simpl(cur, "ulv output bus", { "ulv hull": 1, "chest": 1 });
 
+simpl(cur, "hv chemical bath", { "copper cable x1": 1, "hv hull": 1, "hv pump": 1, "advanced circuit": 2, "glass": 2, "hv conveyor": 2 });
 simpl(cur, "hv emitter", {"chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2});
 simpl(cur, "hv hull", {"gold cable x1": 2, "hv casing": 1 });
 simpl(cur, "hv casing", {"stainless steel plate": 8 });
@@ -147,7 +166,8 @@ simpl(cur, "stainless steel rod", {"stainless steel": 0.5 });
 simpl(cur, "chrome rod", {"chrome": 0.5 });
 
 simpl(cur, "stainless steel gear", {"stainless steel" : 4});
-simpl(cur, "aluminum gear", {"aluminum" : 4});
+simpl(cur, "aluminum gear", { "aluminum": 4 });
+simpl(cur, "bronze gear", { "bronze": 4 });
 
 simpl(cur, "stainless steel fluid pipe", {"stainless steel plate": 3});
 simpl(cur, "steel fluid pipe", {"steel plate": 3});
