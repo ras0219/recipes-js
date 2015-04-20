@@ -13,6 +13,93 @@ function simpl(basket, src, dst) {
         console.log("Craft " + n + " " + src);
     }
 }
+//ENDER IO
+simpl(cur, "dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
+simpl(cur, "reinforced glider wing", { "enriched soularium alloy": 3, "conductive iron armor plating": 3 });
+simpl(cur, "vibrant jetpack_104", { "vibrant jetpack": 1, "dark steel armor plating": 1 });
+simpl(cur, "vibrant jetpack", { "vibrant alloy": 4, "vibrant thrusters": 2, "octadic capacitor": 1, "energetic jetpack": 1 });
+simpl(cur, "energetic jetpack", {"energetic alloy":4, "double capacitor":1, "energetic thrusters":2, "electrical steel jetpack":1});
+simpl(cur, "dark soularium thrusters", { "enriched soularium alloy": 2, "octadic capacitor": 2, "flight control unit": 1, "vibrant thrusters": 1 });
+simpl(cur, "octadic capacitor pack_104", { "electrical steel armor plating": 1, "octadic capacitor pack": 1 });
+simpl(cur, "octadic capacitor pack", {"octadic capacitor": 3, "vibrant crystal": 1, "vibrant alloy": 2,"vibrant capacitor bank":2});
+simpl(cur, "vibrant capacitor bank", {"octadic capacitor":4, "vibrant crystal":1, "iron":4});
+simpl(cur, "enriched soularium alloy", { "dark steel": 1, "soularium": 1, "pulsating crystal": 1 });
+
+simpl(cur, "dark soularium thruster", {"enriched soularium alloy":2,"flight control unit":1,"octadic capacitor":2,"vibrant thruster":1});
+simpl(cur, "electrical steel jetpack", { "electrical steel": 4, "basic capacitor": 1, "electrical steel thruster": 2, "conductive iron jetpack": 1 });
+simpl(cur, "conductive iron jetpack", { "conductive iron": 4, "basic capacitor": 1, "leather straps": 1, "conductive iron thruster": 2 });
+simpl(cur, "conductive iron thruster", { "basic capacitor": 2, "insulated redstone conduit": 2, "conductive iron": 2, "redstone": 1, "basic gear": 2 });
+simpl(cur, "insulated redstone conduit", { "conduit binder": 6 / 8, "redstone alloy": 3 / 8 });
+simpl(cur, "electrical steel thruster", { "electrical steel": 2, "basic capacitor": 2, "energy conduit": 2, "redstone": 1, "machine chassis": 2 });
+simpl(cur, "energetic thrusters", {"redstone alloy":1, "pulsating crystal":2,"double-layer capacitor":2,"enhanced energy conduit":2,"energetic alloy":2,});
+
+simpl(cur, "pulsating crystal", { "pulsating iron nugget": 8, "diamond": 1 });
+simpl(cur, "pulsating iron nugget", {"pulsating iron":1/9})
+simpl(cur, "pulsating iron", {"iron":1,"ender pearl":1});
+
+simpl(cur, "advanced photovoltaic cell", { "daylight sensor": 1, "double capacitor": 2, "enlightened fused quartz": 2, "vibrant alloy": 2, "pulsating iron": 2 });
+simpl(cur, "pulsating iron", { "iron": 1, "ender pearl": 1 });
+simpl(cur, "vibrant crystal", {"emerald":1,"vibrant alloy":8/9});
+
+simpl(cur, "energy conduit", { "conduit binder": 6 / 8, "conductive iron": 3 / 8 });
+simpl(cur, "enlightened fused quartz", { "fused quartz": 4, "glowstone": 4 });
+simpl(cur, "fused quartz", { "nether quartz": 4 });
+
+simpl(cur, "machine chassis", {"basic capacitor":1,"iron":4,"iron bars":4});
+simpl(cur, "octadic capacitor", { "vibrant alloy": 2, "glowstone": 1, "double capacitor": 2 });
+simpl(cur, "vibrant alloy", { "energetic alloy": 1, "ender pearl": 1 });
+simpl(cur, "double capacitor", { "basic capacitor": 2, "coal dust": 1, "energetic alloy": 6 });
+simpl(cur, "basic capacitor", { "redstone": 2, "gold": 4, "red alloy": 1 });
+simpl(cur, "energetic alloy", {"gold":1, "redstone":1, "glowstone dust":1});
+
+simpl(cur, "dark steel armor plating", { "dark steel": 10, "electrical steel armor plating": 1 });
+simpl(cur, "dark steel", { "iron": 1, "coal dust": 1, "obsidian": 1 });
+simpl(cur, "soularium", { "soul sand": 1, "gold ingot": 1 });
+
+simpl(cur, "electrical steel armor plating", { "electrical steel": 10, "conductive iron armor plating": 1 });
+simpl(cur, "conductive iron armor plating", { "conductive iron": 10, "silicon armor plating": 1 });
+simpl(cur, "silicon armor plating", { "silicon": 5, "iron": 4 });
+simpl(cur, "conductive iron", { "redstone": 1, "iron": 1 });
+simpl(cur, "electrical steel", { "iron": 1, "coal dust": 1, "silicon": 1 });
+simpl(cur, "basic gear", { "cobblestone": 4, "stick": 4 });
+simpl(cur, "redstone alloy", {"redstone":1,"silicon":1});
+//END ENDERIO
+
+simpl(cur, "daylight sensor", { "glass": 3, "wood slab":3, "nether quartz": 3 });
+//GENDUSTRY
+simpl(cur, "dna extractor", { "aluminum gear": 4, "genetics processor": 2, "mutagen tank": 1, "power module": 1, "hv hull": 1 });
+simpl(cur, "protein liquifier", {"aluminum gear":5,"aluminum":1,"mutagen tank":1,"power module":1,"hv hull":1});
+simpl(cur, "genetic replicator", { "aluminum gear": 4, "genetics processor": 2, "power module": 2, "hv hull": 1 });
+simpl(cur, "genetic sampler", {"bronze gear":4, "genetics processor":1,"diamond":1,"bee receptacle":1, "sturdy casing":1,"power module":1});
+simpl(cur, "genetic transposer", { "hv hull": 1, "aluminum gear": 2, "power module": 1, "mutagen tank": 1, "genetics processor": 2, "small bronze fluid pipe": 2});
+simpl(cur, "imprinter", { "aluminum gear": 4, "genetics processor": 1, "power module": 1, "hv hull": 1, "bee receptacle": 2 });
+
+simpl(cur, "industrial apiary", { "aluminum gear": 2, "power module": 2, "hv hull": 1, "bee receptacle": 1, "genetics processor": 1, "swarmer": 2 });
+simpl(cur, "swarmer", { "gold": 2, "diamantine electron tube": 4, "alveary": 1 });
+simpl(cur, "diamantine electron tube", {"redstone":0.5, "molten glass":0.25,"diamond":1.25});
+simpl(cur, "mutagen producer", {"aluminum plate":2, "aluminum gear":2,"hv hull":1, "small bronze fluid pipe":1, "power module":2,"mutagen tank":1 });
+simpl(cur, "mutatron", { "aluminum gear": 2, "hv hull": 1, "bee receptacle": 3, "mutagen tank": 1, "power module": 1, "genetics processor": 1 })
+
+simpl(cur, "mutagen tank", { "aluminum plate": 6, "glass pane": 3 });
+
+simpl(cur, "power module", { "aluminum gear": 4, "gold": 2, "nand": 2, "block of redstone": 1 });
+simpl(cur, "bee receptacle", { "aluminum": 5, "block of redstone":2, "glass pane":1, "weighted pressure plate(light)":1 });
+simpl(cur, "weighted pressure plate(light)", { "gold plate": 2 });
+simpl(cur, "genetics processor", { "nether quartz": 4, "diamond":4, "pulsating chipset":1 });
+
+//END GENDUSTRY
+simpl(cur, "glass pane", { "glass": 2.66 });
+simpl(cur, "implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
+
+simpl(cur, "implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminium cable":2,"advanced circuit":2 });
+simpl(cur, "lv energy hatch", { "tin cable": 1, "lv hull":1 });
+simpl(cur, "lv input bus", { "lv hull": 1, "chest": 1 });
+simpl(cur, "lv output bus", { "lv hull": 1, "chest":1 });
+simpl(cur, "lv muffler hatch", { "lv hull": 1, "steel fluid pipe": 1 });
+
+simpl(cur, "solid steel casing", { "steel plate": 6, "steel frame box": 1 });
+simpl(cur, "steel frame box", { "steel rod":4 });
+
 
 simpl(cur, "electric jetpack", { "advanced circuit": 1, "iron item casing": 4, "glowstone": 2, "batbox": 1 });
 simpl(cur, "batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
@@ -31,9 +118,13 @@ simpl(cur, "hv polarizer", { "gold cable x1": 2, "hv hull": 1, "copper wire x4":
 simpl(cur, "hv laser engraver", { "gold cable x1": 2, "hv hull": 1, "advanced circuit": 3, "hv piston": 2, "hv emitter": 1 });
 simpl(cur, "hv forming press", {"gold cable x1": 4, "hv hull": 1, "advanced circuit":2, "hv piston":2});
 simpl(cur, "hv assembling machine", {"gold cable x1": 2, "hv hull": 1, "advanced circuit":2, "hv conveyor":2, "hv robot arm": 2});
+simpl(cur, "hv chemical bath", { "copper cable x1": 1, "hv hull": 1, "hv pump": 1, "advanced circuit": 2, "glass": 2, "hv conveyor": 2 });
+
+simpl(cur, "vacuum freezer", {"frost proof casing": 1, "hv pump": 3, "gold cable x1":2, "data control circuit": 3});
 
 simpl(cur, "mv packager", { "copper cable x1": 2, "mv hull": 1, "mv robot arm": 1, "good circuit": 2, "mv conveyor": 1, "chest": 2 });
-simpl(cur, "mv diesel generator", { "copper cable x1": 1, "mv hull": 1, "mv motor": 2, "good circuit": 1, "aluminum gear": 2, "mv piston": 2 });
+simpl(cur, "mv fluid extractor", {"glass":2, "copper cable x1":2, "mv hull":1, "mv piston":1,"mv pump":1, "good circuit":2});
+simpl(cur, "mv diesel generator", {"copper cable x1": 1, "mv hull": 1, "mv motor": 2, "good circuit" : 1, "aluminum gear" : 2, "mv piston" : 2});
 simpl(cur, "mv fluid canner", {"copper cable x1": 2, "mv hull": 1, "mv pump": 2, "good circuit" : 2, "glass": 2});
 simpl(cur, "mv chemical reactor", {"copper cable x1": 2, "mv hull": 1, "mv motor": 1, "good circuit" : 2, "glass": 2, "bronze rotor": 1});
 simpl(cur, "mv chemical bath", {"copper cable x1": 1, "mv hull": 1, "mv pump": 1, "good circuit" : 2, "glass": 2, "mv conveyor": 2});
@@ -47,7 +138,7 @@ simpl(cur, "lv assembling machine", { "tin cable x1": 2, "lv hull": 1, "basic ci
 simpl(cur, "lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
 
 simpl(cur, "ulv input bus", { "ulv hull": 1, "chest": 1 });
-simpl(cur, "ulv output bus", {"ulv hull": 1, "chest": 1});
+simpl(cur, "ulv output bus", { "ulv hull": 1, "chest": 1 });
 
 simpl(cur, "ev hull", { "aluminum cable x1": 2, "ev casing": 1 });
 simpl(cur, "ev casing", { "titanium plate": 8 });
@@ -146,8 +237,9 @@ simpl(cur, "chrome rod", {"chrome": 0.5 });
 simpl(cur, "titanium rod", { "titanium": 0.5 });
 
 simpl(cur, "stainless steel gear", {"stainless steel" : 4});
-simpl(cur, "aluminum gear", {"aluminum" : 4});
 simpl(cur, "titanium gear", { "titanium": 4 });
+simpl(cur, "aluminum gear", { "aluminum": 4 });
+simpl(cur, "bronze gear", { "bronze": 4 });
 
 simpl(cur, "titanium fluid pipe", { "titanium plate": 3 });
 simpl(cur, "stainless steel fluid pipe", { "stainless steel plate": 3 });
@@ -214,7 +306,6 @@ simpl(cur, "steel plate", { "steel": 1 });
 simpl(cur, "bronze plate", {"bronze": 1});
 simpl(cur, "rubber plate", {"rubber": 1});
 
-simpl(cur, "red alloy", {"copper": 1, "redstone": 4});
 simpl(cur, "annealed copper", { "copper": 1, "oxygen": 1000 });
 
 simpl(cur, "chest", {"plank": 8});
@@ -224,7 +315,12 @@ simpl(cur, "black steel dust", {"nickel dust":0.2, "black bronze dust":0.2, "ste
 simpl(cur, "black bronze dust", {"gold dust":0.2, "silver dust":0.2, "copper dust":0.6});
 simpl(cur, "brass dust", {"zinc dust":0.25, "copper dust":0.75});
 simpl(cur, "rose gold dust", {"gold dust":0.8, "copper dust":0.2});
+simpl(cur, "red alloy", { "copper": 1, "redstone": 4 });
+simpl(cur, "block of redstone", {  "redstone": 9 });
+
+console.log("=======================================INGRIDIENT=========================");
 
 for (var k in cur) {
     console.log(k + ": " + cur[k]);
 }
+
