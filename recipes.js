@@ -1,4 +1,7 @@
-var cur = { "lv fluid canner": 1};
+var cur = { "electric blast furnace": 1, "lv muffler hatch": 1, "lv maintenance hatch": 1,
+            "lv energy hatch": 2, "lv input bus": 1, "lv output bus": 1, "heat proof machine casing": 11,
+            "cupronickel coil": 16
+};
 
 function simpl(basket, src, dst) {
     if (src in basket) {
