@@ -1,6 +1,9 @@
-var cur = { "electric blast furnace": 1, "lv muffler hatch": 1, "lv maintenance hatch": 1,
-            "lv energy hatch": 2, "lv input bus": 1, "lv output bus": 1, "heat proof machine casing": 11,
-            "cupronickel coil": 16
+var cur = {
+/*	"reactor controller": 1, "reactor control rod": 1,
+	"yellorium fuel rod": 1, "reactor coolant port": 2,
+	"reactor casing": 20, "reactor access port": 4
+	*/
+	"lv steam turbine": 1
 };
 
 function simpl(basket, src, dst) {
@@ -13,9 +16,18 @@ function simpl(basket, src, dst) {
             }
             basket[k] += dst[k] * n;
         }
-        console.log("Craft " + n + " " + src);
+        console.log("Craft " + n + " " + src + " from " + dst);
     }
 }
+// BigReactors
+simpl(cur, "reactor controller", {"yellorium": 2, "redstone": 1, "diamond":1, "reactor casing": 4});
+simpl(cur, "reactor control rod", {"graphite":3,"yellorium":1,"redstone":1,"reactor casing":4});
+simpl(cur, "yellorium fuel rod", {"steel plate":4,"yellorium":2,"yellorium block":1,"reactor glass":2});
+simpl(cur, "reactor glass", {"reactor casing":1, "fused quartz":2});
+simpl(cur, "reactor access port", {"reactor casing":4,"chest":1,"piston":1});
+simpl(cur, "reactor coolant port", {"reactor casing":4,"bucket":1,"piston":1,"steel":2});
+simpl(cur, "reactor casing", {"steel plate":16.0/4.0, "yellorium":0.25, "graphite":0.5});
+
 //ENDER IO
 simpl(cur, "dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
 simpl(cur, "reinforced glider wing", { "enriched soularium alloy": 3, "conductive iron armor plating": 3 });
@@ -95,7 +107,7 @@ simpl(cur, "glass pane", { "glass": 2.66 });
 simpl(cur, "implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
 
 simpl(cur, "implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminium cable":2,"advanced circuit":2 });
-simpl(cur, "lv energy hatch", { "tin cable": 1, "lv hull":1 });
+simpl(cur, "lv energy hatch", { "tin cable x1": 1, "lv hull":1 });
 simpl(cur, "lv input bus", { "lv hull": 1, "chest": 1 });
 simpl(cur, "lv output bus", { "lv hull": 1, "chest":1 });
 simpl(cur, "lv muffler hatch", { "lv hull": 1, "steel fluid pipe": 1 });
@@ -103,6 +115,10 @@ simpl(cur, "lv muffler hatch", { "lv hull": 1, "steel fluid pipe": 1 });
 simpl(cur, "solid steel casing", { "steel plate": 6, "steel frame box": 1 });
 simpl(cur, "steel frame box", { "steel rod":4 });
 
+simpl(cur, "electric blast furnace", { "heat proof casing": 1, "basic circuit": 3, "tin cable x1": 2, "furnace": 3});
+
+simpl(cur, "heat proof casing", { "invar plate": 6, "invar frame box": 1 });
+simpl(cur, "invar frame box", { "invar rod": 4 });
 
 simpl(cur, "electric jetpack", { "advanced circuit": 1, "iron item casing": 4, "glowstone": 2, "batbox": 1 });
 simpl(cur, "batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
@@ -139,6 +155,7 @@ simpl(cur, "mv energy hatch", {"copper cable x1": 1, "mv hull":1});
 simpl(cur, "lv fluid canner", {"tin cable x1": 2, "lv hull": 1, "lv pump": 2, "basic circuit" : 2, "glass": 2});
 simpl(cur, "lv assembling machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv conveyor":2, "lv robot arm":2 });
 simpl(cur, "lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
+simpl(cur, "lv steam turbine", {"basic circuit": 1, "tin rotor":2, "lv motor":2, "tin cable x1": 1, "lv hull":1, "bronze fluid pipe": 2});
 
 simpl(cur, "ulv input bus", { "ulv hull": 1, "chest": 1 });
 simpl(cur, "ulv output bus", { "ulv hull": 1, "chest": 1 });
@@ -195,12 +212,10 @@ simpl(cur, "advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
 //simpl(cur, "basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 });
 //simpl(cur, "basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
 
-simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 1, "soldering alloy": 0.125 });
-
 // This is for "bronze-age tech"
 simpl(cur, "basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
+simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 1, "soldering alloy": 0.125 });
 //simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
-
 
 simpl(cur, "etched ev wiring", { "platinum foil": 1 });
 simpl(cur, "etched hv wiring", { "gold foil": 1 });
@@ -212,18 +227,22 @@ simpl(cur, "frost proof casing", {"aluminum plate": 6, "aluminum frame box":1 })
 simpl(cur, "aluminum frame box", {"aluminum rod": 4});
 
 simpl(cur, "bronze rotor", {"bronze plate": 4, "bronze screw":1, "bronze ring" : 1});
+simpl(cur, "tin rotor", {"tin plate": 4, "tin screw":1, "tin ring" : 1});
 simpl(cur, "steel rotor", {"steel plate": 4, "steel screw":1, "steel ring" : 1});
 simpl(cur, "stainless steel rotor", { "stainless steel plate": 4, "stainless steel screw": 1, "stainless steel ring": 1 });
 
 simpl(cur, "rubber ring", {"rubber": 0.25 });
 simpl(cur, "bronze ring", {"bronze": 0.25 });
 simpl(cur, "steel ring", {"steel": 0.25 });
+simpl(cur, "tin ring", {"tin rod": 1 });
 simpl(cur, "stainless steel ring", { "stainless steel": 0.25 });
 
+simpl(cur, "tin screw", {"tin bolt": 1});
 simpl(cur, "bronze screw", {"bronze bolt": 1});
 simpl(cur, "steel screw", {"steel bolt": 1});
 simpl(cur, "stainless steel screw", { "stainless steel bolt": 1 });
 
+simpl(cur, "tin bolt", {"tin rod": 0.5});
 simpl(cur, "bronze bolt", {"bronze": 0.125});
 simpl(cur, "steel bolt", { "steel": 0.125 });
 simpl(cur, "stainless steel bolt", { "stainless steel": 0.125 });
@@ -238,6 +257,9 @@ simpl(cur, "aluminum rod", {"aluminum": 0.5 });
 simpl(cur, "stainless steel rod", {"stainless steel": 0.5 });
 simpl(cur, "chrome rod", {"chrome": 0.5 });
 simpl(cur, "titanium rod", { "titanium": 0.5 });
+simpl(cur, "invar rod", { "invar": 0.5 });
+simpl(cur, "tin rod", { "tin": 0.5 });
+simpl(cur, "iron rod", { "iron": 1 });
 
 simpl(cur, "stainless steel gear", {"stainless steel" : 4});
 simpl(cur, "titanium gear", { "titanium": 4 });
@@ -247,6 +269,7 @@ simpl(cur, "bronze gear", { "bronze": 4 });
 simpl(cur, "titanium fluid pipe", { "titanium plate": 3 });
 simpl(cur, "stainless steel fluid pipe", { "stainless steel plate": 3 });
 simpl(cur, "steel fluid pipe", {"steel plate": 3});
+simpl(cur, "bronze fluid pipe", {"bronze plate": 3});
 
 simpl(cur, "platinum foil", { "platinum plate": 0.25 });
 simpl(cur, "gold foil", { "gold plate": 0.25 });
@@ -269,12 +292,18 @@ simpl(cur, "annealed copper wire x2", { "annealed copper wire x1": 2 });
 simpl(cur, "annealed copper wire x1", { "annealed copper": 0.5 });
 
 simpl(cur, "insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
-simpl(cur, "ic2 copper cable", { "tin plate": 1/3.0 });
+simpl(cur, "ic2 copper cable", { "copper plate": 1/3.0 });
 simpl(cur, "copper cable x1", { "copper wire x1": 1, "rubber plate" : 1});
 simpl(cur, "copper wire x8", { "copper wire x4": 2 });
 simpl(cur, "copper wire x4", { "copper wire x2": 2 });
 simpl(cur, "copper wire x2", { "copper wire x1": 2 });
 simpl(cur, "copper wire x1", { "copper": 0.5 });
+
+simpl(cur, "cupronickel coil", { "cupronickel wire x8": 2 });
+simpl(cur, "cupronickel wire x8", { "cupronickel wire x4": 2 });
+simpl(cur, "cupronickel wire x4", { "cupronickel wire x2": 2 });
+simpl(cur, "cupronickel wire x2", { "cupronickel wire x1": 2 });
+simpl(cur, "cupronickel wire x1", { "cupronickel": 0.5 });
 
 simpl(cur, "insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
 simpl(cur, "ic2 tin cable", { "tin plate": 0.25 });
@@ -308,6 +337,7 @@ simpl(cur, "tin plate", { "tin": 1 });
 simpl(cur, "steel plate", { "steel": 1 });
 simpl(cur, "bronze plate", {"bronze": 1});
 simpl(cur, "rubber plate", {"rubber": 1});
+simpl(cur, "invar plate", {"invar": 1});
 
 simpl(cur, "annealed copper", { "copper": 1, "oxygen": 1000 });
 
