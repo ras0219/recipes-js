@@ -8,42 +8,55 @@ String.prototype.endsWith = function(suffix) {
 
 // Let's figure out what we need
 var have = {
-  "tin wire" : 2,
-  "copper wire" : 7,
-  "red alloy plate": 2,
-  "steel plate" : 7,
-  "copper cable" : 13,
-}
+	"electric circuit" : 2,
+	"lv machine hull" : 1,
+	"tin cable" : 6,
+	"red alloy wire" : 2,
+	"tin plate" : 4,
+	"rubber sheet" : 10,
+	"iron rod" : 9,
+	"magnetic iron rod" : 2,
+	"electric motor" : 2,
+	"copper cable" : 1
+};
 var wants = {
   "basic wiremill" : 1
 };
 
 var steps = [];
 
+
+function ifwehaveituseit(src, num) {
+  if (!(src in have)) {
+    return 0;
+  }
+  if (have[src] < num) {
+    var had = have[src];
+    have[src] = 0;
+    return had;
+  }
+  have[src] -= num;
+  return num;
+}
+
 function substitute(src, dst) {
   if (src in wants) {
     var n = wants[src];
     delete wants[src];
-    for (var k in dst) {
-      var num = dst[k] * n;
-      if (k in have) {
-        if (have[k] < num) {
-          have[k] = 0;
-          num -= have[k];
-        }
-        else {
-          have[k] -= num;
-          num = 0;
+    n -= ifwehaveituseit(src, n);
+    if (n > 0) {
+      for (var k in dst) {
+        num = dst[k] * n;
+        num -= ifwehaveituseit(src, num);
+        if (num > 0) {
+          if (!(k in wants)) {
+            wants[k] = 0;
+          }
+          wants[k] += num;
         }
       }
-      if (num > 0) {
-        if (!(k in wants)) {
-          wants[k] = 0;
-        }
-        wants[k] += num;
-      }
+      steps.push(n + " * " + JSON.stringify(dst) + " => " + n + " " + src);
     }
-    steps.push(n + " * " + JSON.stringify(dst) + " => " + n + " " + src);
   }
 }
 
@@ -57,7 +70,7 @@ substitute("electric motor", {
   "tin cable" : 2,
   "copper wire" : 4,
   "iron rod" : 2,
-  "magnetic iron rod" : 2
+  "magnetic iron rod" : 1
 });
 substitute("electric circuit", {
   "nand chip" : 2,
@@ -122,7 +135,7 @@ substituteGeneric("plate", function(material) {
 substitute("rubber sheet", {
   "rubber dust": 2
 });
-substitute("red alloy", {
+substitute("red alloy ingot", {
   "copper": 1,
   "redstone": 4
 });
