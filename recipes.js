@@ -1,26 +1,35 @@
-var cur = {
+var wants = {
 	"red alloy": 5
 };
 
-function simpl(basket, src, dst) {
-    if (src in basket) {
-        var n = basket[src];
-        delete basket[src];
+var steps = [];
+
+function substitute(src, dst) {
+    if (src in wants) {
+        var n = wants[src];
+        delete wants[src];
         for (var k in dst) {
-            if (!(k in basket)) {
-                basket[k] = 0;
+            if (!(k in wants)) {
+                wants[k] = 0;
             }
-            basket[k] += dst[k] * n;
+            wants[k] += dst[k] * n;
         }
-        console.log("Craft " + n + " " + src + " using recipe " + JSON.stringify(dst));
+				steps.push(n + " * " + JSON.stringify(dst) + " => " + n + " " + src);
     }
 }
 
-simpl(cur, "red alloy", { "copper": 1, "redstone": 4 });
+substitute("red alloy", { "copper": 1, "redstone": 4 });
 
-console.log("=======================================INGRIDIENT=========================");
-
-for (var k in cur) {
-    console.log(k + ": " + cur[k]);
+console.log("");
+console.log("You need:");
+for (var item in wants) {
+    console.log("   " + wants[item] + "x " + item);
 }
 
+console.log("");
+console.log("And need to craft:");
+steps.forEach(function(step) {
+	console.log("   " + step);
+});
+
+console.log("");
