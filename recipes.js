@@ -7,8 +7,15 @@ String.prototype.endsWith = function(suffix) {
 };
 
 // Let's figure out what we need
+var have = {
+  "tin wire" : 2,
+  "copper wire" : 7,
+  "red alloy plate": 2,
+  "steel plate" : 7,
+  "copper cable" : 13,
+}
 var wants = {
-  "basic wiremill": 1
+  "basic wiremill" : 1
 };
 
 var steps = [];
@@ -18,10 +25,23 @@ function substitute(src, dst) {
     var n = wants[src];
     delete wants[src];
     for (var k in dst) {
-      if (!(k in wants)) {
-        wants[k] = 0;
+      var num = dst[k] * n;
+      if (k in have) {
+        if (have[k] < num) {
+          have[k] = 0;
+          num -= have[k];
+        }
+        else {
+          have[k] -= num;
+          num = 0;
+        }
       }
-      wants[k] += dst[k] * n;
+      if (num > 0) {
+        if (!(k in wants)) {
+          wants[k] = 0;
+        }
+        wants[k] += num;
+      }
     }
     steps.push(n + " * " + JSON.stringify(dst) + " => " + n + " " + src);
   }
