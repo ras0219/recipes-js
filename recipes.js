@@ -3,23 +3,40 @@ var cur = {
 	"yellorium fuel rod": 1, "reactor coolant port": 2,
 	"reactor casing": 20, "reactor access port": 4
 	*/
-	//"lv steam turbine": 2
+	"lv steam turbine": 2
 	//"mv laser engraver": 1
-	"mv forming press":1
+	//"mv forming press":1
 	//"mv extruder": 1
+	//"mv cutting machine": 1
 };
 
-function simpl(basket, src, dst) {
+// Enum for tech levels
+var NONE = 0
+var BRONZE = 1
+var LV = 2
+var MV = 3
+var HV = 4
+
+var TECH = {
+    "bending machine" : NONE,
+    "assembling machine" : NONE,
+    "extruder": NONE
+};
+
+function simpl(basket, src, dst, comment) {
     if (src in basket) {
-        var n = basket[src];
-        delete basket[src];
+        var n = basket[src]
+        delete basket[src]
         for (var k in dst) {
             if (!(k in basket)) {
-                basket[k] = 0;
+                basket[k] = 0
             }
-            basket[k] += dst[k] * n;
+            basket[k] += dst[k] * n
         }
-        console.log("Craft " + n + " " + src + " using recipe " + JSON.stringify(dst));
+        if (comment)
+            console.log("Craft " + n + " " + src + " using recipe " + JSON.stringify(dst) + " [COMMENT: "+comment+"]")
+        else
+            console.log("Craft " + n + " " + src + " using recipe " + JSON.stringify(dst))
     }
 }
 // BigReactors
@@ -152,11 +169,13 @@ simpl(cur, "mv fluid canner", {"copper cable x1": 2, "mv hull": 1, "mv pump": 2,
 simpl(cur, "mv chemical reactor", {"copper cable x1": 2, "mv hull": 1, "mv motor": 1, "good circuit" : 2, "glass": 2, "bronze rotor": 1});
 simpl(cur, "mv chemical bath", {"copper cable x1": 1, "mv hull": 1, "mv pump": 1, "good circuit" : 2, "glass": 2, "mv conveyor": 2});
 simpl(cur, "mv centrifuge", {"copper cable x1": 2, "mv hull": 1, "mv motor": 2, "good circuit" : 4});
+simpl(cur, "mv cutting machine", {"copper cable x1": 2, "mv hull": 1, "mv conveyor": 1, "good circuit" : 2, "glass": 1, "mv motor": 1, "diamond sawblade":1});
 simpl(cur, "mv compressor", {"copper cable x1": 2, "mv hull": 1, "mv piston": 2, "good circuit" : 2});
 simpl(cur, "mv gas turbine", {"good circuit": 2, "bronze rotor":3, "mv motor":2, "copper cable x1": 1, "mv hull":1});
 simpl(cur, "mv energy hatch", {"copper cable x1": 1, "mv hull":1});
 simpl(cur, "mv laser engraver", { "copper cable x1": 2, "mv hull": 1, "good circuit": 3, "mv piston": 2, "mv emitter": 1 });
 simpl(cur, "mv extruder", { "cupronickel wire x4": 4, "mv hull": 1, "good circuit": 2, "mv piston": 1, "steel fluid pipe": 1 });
+simpl(cur, "mv electrolyzer", { "copper cable x1": 1, "silver wire x1": 4, "mv hull": 1, "good circuit": 2, "glass": 1 });
 
 simpl(cur, "lv fluid canner", {"tin cable x1": 2, "lv hull": 1, "lv pump": 2, "basic circuit" : 2, "glass": 2});
 simpl(cur, "lv assembling machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv conveyor":2, "lv robot arm":2 });
@@ -205,6 +224,8 @@ simpl(cur, "lv motor", {"iron rod": 2, "magnetic iron rod":1, "tin cable x1": 2,
 simpl(cur, "ulv hull", {"ulv casing": 1, "lead cable x1": 2});
 simpl(cur, "ulv casing", {"steel plate": 4});
 
+simpl(cur, "diamond sawblade", {"diamond dust": 1, "cobalt brass gear": 1});
+
 simpl(cur, "data control circuit", { "processor board": 1, "data storage chip" : 3, "soldering alloy": 1 });
 simpl(cur, "processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
 simpl(cur, "data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "soldering alloy": 0.5 });
@@ -215,14 +236,20 @@ simpl(cur, "advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 
 simpl(cur, "advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
 
 // This is for "full tech"
-simpl(cur, "good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 });
+//simpl(cur, "good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 });
 //simpl(cur, "basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 });
 //simpl(cur, "basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
 
-// This is for "bronze-age tech"
 simpl(cur, "basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
-simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 1, "soldering alloy": 0.125 });
-//simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
+
+if (TECH["assembling machine"] >= LV)
+{
+    simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 1, "soldering alloy": 0.125 }, "Assemble");
+}
+else
+{
+    simpl(cur, "nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
+}
 
 simpl(cur, "etched ev wiring", { "platinum foil": 1 });
 simpl(cur, "etched hv wiring", { "gold foil": 1 });
@@ -243,99 +270,96 @@ function assoc() {
 	return obj;
 }
 
-materials = ["iron", "steel"];
-for (var k in materials) {
-	var v = materials[k];
-	simpl(cur, "magnetic "+v+" rod", assoc(v+" rod", 1));
+var materials
+
+if (TECH["polarizer"] > NONE)
+{
+    materials = ["iron", "steel"];
+    for (var k in materials) {
+        var v = materials[k];
+        simpl(cur, "magnetic "+v+" rod", assoc(v+" rod", 1));
+    }
+}
+else
+{
+    simpl(cur, "magnetic iron rod", {"iron rod": 1, "redstone": 4});
+}
+simpl(cur, "platinum foil", { "platinum plate": 0.25 });
+simpl(cur, "gold foil", { "gold plate": 0.25 });
+simpl(cur, "copper foil", { "copper plate": 0.25 });
+
+simpl(cur, "insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
+simpl(cur, "ic2 copper cable", { "copper plate": 1/3.0 });
+
+simpl(cur, "cupronickel coil", { "cupronickel wire x8": 2 });
+
+simpl(cur, "insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
+simpl(cur, "ic2 tin cable", { "tin plate": 0.25 });
+
+materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy"]
+for (var k in materials)
+{
+    var v = materials[k];
+    simpl(cur, v + " cable x8", assoc(v + " wire x8", 1, "rubber plate", 3));
+    simpl(cur, v + " cable x4", assoc(v + " wire x4", 1, "rubber plate", 2));
+    simpl(cur, v + " cable x2", assoc(v + " wire x2", 1, "rubber plate", 1));
+    simpl(cur, v + " cable x1", assoc(v + " wire x1", 1, "rubber plate", 1));
+
+    simpl(cur, v + " wire x16", assoc(v + " wire x8", 2));
+    simpl(cur, v + " wire x8", assoc(v + " wire x4", 2));
+    simpl(cur, v + " wire x4", assoc(v + " wire x2", 2));
+    simpl(cur, v + " wire x2", assoc(v + " wire x1", 2));
+    simpl(cur, v + " wire x1", assoc(v, 0.5));
 }
 
-materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar"];
+simpl(cur, "steel item casing", { "steel": 0.5 });
+simpl(cur, "iron item casing", {"iron": 0.5 });
+
+materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold"];
 for (var k in materials) {
 	var v = materials[k];
 	var plate = v + " plate";
 	var rod = v + " rod";
 	var bolt = v + " bolt";
 	
-    simpl(cur, v+" gear", assoc(plate,4,rod,4));
+    simpl(cur, v+" gear", assoc(v, 4));
     simpl(cur, v+" fluid pipe", assoc(plate,3));
 
 	simpl(cur, v+" rotor", assoc(plate,4,v+" screw",1,v+" ring",1));
-	simpl(cur, v+" ring", assoc(rod,1));
-	simpl(cur, v+" screw", assoc(bolt,1));
-	simpl(cur, v+" bolt", assoc(rod,0.5));
+    if (TECH["extruder"] >= MV)
+        simpl(cur, v+" ring", assoc(rod,0.25), "Extrude");
+    else
+        simpl(cur, v+" ring", assoc(rod,1));
+
+    if (TECH["lathe"] > NONE)
+        simpl(cur, v+" screw", assoc(bolt,1), "Lathe");
+    else
+        simpl(cur, v+" screw", assoc(bolt,2));
+
+	simpl(cur, bolt, assoc(rod,0.5));
 
 	simpl(cur, "small "+v+" gear", assoc(plate,1));
 
-	simpl(cur, rod, assoc(v,0.5));
+    if (TECH["lathe"] > NONE)
+        simpl(cur, rod, assoc(v,0.5), "Lathe");
+    else
+        simpl(cur, rod, assoc(v,1));
+	
+	if (TECH["bending machine"] > NONE)
+		simpl(cur, plate, assoc(v,1));
+	else
+		simpl(cur, plate, assoc(v,2));
 }
 
-simpl(cur, "platinum foil", { "platinum plate": 0.25 });
-simpl(cur, "gold foil", { "gold plate": 0.25 });
-simpl(cur, "copper foil", { "copper plate": 0.25 });
-
-simpl(cur, "aluminum cable x1", { "aluminum wire x1": 1, "rubber plate": 1 });
-simpl(cur, "aluminum wire x4", { "aluminum wire x2": 2 });
-simpl(cur, "aluminum wire x2", { "aluminum wire x1": 2 });
-simpl(cur, "aluminum wire x1", { "aluminum": 0.5 });
-
-simpl(cur, "gold cable x1", { "gold wire x1": 1, "rubber plate": 1 });
-simpl(cur, "gold wire x4", { "gold wire x2": 2 });
-simpl(cur, "gold wire x2", { "gold wire x1": 2 });
-simpl(cur, "gold wire x1", { "gold": 0.5 });
-
-simpl(cur, "annealed copper cable x1", { "annealed copper wire x1": 1, "rubber plate": 1 });
-simpl(cur, "annealed copper wire x8", { "annealed copper wire x4": 2 });
-simpl(cur, "annealed copper wire x4", { "annealed copper wire x2": 2 });
-simpl(cur, "annealed copper wire x2", { "annealed copper wire x1": 2 });
-simpl(cur, "annealed copper wire x1", { "annealed copper": 0.5 });
-
-simpl(cur, "insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
-simpl(cur, "ic2 copper cable", { "copper plate": 1/3.0 });
-simpl(cur, "copper cable x1", { "copper wire x1": 1, "rubber plate" : 1});
-simpl(cur, "copper wire x8", { "copper wire x4": 2 });
-simpl(cur, "copper wire x4", { "copper wire x2": 2 });
-simpl(cur, "copper wire x2", { "copper wire x1": 2 });
-simpl(cur, "copper wire x1", { "copper": 0.5 });
-
-simpl(cur, "cupronickel coil", { "cupronickel wire x8": 2 });
-simpl(cur, "cupronickel wire x8", { "cupronickel wire x4": 2 });
-simpl(cur, "cupronickel wire x4", { "cupronickel wire x2": 2 });
-simpl(cur, "cupronickel wire x2", { "cupronickel wire x1": 2 });
-simpl(cur, "cupronickel wire x1", { "cupronickel": 0.5 });
-
-simpl(cur, "insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
-simpl(cur, "ic2 tin cable", { "tin plate": 0.25 });
-simpl(cur, "tin cable x1", { "tin wire x1": 1, "rubber plate": 1 });
-simpl(cur, "tin wire x4", { "tin wire x2": 2 });
-simpl(cur, "tin wire x2", { "tin wire x1": 2 });
-simpl(cur, "tin wire x1", { "tin": 0.5 });
-
-simpl(cur, "lead cable x1", { "lead wire x1": 1, "rubber plate" : 1});
-simpl(cur, "lead wire x4", { "lead wire x2": 2 });
-simpl(cur, "lead wire x2", { "lead wire x1": 2 });
-simpl(cur, "lead wire x1", { "lead": 0.5 });
-
-simpl(cur, "red alloy wire x1", { "red alloy": 0.5 });
-
-simpl(cur, "steel item casing", { "steel": 0.5 });
-simpl(cur, "iron item casing", {"iron": 0.5 });
-
-simpl(cur, "battery alloy plate", { "battery alloy": 1 });
-simpl(cur, "titanium plate", { "titanium": 1 });
-simpl(cur, "olivine plate", { "olivine dust": 1 });
-simpl(cur, "stainless steel plate", {"stainless steel": 1 });
-simpl(cur, "platinum plate", {"platinum": 1 });
-simpl(cur, "gold plate", {"gold": 1 });
 simpl(cur, "lapis plate", {"lapis dust": 1 });
-simpl(cur, "chrome plate", {"chrome": 1 });
-simpl(cur, "aluminum plate", {"aluminum": 1 });
+simpl(cur, "olivine plate", { "olivine dust": 1 });
+simpl(cur, "battery alloy plate", { "battery alloy": 1 });
+
 simpl(cur, "silicon plate", { "silicon": 1 });
-simpl(cur, "copper plate", { "copper" : 1 });
-simpl(cur, "tin plate", { "tin": 1 });
-simpl(cur, "steel plate", { "steel": 1 });
-simpl(cur, "bronze plate", {"bronze": 1});
-simpl(cur, "rubber plate", {"rubber": 1});
-simpl(cur, "invar plate", {"invar": 1});
+if (TECH["extruder"] > NONE)
+    simpl(cur, "rubber plate", {"rubber": 1});
+else
+    simpl(cur, "rubber plate", {"rubber": 2});
 
 simpl(cur, "annealed copper", { "copper": 1, "oxygen": 1000 });
 
@@ -349,7 +373,7 @@ simpl(cur, "rose gold dust", {"gold dust":0.8, "copper dust":0.2});
 simpl(cur, "red alloy", { "copper": 1, "redstone": 4 });
 simpl(cur, "block of redstone", {  "redstone": 9 });
 
-console.log("=======================================INGRIDIENT=========================");
+console.log("=======================================INGREDIENT=========================");
 
 for (var k in cur) {
     console.log(k + ": " + cur[k]);
