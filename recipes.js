@@ -387,14 +387,15 @@ function RUN_RECIPES(cur, TECH, cb)
 
 function basictech() {
     return {
-        "bending machine" : techlevel.none,
+        "bending machine" : techlevel.lv,
         "extruder" : techlevel.none,
         "assembling machine" : techlevel.none,
-        "wiremill" : techlevel.none,
-        "casing mold" : techlevel.none,
-        "plate mold" : techlevel.none,
+        "wiremill" : techlevel.lv,
+        "casing mold" : techlevel.bronze,
+        "plate mold" : techlevel.bronze,
         "forming press" : techlevel.none,
-        "fluid extractor" : techlevel.none
+        "fluid extractor" : techlevel.none,
+        "lathe" : techlevel.none
     }
 }
 

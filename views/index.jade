@@ -1,7 +1,7 @@
 html
   head
     title hello
-  body
+  body(style="font: comic")
     h1 Recipes JS
     form
       ul
@@ -25,7 +25,7 @@ html
             td= tkey + ': '
             each lval, lkey in techlevel
               td
-                if lval === 0
+                if lval === tval
                   input(type="radio", name="#{tkey}", value="#{lval}", checked)
                 else
                   input(type="radio", name="#{tkey}", value="#{lval}")

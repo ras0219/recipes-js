@@ -25,7 +25,19 @@ app.all('/', function (req, res) {
         var crafts = []
         // This is terrible... but the best way to clone an object afaict
         var begin = JSON.parse(JSON.stringify(cur));
-        recipes.run(cur, recipes.basictech(), function (n, src, dst, comment) {
+        var tl = recipes.basictech()
+        // Evaluate tech level based on submission values
+        for (var k in tl)
+        {
+            if (k in req.query)
+            {
+                tl[k] = Number(req.query[k])
+                console.log("Found tech " + k + " " + req.query[k]);
+            }
+            else
+                console.log("Didn't find tech " + k);
+        }
+        recipes.run(cur, tl, function (n, src, dst, comment) {
             crafts.push([n, src, dst, comment])
         })
         res.render('index', {
