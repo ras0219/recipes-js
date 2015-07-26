@@ -124,12 +124,14 @@ function RUN_RECIPES(cur, TECH, cb)
     simpl(cur, "alchemical furnace", { "crucible": 1, "furnace": 1, "arcane stone block":7 }, "5 ignis, 5 aqua");
     simpl(cur, "alchemical centrifuge", { "piston": 1, "essentia tube":2, "alchemical construct": 1, "arcane alembic": 1 }, "5 ordo, 5 aqua, 5 perditio");
     simpl(cur, "alchemical construct", { "vis filter": 2, "essentia valve":2, "essentia tube":4, "greatwood planks": 1 }, "5 ordo, 5 aqua");
+    simpl(cur, "essentia valve", { "essentia tube": 1, "lever": 1 }, "5 ordo, 5 aqua");
     simpl(cur, "essentia tube", { "glass": 1.0/8, "iron": 2.0/8, "gold nugget":1.0/8, "quicksilver drop": 1.0/8 }, "1/8 ordo, 1/8 aqua");
     simpl(cur, "arcane alembic", { "bucket": 1, "iron":5, "gold":1, "vis filter": 1 }, "5 aer, 5 aqua");
     simpl(cur, "vis filter", { "silverwood planks": 0.5, "gold":1 }, "5/2 ordo, 5/2 aqua");
+    simpl(cur, "arcane stone block", { "stone": 8.0/9, "* shard":1.0/9 }, "1/9 ignis, 1/9 terra");
+    simpl(cur, "crucible", { "cauldron": 1 }, "wand");
     //END THAUMCRAFT
 
-    simpl(cur, "glass pane", { "glass": 2.66 });
     simpl(cur, "implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
 
     simpl(cur, "implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminium cable":2,"advanced circuit":2 });
@@ -185,8 +187,10 @@ function RUN_RECIPES(cur, TECH, cb)
 
     simpl(cur, "lv fluid canner", {"tin cable x1": 2, "lv hull": 1, "lv pump": 2, "basic circuit" : 2, "glass": 2});
     simpl(cur, "lv assembling machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv conveyor":2, "lv robot arm":2 });
+    simpl(cur, "lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":2 });
     simpl(cur, "lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
     simpl(cur, "lv bending machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv motor":2, "lv piston":2 });
+    simpl(cur, "lv lathe", { "tin cable x1": 3, "lv hull": 1, "basic circuit":2, "lv motor":1, "lv piston":1, "diamond": 1 });
     simpl(cur, "lv wiremill", { "tin cable x1": 2, "lv hull": 1, "lv motor": 4, "basic circuit": 2 });
     simpl(cur, "lv steam turbine", {"basic circuit": 1, "tin rotor":2, "lv motor":2, "tin cable x1": 1, "lv hull":1, "bronze fluid pipe": 2});
 
@@ -233,6 +237,15 @@ function RUN_RECIPES(cur, TECH, cb)
     simpl(cur, "ulv casing", {"steel plate": 4});
 
     simpl(cur, "diamond sawblade", {"diamond dust": 1, "cobalt brass gear": 1});
+
+    //BEGIN INTERMEDIATE VANILLA
+    simpl(cur, "glass pane", { "glass": 2.66 });
+    simpl(cur, "bucket", { "iron plate": 3 });
+    simpl(cur, "furnace", { "cobblestone": 8 });
+    simpl(cur, "gold nugget", { "gold" : 1.0/9 });
+    simpl(cur, "quicksilver drop", { "quicksilver" : 1.0/9 });
+    simpl(cur, "cauldron", { "iron plate" : 7 });
+    //END VANILLA
 
     simpl(cur, "data control circuit", { "processor board": 1, "data storage chip" : 3, "soldering alloy": 1 });
     simpl(cur, "processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
@@ -283,9 +296,11 @@ function RUN_RECIPES(cur, TECH, cb)
     if (TECH["polarizer"] > NONE)
     {
         materials = ["iron", "steel"];
+        if (TECH["polarizer"] >= HV)
+            materials.push("neodynium")
         for (var k in materials) {
             var v = materials[k];
-            simpl(cur, "magnetic "+v+" rod", assoc(v+" rod", 1));
+            simpl(cur, "magnetic "+v+" rod", assoc(v+" rod", 1), "Polarize");
         }
     }
     else
@@ -297,7 +312,7 @@ function RUN_RECIPES(cur, TECH, cb)
     simpl(cur, "copper foil", { "copper plate": 0.25 });
 
     simpl(cur, "insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
-    simpl(cur, "ic2 copper cable", { "copper plate": 1.0/3 });
+    simpl(cur, "ic2 copper cable", { "copper plate": 1.0/3 }, "Wiremill");
 
     simpl(cur, "cupronickel coil", { "cupronickel wire x8": 2 });
 
@@ -318,15 +333,15 @@ function RUN_RECIPES(cur, TECH, cb)
         simpl(cur, v + " wire x4", assoc(v + " wire x2", 2));
         simpl(cur, v + " wire x2", assoc(v + " wire x1", 2));
         if (TECH["wiremill"] > NONE)
-            simpl(cur, v + " wire x1", assoc(v, 0.5));
+            simpl(cur, v + " wire x1", assoc(v, 0.5), "Wiremill");
         else
             simpl(cur, v + " wire x1", assoc(v + " plate", 1));
     }
 
     if (TECH["extruder"] > NONE)
     {
-        simpl(cur, "steel item casing", { "steel": 0.5 });
-        simpl(cur, "iron item casing", {"iron": 0.5 });
+        simpl(cur, "steel item casing", { "steel": 0.5 }, "Extrude");
+        simpl(cur, "iron item casing", {"iron": 0.5 }, "Extrude");
     }
     else if (TECH["casing mold"] > NONE)
     {
@@ -378,7 +393,7 @@ function RUN_RECIPES(cur, TECH, cb)
 
     simpl(cur, "silicon plate", { "silicon": 1 });
     if (TECH["extruder"] > NONE)
-        simpl(cur, "rubber plate", {"rubber": 1});
+        simpl(cur, "rubber plate", {"rubber": 1}, "Extrude");
     else
         simpl(cur, "rubber plate", {"rubber": 2});
 
@@ -405,7 +420,8 @@ function basictech() {
         "plate mold" : techlevel.bronze,
         "forming press" : techlevel.none,
         "fluid extractor" : techlevel.none,
-        "lathe" : techlevel.none
+        "lathe" : techlevel.none,
+        "polarizer" : techlevel.none
     }
 }
 
