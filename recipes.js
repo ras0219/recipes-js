@@ -23,7 +23,8 @@ simpl(cur, "vibrant jetpack", { "vibrant alloy": 4, "vibrant thrusters": 2, "oct
 simpl(cur, "energetic jetpack", {"energetic alloy":4, "double capacitor":1, "energetic thrusters":2, "electrical steel jetpack":1});
 simpl(cur, "dark soularium thrusters", { "enriched soularium alloy": 2, "octadic capacitor": 2, "flight control unit": 1, "vibrant thrusters": 1 });
 simpl(cur, "octadic capacitor pack_104", { "electrical steel armor plating": 1, "octadic capacitor pack": 1 });
-simpl(cur, "octadic capacitor pack", {"octadic capacitor": 3, "vibrant crystal": 1, "vibrant alloy": 2,"vibrant capacitor bank":2});
+simpl(cur, "octadic capacitor pack", { "octadic capacitor": 3, "vibrant crystal": 1, "vibrant alloy": 2, "vibrant capacitor bank": 2, "quadruple capacitor pack": 1 });
+//simpl(cur, "quadruple capacitor pack", {""});
 simpl(cur, "vibrant capacitor bank", {"octadic capacitor":4, "vibrant crystal":1, "iron":4});
 simpl(cur, "enriched soularium alloy", { "dark steel": 1, "soularium": 1, "pulsating crystal": 1 });
 
@@ -33,7 +34,7 @@ simpl(cur, "conductive iron jetpack", { "conductive iron": 4, "basic capacitor":
 simpl(cur, "conductive iron thruster", { "basic capacitor": 2, "insulated redstone conduit": 2, "conductive iron": 2, "redstone": 1, "basic gear": 2 });
 simpl(cur, "insulated redstone conduit", { "conduit binder": 6 / 8, "redstone alloy": 3 / 8 });
 simpl(cur, "electrical steel thruster", { "electrical steel": 2, "basic capacitor": 2, "energy conduit": 2, "redstone": 1, "machine chassis": 2 });
-simpl(cur, "energetic thrusters", {"redstone alloy":1, "pulsating crystal":2,"double-layer capacitor":2,"enhanced energy conduit":2,"energetic alloy":2,});
+simpl(cur, "energetic thrusters", {"redstone alloy":1, "pulsating crystal":2,"double capacitor":2,"enhanced energy conduit":2,"energetic alloy":2,});
 
 simpl(cur, "pulsating crystal", { "pulsating iron nugget": 8, "diamond": 1 });
 simpl(cur, "pulsating iron nugget", {"pulsating iron":1/9})
@@ -51,7 +52,7 @@ simpl(cur, "machine chassis", {"basic capacitor":1,"iron":4,"iron bars":4});
 simpl(cur, "octadic capacitor", { "vibrant alloy": 2, "glowstone": 1, "double capacitor": 2 });
 simpl(cur, "vibrant alloy", { "energetic alloy": 1, "ender pearl": 1 });
 simpl(cur, "double capacitor", { "basic capacitor": 2, "coal dust": 1, "energetic alloy": 6 });
-simpl(cur, "basic capacitor", { "redstone": 2, "gold": 4, "red alloy": 1 });
+simpl(cur, "basic capacitor", { "redstone": 2, "gold": 4/9, "copper": 1 });
 simpl(cur, "energetic alloy", {"gold":1, "redstone":1, "glowstone dust":1});
 
 simpl(cur, "dark steel armor plating", { "dark steel": 10, "electrical steel armor plating": 1 });
