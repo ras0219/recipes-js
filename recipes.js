@@ -118,8 +118,17 @@ function RUN_RECIPES(cur, TECH, cb)
     simpl(cur, "bee receptacle", { "aluminum": 5, "block of redstone":2, "glass pane":1, "weighted pressure plate(light)":1 });
     simpl(cur, "weighted pressure plate(light)", { "gold plate": 2 });
     simpl(cur, "genetics processor", { "nether quartz": 4, "diamond":4, "pulsating chipset":1 });
-
     //END GENDUSTRY
+
+    //THAUMCRAFT
+    simpl(cur, "alchemical furnace", { "crucible": 1, "furnace": 1, "arcane stone block":7 }, "5 ignis, 5 aqua");
+    simpl(cur, "alchemical centrifuge", { "piston": 1, "essentia tube":2, "alchemical construct": 1, "arcane alembic": 1 }, "5 ordo, 5 aqua, 5 perditio");
+    simpl(cur, "alchemical construct", { "vis filter": 2, "essentia valve":2, "essentia tube":4, "greatwood planks": 1 }, "5 ordo, 5 aqua");
+    simpl(cur, "essentia tube", { "glass": 1.0/8, "iron": 2.0/8, "gold nugget":1.0/8, "quicksilver drop": 1.0/8 }, "1/8 ordo, 1/8 aqua");
+    simpl(cur, "arcane alembic", { "bucket": 1, "iron":5, "gold":1, "vis filter": 1 }, "5 aer, 5 aqua");
+    simpl(cur, "vis filter", { "silverwood planks": 0.5, "gold":1 }, "5/2 ordo, 5/2 aqua");
+    //END THAUMCRAFT
+
     simpl(cur, "glass pane", { "glass": 2.66 });
     simpl(cur, "implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
 
