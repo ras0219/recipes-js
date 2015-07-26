@@ -1,0 +1,65 @@
+html
+  head
+    title hello
+    style(type='text/css')
+      | .part { font-weight: bold }
+      | .qty { font-weight: bold }
+      | .comment > span { font-weight: bold }
+      | li
+  body(style="font: comic")
+    h1 Recipes JS
+    form
+      ul
+        li Item1
+          input(type="text", name="i1name", value="#{query.i1name}")
+          input(type="text", name="i1qty", value="#{query.i1qty}")
+        li Item2
+          input(type="text", name="i2name", value="#{query.i2name}")
+          input(type="text", name="i2qty", value="#{query.i2qty}")
+        li Item3
+          input(type="text", name="i3name", value="#{query.i3name}")
+          input(type="text", name="i3qty", value="#{query.i3qty}")
+      h4 Tech level
+      table
+        tr
+          td
+          each val, key in techlevel
+            td= key
+        each tval, tkey in basictech
+          tr
+            td= tkey + ': '
+            each lval, lkey in techlevel
+              td
+                if lval === tval
+                  input(type="radio", name="#{tkey}", value="#{lval}", checked)
+                else
+                  input(type="radio", name="#{tkey}", value="#{lval}")
+
+      input(type="submit")
+    if crafts
+      // This page contains the results of a crafting request
+      h3 Starting Ingredients
+      ul
+        each val, index in final
+          li= index + ': ' + val
+      h3 Crafting Steps
+      ol
+        each val in crafts
+          li
+            if val[3]
+              = "Craft "
+              span.qty= val[0]
+              = " "
+              span.part= val[1]
+              = " using recipe "
+              span.recipe= JSON.stringify(val[2])
+              span.comment= " [COMMENT: "
+                span= val[3]
+                = "]"
+            else
+              = "Craft "
+              span.qty= val[0]
+              = " "
+              span.part= val[1]
+              = " using recipe "
+              span.recipe= JSON.stringify(val[2])
