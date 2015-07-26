@@ -178,6 +178,7 @@ function RUN_RECIPES(cur, TECH, cb)
     simpl(cur, "lv assembling machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv conveyor":2, "lv robot arm":2 });
     simpl(cur, "lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
     simpl(cur, "lv bending machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv motor":2, "lv piston":2 });
+    simpl(cur, "lv wiremill", { "tin cable x1": 2, "lv hull": 1, "lv motor": 4, "basic circuit": 2 });
     simpl(cur, "lv steam turbine", {"basic circuit": 1, "tin rotor":2, "lv motor":2, "tin cable x1": 1, "lv hull":1, "bronze fluid pipe": 2});
 
     simpl(cur, "ulv input bus", { "ulv hull": 1, "chest": 1 });
@@ -287,7 +288,7 @@ function RUN_RECIPES(cur, TECH, cb)
     simpl(cur, "copper foil", { "copper plate": 0.25 });
 
     simpl(cur, "insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
-    simpl(cur, "ic2 copper cable", { "copper plate": 1/3.0 });
+    simpl(cur, "ic2 copper cable", { "copper plate": 1.0/3 });
 
     simpl(cur, "cupronickel coil", { "cupronickel wire x8": 2 });
 
@@ -320,8 +321,8 @@ function RUN_RECIPES(cur, TECH, cb)
     }
     else if (TECH["casing mold"] > NONE)
     {
-        simpl(cur, "steel item casing", { "steel": 0.66 });
-        simpl(cur, "iron item casing", {"iron": 0.66 });
+        simpl(cur, "steel item casing", { "steel": 2.0/3 });
+        simpl(cur, "iron item casing", {"iron": 2.0/3 });
     }
 
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold"];
@@ -358,7 +359,7 @@ function RUN_RECIPES(cur, TECH, cb)
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
-            simpl(cur, v + " plate", assoc(v,1), "Bend S1");
+            simpl(cur, v + " plate", assoc(v,1), "Bend Setting 1");
         else
             simpl(cur, v + " plate", assoc(v,2));
     }
@@ -402,12 +403,9 @@ function basictech() {
 
 if(require.main === module)
 {
-    var tech = {
-        "bending machine" : techlevel.lv,
-        "assembling machine" : techlevel.none,
-        "extruder": techlevel.none,
-        "wiremill": techlevel.lv
-    }
+    var tech = basictech()
+    tech["bending machine"] = techlevel.lv
+    tech["wiremill"] = techlevel.lv
     var cur = {"hv wiremill": 1}
     RUN_RECIPES(cur, tech, console_logger)
     console.log("=======================================INGREDIENT=========================");

@@ -1,6 +1,11 @@
 html
   head
     title hello
+    style(type='text/css')
+      | .part { font-weight: bold }
+      | .qty { font-weight: bold }
+      | .comment > span { font-weight: bold }
+      | li
   body(style="font: comic")
     h1 Recipes JS
     form
@@ -42,6 +47,19 @@ html
         each val in crafts
           li
             if val[3]
-              p= "Craft " + val[0] + " " + val[1] + " using recipe " + JSON.stringify(val[2]) + " [COMMENT: " + val[3] + "]"
+              = "Craft "
+              span.qty= val[0]
+              = " "
+              span.part= val[1]
+              = " using recipe "
+              span.recipe= JSON.stringify(val[2])
+              span.comment= " [COMMENT: "
+                span= val[3]
+                = "]"
             else
-              p= "Craft " + val[0] + " " + val[1] + " using recipe " + JSON.stringify(val[2])
+              = "Craft "
+              span.qty= val[0]
+              = " "
+              span.part= val[1]
+              = " using recipe "
+              span.recipe= JSON.stringify(val[2])
