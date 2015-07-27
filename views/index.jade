@@ -1,23 +1,29 @@
 html
   head
     title hello
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    link(rel='stylesheet', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js')
     style(type='text/css')
       | .part { font-weight: bold }
       | .qty { font-weight: bold }
       | .comment > span { font-weight: bold }
       | li
+    script
+      != "var data = " + JSON.stringify(itemlist) + ";"
+      | $(function() { $(".itembox").autocomplete({ source: data }); });
   body(style="font: comic")
     h1 Recipes JS
     form
       ul
         li Item1
-          input(type="text", name="i1name", value="#{query.i1name}")
+          input.itembox(type="text", name="i1name", value="#{query.i1name}")
           input(type="text", name="i1qty", value="#{query.i1qty}")
         li Item2
-          input(type="text", name="i2name", value="#{query.i2name}")
+          input.itembox(type="text", name="i2name", value="#{query.i2name}")
           input(type="text", name="i2qty", value="#{query.i2qty}")
         li Item3
-          input(type="text", name="i3name", value="#{query.i3name}")
+          input.itembox(type="text", name="i3name", value="#{query.i3name}")
           input(type="text", name="i3qty", value="#{query.i3qty}")
       h4 Tech level
       table

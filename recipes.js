@@ -139,6 +139,16 @@ function RUN_RECIPES(TECH, simpl)
     simpl("arcane stone bricks", { "arcane stone block": 1 });
     simpl("arcane stone block", { "stone": 8.0/9, "* shard":1.0/9, "ignis vis": 1.0/9, "terra vis": 1.0/9 }, "arcane");
     simpl("crucible", { "cauldron": 1 }, "wand");
+    simpl("golem core chop", { "golem core harvest": 1, "iron axe": 3, "axe of the stream": 1, "meto": 16, "instrumentum": 16, "arbor": 16 }, "infusion");
+    simpl("stone golem", { "stone bricks": 1, "humanus": 4, "motus": 4, "spiritus": 4 }, "crucible");
+    simpl("golem core harvest", { "golem animation core": 1, "meto": 5, "messis": 5 }, "crucible");
+    simpl("golem animation core", { "brick": 4, "nitor": 1, "ordo vis": 5, "ignis vis": 5 }, "arcane");
+    simpl("nitor", { "glowstone": 1, "ignis": 3, "lux": 3, "potentia": 3 }, "crucible");
+    simpl("boots of the traveler", { "air shard": 2, "raw fish": 1, "feather": 1, "leather boots": 1, "enchanted fabric": 2, "iter": 25, "volatus":25}, "infusion")
+    simpl("enchanted fabric", { "wool": 1, "string": 4,
+        "ignis vis": 1, "ordo vis": 1, "aqua vis": 1,
+        "aer vis": 1, "terra vis": 1, "perditio vis": 1
+        }, "arcane")
     //END THAUMCRAFT
 
     simpl("implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});

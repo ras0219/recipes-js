@@ -2,6 +2,9 @@ var express = require('express')
 var app = express()
 var recipes = require('./recipes')
 
+var itemlist = [];
+recipes.raw_recipes(recipes.basictech(), function(item) { itemlist.push(item); });
+
 app.set('view engine', 'jade')
 
 app.all('/', function (req, res) {
@@ -46,7 +49,8 @@ app.all('/', function (req, res) {
             begin: begin,
             crafts: crafts.reverse(),
             final: cur,
-            query: req.query
+            query: req.query,
+            itemlist: itemlist
         })
         console.log("run recipes.")
         console.log(begin)
@@ -57,7 +61,8 @@ app.all('/', function (req, res) {
         res.render('index', {
             basictech: recipes.basictech(),
             techlevel: recipes.techlevel,
-            query: { i1name:'', i1qty:'', i2name:'', i2qty:'', i3name:'', i3qty:''}
+            query: { i1name:'', i1qty:'', i2name:'', i2qty:'', i3name:'', i3qty:''},
+            itemlist: itemlist
         })
 })
 
