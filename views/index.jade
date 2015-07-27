@@ -16,15 +16,12 @@ html
     h1 Recipes JS
     form
       ul
-        li Item1
-          input.itembox(type="text", name="i1name", value="#{query.i1name}")
-          input(type="text", name="i1qty", value="#{query.i1qty}")
-        li Item2
-          input.itembox(type="text", name="i2name", value="#{query.i2name}")
-          input(type="text", name="i2qty", value="#{query.i2qty}")
-        li Item3
-          input.itembox(type="text", name="i3name", value="#{query.i3name}")
-          input(type="text", name="i3qty", value="#{query.i3qty}")
+        each x in [1,2,3,4,5,6]
+          - var v_name = query['i' + x + 'name'] || ''
+          - var v_qty = query['i' + x + 'qty'] || ''
+          li Item#{x}
+            input.itembox(type="text", name="i#{x}name", value="#{v_name}")
+            input(type="text", name="i#{x}qty", value="#{v_qty}")
       h4 Tech level
       table
         tr
@@ -47,16 +44,20 @@ html
       h3 Starting Ingredients
       table
         tr
+          td
           td Item
           td Qty
         each val, index in final
           tr
+            td
+              input(type="checkbox")
             td= index
             td= Number(val).toFixed(2)
       h3 Crafting Steps
       ol
         each val in crafts
           li
+            input(type="checkbox")
             if val[3]
               = "Craft "
               span.qty= Number(val[0]).toFixed(2)

@@ -22,6 +22,9 @@ app.all('/', function (req, res) {
     parseparam(req.query.i1name, req.query.i1qty)
     parseparam(req.query.i2name, req.query.i2qty)
     parseparam(req.query.i3name, req.query.i3qty)
+    parseparam(req.query.i4name, req.query.i4qty)
+    parseparam(req.query.i5name, req.query.i5qty)
+    parseparam(req.query.i6name, req.query.i6qty)
     if (Object.keys(cur).length > 0)
     {
         // do recipes here
@@ -61,7 +64,7 @@ app.all('/', function (req, res) {
         res.render('index', {
             basictech: recipes.basictech(),
             techlevel: recipes.techlevel,
-            query: { i1name:'', i1qty:'', i2name:'', i2qty:'', i3name:'', i3qty:''},
+            query: {},
             itemlist: itemlist
         })
 })

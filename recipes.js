@@ -139,18 +139,26 @@ function RUN_RECIPES(TECH, simpl)
     simpl("arcane stone bricks", { "arcane stone block": 1 });
     simpl("arcane stone block", { "stone": 8.0/9, "* shard":1.0/9, "ignis vis": 1.0/9, "terra vis": 1.0/9 }, "arcane");
     simpl("crucible", { "cauldron": 1 }, "wand");
-    simpl("golem core chop", { "golem core harvest": 1, "iron axe": 3, "axe of the stream": 1, "meto": 16, "instrumentum": 16, "arbor": 16 }, "infusion");
-    simpl("stone golem", { "stone bricks": 1, "humanus": 4, "motus": 4, "spiritus": 4 }, "crucible");
-    simpl("golem core harvest", { "golem animation core": 1, "meto": 5, "messis": 5 }, "crucible");
+    simpl("golem core chop", { "golem core harvest": 1, "iron axe": 3, "axe of the stream": 1, "meto essentia": 16, "instrumentum essentia": 16, "arbor essentia": 16 }, "infusion");
+    simpl("stone golem", { "stone bricks": 1, "humanus essentia": 4, "motus essentia": 4, "spiritus essentia": 4 }, "crucible");
+    simpl("golem core harvest", { "golem animation core": 1, "meto essentia": 5, "messis essentia": 5 }, "crucible");
     simpl("golem animation core", { "brick": 4, "nitor": 1, "ordo vis": 5, "ignis vis": 5 }, "arcane");
-    simpl("nitor", { "glowstone": 1, "ignis": 3, "lux": 3, "potentia": 3 }, "crucible");
-    simpl("boots of the traveler", { "air shard": 2, "raw fish": 1, "feather": 1, "leather boots": 1, "enchanted fabric": 2, "iter": 25, "volatus":25}, "infusion")
+    simpl("nitor", { "glowstone": 1, "ignis essentia": 3, "lux essentia": 3, "potentia essentia": 3 }, "crucible");
+    simpl("boots of the traveler", { "air shard": 2, "raw fish": 1, "feather": 1, "leather boots": 1, "enchanted fabric": 2, "iter essentia": 25, "volatus essentia":25}, "infusion")
     simpl("enchanted fabric", { "wool": 1, "string": 4,
         "ignis vis": 1, "ordo vis": 1, "aqua vis": 1,
         "aer vis": 1, "terra vis": 1, "perditio vis": 1
         }, "arcane")
+    simpl("axe of the stream", { "greatwood": 1, "thaumium axe": 1, "water shard": 2, "diamond": 1, "aqua essentia": 16, "arbor essentia": 8 }, "infusion")
+    simpl("thaumium axe", {"thaumium plate": 2, "thaumium": 1, "stick": 2})
     //END THAUMCRAFT
 
+    simpl("electric blast furnace multi", { "electric blast furnace": 1, "cupronickel coil block": 16, "lv input bus": 1, "lv output bus":1,
+        "maintenance hatch":1,
+        "lv muffler hatch":1,
+        "lv energy hatch":3,
+        "heat proof casing":10
+        });
     simpl("implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
 
     simpl("implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminium cable":2,"advanced circuit":2 });
@@ -163,6 +171,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("steel frame box", { "steel rod":4 });
 
     simpl("electric blast furnace", { "heat proof casing": 1, "basic circuit": 3, "tin cable x1": 2, "furnace": 3});
+    simpl("cupronickel coil block", { "cupronickel wire x2": 8 })
 
     simpl("heat proof casing", { "invar plate": 6, "invar frame box": 1 });
     simpl("invar frame box", { "invar rod": 4 });
@@ -205,13 +214,19 @@ function RUN_RECIPES(TECH, simpl)
     simpl("mv electrolyzer", { "copper cable x1": 1, "silver wire x1": 4, "mv hull": 1, "good circuit": 2, "glass": 1 });
 
     simpl("lv fluid canner", {"tin cable x1": 2, "lv hull": 1, "lv pump": 2, "basic circuit" : 2, "glass": 2});
+    simpl("lv canning machine", {"tin cable x1": 2, "lv hull": 1, "lv pump": 1, "basic circuit" : 2, "glass": 3});
     simpl("lv assembling machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv conveyor":2, "lv robot arm":2 });
+    simpl("lv fluid extractor", {"glass":2, "tin cable x1":2, "lv hull":1, "lv piston":1,"lv pump":1, "basic circuit":2});
+    simpl("lv electrolyzer", {"gold cable x1": 4, "lv hull":1, "tin wire x1":1, "basic circuit":2, "glass": 1});
+    simpl("lv extruder", {"copper wire x4": 4, "lv hull":1, "lv piston":1,"bronze fluid pipe":1, "basic circuit":2});
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
     simpl("lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
     simpl("lv bending machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv motor":2, "lv piston":2 });
     simpl("lv lathe", { "tin cable x1": 3, "lv hull": 1, "basic circuit":2, "lv motor":1, "lv piston":1, "diamond": 1 });
     simpl("lv wiremill", { "tin cable x1": 2, "lv hull": 1, "lv motor": 4, "basic circuit": 2 });
     simpl("lv steam turbine", {"basic circuit": 1, "tin rotor":2, "lv motor":2, "tin cable x1": 1, "lv hull":1, "bronze fluid pipe": 2});
+    simpl("lv centrifuge", {"basic circuit": 4, "lv motor":2, "tin cable x1": 2, "lv hull":1 });
+    simpl("lv extractor", {"basic circuit": 2, "lv piston":1, "tin cable x1": 2, "lv hull":1, "glass": 2, "lv pump": 1 });
 
     simpl("ulv input bus", { "ulv hull": 1, "chest": 1 });
     simpl("ulv output bus", { "ulv hull": 1, "chest": 1 });
@@ -248,7 +263,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lv emitter", { "brass rod": 4, "basic circuit": 2, "quartzite": 1, "tin cable x1": 2 });
     simpl("lv hull", { "tin cable x1": 2, "lv casing": 1 });
     simpl("lv casing", {"steel plate": 8 });
-    simpl("lv pump", {"tin rotor": 1, "tin screw":1, "tin cable x1": 1, "rubber ring": 1, "lv motor": 1, "bronze fluid pipe": 1});
+    simpl("lv pump", {"tin rotor": 1, "tin screw":1, "tin cable x1": 1, "rubber ring": 2, "lv motor": 1, "bronze fluid pipe": 1});
     simpl("lv piston", {"steel rod": 2, "lv motor":1, "tin cable x1": 2, "steel plate": 3, "small steel gear":1});
     simpl("lv motor", {"iron rod": 2, "magnetic iron rod":1, "tin cable x1": 2, "copper wire x1": 4});
 
@@ -258,6 +273,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("diamond sawblade", {"diamond dust": 1, "cobalt brass gear": 1});
 
     //BEGIN INTERMEDIATE VANILLA
+    simpl("iron axe", {"iron plate": 2, "iron": 1, "stick": 2})
     simpl("daylight sensor", { "glass": 3, "wood slab":3, "nether quartz": 3 });
     simpl("glass pane", { "glass": 2.66 });
     simpl("bucket", { "iron plate": 3 });
@@ -305,7 +321,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("frost proof casing", {"aluminum plate": 6, "aluminum frame box":1 });
     simpl("aluminum frame box", {"aluminum rod": 4});
 
-    simpl("rubber ring", {"rubber": 0.25 });
+    if (TECH["extruder"] >= LV)
+        simpl("rubber ring", {"rubber": 0.25 }, "Extrude");
+    else
+        simpl("rubber ring", {"rubber sheet": 1 });
 
     function assoc() {
     	var obj = {};
@@ -343,7 +362,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
     simpl("ic2 tin cable", { "tin plate": 0.25 });
 
-    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy"]
+    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel"]
     for (var k in materials)
     {
         var v = materials[k];
@@ -362,7 +381,7 @@ function RUN_RECIPES(TECH, simpl)
             simpl(v + " wire x1", assoc(v + " plate", 1));
     }
 
-    if (TECH["extruder"] > NONE)
+    if (TECH["extruder"] >= MV)
     {
         simpl("steel item casing", { "steel": 0.5 }, "Extrude");
         simpl("iron item casing", {"iron": 0.5 }, "Extrude");
@@ -403,7 +422,7 @@ function RUN_RECIPES(TECH, simpl)
         else
             simpl(rod, assoc(v,1));
     }
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"]
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy", "thaumium"]
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
@@ -431,6 +450,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("brass dust", {"zinc dust":0.25, "copper dust":0.75});
     simpl("rose gold dust", {"gold dust":0.8, "copper dust":0.2});
     simpl("red alloy", { "copper": 1, "redstone": 4 });
+    simpl("cupronickel", { "copper": 0.5, "nickel": 0.5 });
     simpl("block of redstone", {  "redstone": 9 });
 }
 
@@ -444,8 +464,8 @@ function basictech() {
         "plate mold" : techlevel.bronze,
         "forming press" : techlevel.none,
         "fluid extractor" : techlevel.none,
-        "lathe" : techlevel.none,
-        "polarizer" : techlevel.none
+        "lathe" : techlevel.lv,
+        "polarizer" : techlevel.lv
     }
 }
 
