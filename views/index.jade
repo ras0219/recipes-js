@@ -39,16 +39,21 @@ html
     if crafts
       // This page contains the results of a crafting request
       h3 Starting Ingredients
-      ul
+      table
+        tr
+          td Item
+          td Qty
         each val, index in final
-          li= index + ': ' + val
+          tr
+            td= index
+            td= Number(val).toFixed(2)
       h3 Crafting Steps
       ol
         each val in crafts
           li
             if val[3]
               = "Craft "
-              span.qty= val[0]
+              span.qty= Number(val[0]).toFixed(2)
               = " "
               span.part= val[1]
               = " using recipe "
@@ -58,7 +63,7 @@ html
                 = "]"
             else
               = "Craft "
-              span.qty= val[0]
+              span.qty= Number(val[0]).toFixed(2)
               = " "
               span.part= val[1]
               = " using recipe "
