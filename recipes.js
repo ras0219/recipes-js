@@ -132,7 +132,9 @@ function RUN_RECIPES(TECH, simpl)
     simpl("alchemical furnace", { "crucible": 1, "furnace": 1, "arcane stone block":7, "ignis vis": 5, "aqua vis": 5 }, "arcane");
     simpl("alchemical centrifuge", { "piston": 1, "essentia tube":2, "alchemical construct": 1, "arcane alembic": 1, "ordo vis":5, "aqua vis":5, "perditio vis":5 }, "arcane");
     simpl("alchemical construct", { "vis filter": 2, "essentia valve":2, "essentia tube":4, "greatwood planks": 1, "ordo vis":5, "aqua vis":5 }, "arcane");
+    simpl("essentia buffer", { "essentia valve": 1, "essentia tube": 2, "restricted essentia tube":1, "glass phial":4, "ordo vis":5, "aqua vis":5 }, "arcane");
     simpl("essentia valve", { "essentia tube": 1, "lever": 1, "ordo vis":5, "aqua vis":5 }, "arcane");
+    simpl("restricted essentia tube", { "essentia tube": 1, "stone": 1, "terra vis":16, "aqua vis":5 }, "arcane");
     simpl("essentia tube", { "glass": 1.0/8, "iron": 2.0/8, "gold nugget":1.0/8, "quicksilver drop": 1.0/8, "ordo vis":1.0/8, "aqua vis":1.0/8 }, "arcane");
     simpl("arcane alembic", { "bucket": 1, "iron":5, "gold":1, "vis filter": 1, "aer vis": 5, "aqua vis": 5 }, "arcane");
     simpl("vis filter", { "silverwood planks": 0.5, "gold":1, "ordo vis": 5.0/2, "aqua vis": 5.0/2 }, "arcane");
@@ -212,6 +214,17 @@ function RUN_RECIPES(TECH, simpl)
     simpl("mv laser engraver", { "copper cable x1": 2, "mv hull": 1, "good circuit": 3, "mv piston": 2, "mv emitter": 1 });
     simpl("mv extruder", { "cupronickel wire x4": 4, "mv hull": 1, "good circuit": 2, "mv piston": 1, "steel fluid pipe": 1 });
     simpl("mv electrolyzer", { "copper cable x1": 1, "silver wire x1": 4, "mv hull": 1, "good circuit": 2, "glass": 1 });
+    simpl("mv steam turbine", {"good circuit": 1, "bronze rotor":2, "mv motor":2, "copper cable x1": 1, "mv hull":1, "steel fluid pipe": 2});
+
+    simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
+    simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
+    simpl("mv battery buffer x4", {"copper wire x4": 4, "mv hull": 1, "chest": 1});
+    simpl("mv battery buffer x1", {"copper wire x1": 4, "mv hull": 1, "chest": 1});
+
+    simpl("lv battery buffer x16", {"tin wire x16": 4, "lv hull": 1, "chest": 1});
+    simpl("lv battery buffer x9", {"tin wire x8": 4, "lv hull": 1, "chest": 1});
+    simpl("lv battery buffer x4", {"tin wire x4": 4, "lv hull": 1, "chest": 1});
+    simpl("lv battery buffer x1", {"tin wire x1": 4, "lv hull": 1, "chest": 1});
 
     simpl("lv fluid canner", {"tin cable x1": 2, "lv hull": 1, "lv pump": 2, "basic circuit" : 2, "glass": 2});
     simpl("lv canning machine", {"tin cable x1": 2, "lv hull": 1, "lv pump": 1, "basic circuit" : 2, "glass": 3});
@@ -227,6 +240,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lv steam turbine", {"basic circuit": 1, "tin rotor":2, "lv motor":2, "tin cable x1": 1, "lv hull":1, "bronze fluid pipe": 2});
     simpl("lv centrifuge", {"basic circuit": 4, "lv motor":2, "tin cable x1": 2, "lv hull":1 });
     simpl("lv extractor", {"basic circuit": 2, "lv piston":1, "tin cable x1": 2, "lv hull":1, "glass": 2, "lv pump": 1 });
+    simpl("lv macerator", {"basic circuit": 2, "lv piston":1, "tin cable x1": 3, "lv hull":1, "diamond": 1, "lv motor": 1 });
+    simpl("lv ore washing plant", {"basic circuit": 2, "lv motor":1, "tin cable x1": 2, "lv hull":1, "glass": 1, "tin rotor": 2 });
 
     simpl("ulv input bus", { "ulv hull": 1, "chest": 1 });
     simpl("ulv output bus", { "ulv hull": 1, "chest": 1 });
@@ -297,7 +312,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
 
     // This is for "full tech"
-    //simpl("good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 });
+    if (TECH["assembling machine"] >= LV)
+    {
+        simpl("good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 });
+    }
     //simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 });
     //simpl("basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
 
@@ -392,7 +410,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl("iron item casing", {"iron": 2.0/3 });
     }
 
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold"];
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "electrum"];
     for (var k in materials) {
         var v = materials[k]
         var plate = v + " plate";
@@ -418,7 +436,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl("small "+v+" gear", assoc(plate,1));
 
         if (TECH["lathe"] > NONE)
-            simpl(rod, assoc(v,0.5), "Lathe");
+            simpl(rod, assoc(v,1, "recycled "+ v, -0.5), "Lathe");
         else
             simpl(rod, assoc(v,1));
     }
