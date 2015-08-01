@@ -69,7 +69,15 @@ app.all('/', function (req, res) {
         })
 })
 
-var server = app.listen(80, function () {
+var process = require('process');
+
+var port = 3000
+if ('PORT' in process.env)
+{
+    port = process.env.PORT
+}
+
+var server = app.listen(port, function () {
     var host = server.address().address
     var port = server.address().port
 
