@@ -69,8 +69,6 @@ app.all('/', function (req, res) {
         })
 })
 
-var process = require('process');
-
 var port = 3000
 if ('PORT' in process.env)
 {
