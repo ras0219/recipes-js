@@ -53,26 +53,22 @@ html
             td
               input(type="checkbox")
             td= index
-            td= Number(val).toFixed(2)
+            td= Number(val)
       h3 Crafting Steps
       ol
         each val in crafts
           li
             input(type="checkbox")
+            = "Craft "
+            span.qty= Number(val[0])
+            = " "
+            span.part= val[1]
+            = " using recipe "
+            span.recipe= JSON.stringify(val[2])
+            if val[4]
+              span.comment= " = "
+                span= val[4]
             if val[3]
-              = "Craft "
-              span.qty= Number(val[0]).toFixed(2)
-              = " "
-              span.part= val[1]
-              = " using recipe "
-              span.recipe= JSON.stringify(val[2])
               span.comment= " [COMMENT: "
                 span= val[3]
                 = "]"
-            else
-              = "Craft "
-              span.qty= Number(val[0]).toFixed(2)
-              = " "
-              span.part= val[1]
-              = " using recipe "
-              span.recipe= JSON.stringify(val[2])

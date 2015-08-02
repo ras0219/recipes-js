@@ -6,18 +6,33 @@ var techlevel = {
     "hv": 4
 };
 
-function console_logger(n, src, dst, comment)
+function console_logger(n, src, dst, comment, batchsize)
 {
+    var s = "Craft " + n + " " + src + " using recipe " + JSON.stringify(dst);
+
+    if (batchsize)
+        s += " [BATCH: "+batchsize+"]";
+
     if (comment)
-        console.log("Craft " + n + " " + src + " using recipe " + JSON.stringify(dst) + " [COMMENT: "+comment+"]")
-    else
-        console.log("Craft " + n + " " + src + " using recipe " + JSON.stringify(dst))
+        s += " [COMMENT: "+comment+"]";
+
+    console.log(s);
 }
 
 function make_simpl(basket, cb) {
-    return function (src, dst, comment) {
+    return function (src, dst, comment, batchsize) {
         if (src in basket) {
-            var n = basket[src]
+            var orig_n = basket[src]
+            var n = orig_n;
+            if (batchsize !== undefined)
+            {
+                n = Math.ceil(orig_n / batchsize) * batchsize;
+                var extra = n - orig_n;
+                if (extra > 0)
+                {
+                    basket["recycled " + src] = -extra;
+                }
+            }
             delete basket[src]
             for (var k in dst) {
                 if (!(k in basket)) {
@@ -25,7 +40,7 @@ function make_simpl(basket, cb) {
                 }
                 basket[k] += dst[k] * n
             }
-            cb(n, src, dst, comment)
+            cb(n, src, dst, comment, batchsize)
         }
     }
 }
@@ -46,7 +61,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("reactor glass", {"reactor casing":1, "fused quartz":2});
     simpl("reactor access port", {"reactor casing":4,"chest":1,"piston":1});
     simpl("reactor coolant port", {"reactor casing":4,"bucket":1,"piston":1,"steel":2});
-    simpl("reactor casing", {"steel plate":16.0/4.0, "yellorium":0.25, "graphite":0.5});
+    simpl("reactor casing", {"steel plate": 6, "yellorium": 1, "graphite": 2}, undefined, 4);
 
     //ENDER IO
     simpl("dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
@@ -128,18 +143,18 @@ function RUN_RECIPES(TECH, simpl)
         "aer vis": 25, "perditio vis": 25, "aqua vis": 25
         }, "multiblock structure");
     simpl("runic matrix", { "* shard": 4, "ender pearl": 1, "arcane stone block": 4, "ordo vis": 40 }, "arcane");
-    simpl("arcane pedestal", { "arcane stone block":7.0/2, "aer vis": 5.0/2 }, "arcane");
+    simpl("arcane pedestal", { "arcane stone block":7, "aer vis": 5 }, "arcane", 2);
     simpl("alchemical furnace", { "crucible": 1, "furnace": 1, "arcane stone block":7, "ignis vis": 5, "aqua vis": 5 }, "arcane");
     simpl("alchemical centrifuge", { "piston": 1, "essentia tube":2, "alchemical construct": 1, "arcane alembic": 1, "ordo vis":5, "aqua vis":5, "perditio vis":5 }, "arcane");
     simpl("alchemical construct", { "vis filter": 2, "essentia valve":2, "essentia tube":4, "greatwood planks": 1, "ordo vis":5, "aqua vis":5 }, "arcane");
     simpl("essentia buffer", { "essentia valve": 1, "essentia tube": 2, "restricted essentia tube":1, "glass phial":4, "ordo vis":5, "aqua vis":5 }, "arcane");
     simpl("essentia valve", { "essentia tube": 1, "lever": 1, "ordo vis":5, "aqua vis":5 }, "arcane");
     simpl("restricted essentia tube", { "essentia tube": 1, "stone": 1, "terra vis":16, "aqua vis":5 }, "arcane");
-    simpl("essentia tube", { "glass": 1.0/8, "iron": 2.0/8, "gold nugget":1.0/8, "quicksilver drop": 1.0/8, "ordo vis":1.0/8, "aqua vis":1.0/8 }, "arcane");
+    simpl("essentia tube", { "glass": 1, "iron": 2, "gold nugget":1, "quicksilver drop": 1, "ordo vis":1, "aqua vis":1 }, "arcane", 8);
     simpl("arcane alembic", { "bucket": 1, "iron":5, "gold":1, "vis filter": 1, "aer vis": 5, "aqua vis": 5 }, "arcane");
-    simpl("vis filter", { "silverwood planks": 0.5, "gold":1, "ordo vis": 5.0/2, "aqua vis": 5.0/2 }, "arcane");
+    simpl("vis filter", { "silverwood planks": 1, "gold":2, "ordo vis": 5, "aqua vis": 5 }, "arcane", 2);
     simpl("arcane stone bricks", { "arcane stone block": 1 });
-    simpl("arcane stone block", { "stone": 8.0/9, "* shard":1.0/9, "ignis vis": 1.0/9, "terra vis": 1.0/9 }, "arcane");
+    simpl("arcane stone block", { "stone": 8, "* shard":1, "ignis vis": 1, "terra vis": 1 }, "arcane", 9);
     simpl("crucible", { "cauldron": 1 }, "wand");
     simpl("golem core chop", { "golem core harvest": 1, "iron axe": 3, "axe of the stream": 1, "meto essentia": 16, "instrumentum essentia": 16, "arbor essentia": 16 }, "infusion");
     simpl("stone golem", { "stone bricks": 1, "humanus essentia": 4, "motus essentia": 4, "spiritus essentia": 4 }, "crucible");
@@ -290,24 +305,24 @@ function RUN_RECIPES(TECH, simpl)
     //BEGIN INTERMEDIATE VANILLA
     simpl("iron axe", {"iron plate": 2, "iron": 1, "stick": 2})
     simpl("daylight sensor", { "glass": 3, "wood slab":3, "nether quartz": 3 });
-    simpl("glass pane", { "glass": 2.66 });
+    simpl("glass pane", { "glass": 6 }, undefined, 16);
     simpl("bucket", { "iron plate": 3 });
     simpl("furnace", { "cobblestone": 8 });
-    simpl("gold nugget", { "gold" : 1.0/9 });
-    simpl("quicksilver drop", { "quicksilver" : 1.0/9 });
+    simpl("gold nugget", { "gold" : 1 }, undefined, 9);
+    //simpl("quicksilver drop", { "quicksilver" : 1.0/9 });
     simpl("cauldron", { "iron plate" : 7 });
     simpl("bookshelf", { "book" : 3, "plank" : 6 });
     simpl("book", { "paper" : 3, "leather" : 1 });
-    simpl("paper", { "sugar cane" : 3.0/2 });
+    simpl("paper", { "sugar cane" : 3 }, undefined, 2);
     simpl("cauldron", { "iron plate" : 7 });
     //END VANILLA
 
-    simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "soldering alloy": 1 });
+    simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 });
     simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
-    simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "soldering alloy": 0.5 });
+    simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 });
     simpl("engraved crystal chip", { "olivine plate": 1 });
 
-    simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "soldering alloy": 0.5 });
+    simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 });
     simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 });
     simpl("advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
 
@@ -316,16 +331,16 @@ function RUN_RECIPES(TECH, simpl)
 
     if (TECH["assembling machine"] >= LV)
     {
-        simpl("good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 }, "Assemble");
+        simpl("good circuit", { "basic circuit": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble");
         if (TECH["forming press"] >= LV)
         {
-            simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 }, "Assemble");
+            simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble");
         }
         else
         {
             simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
         }
-        simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "soldering alloy": 0.125 }, "Assemble");
+        simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "molten soldering alloy": 18 }, "Assemble");
     }
     else
     {
@@ -351,7 +366,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("aluminum frame box", {"aluminum rod": 4});
 
     if (TECH["extruder"] >= LV)
-        simpl("rubber ring", {"rubber": 0.25 }, "Extrude");
+        simpl("rubber ring", {"rubber": 1 }, "Extrude", 4);
     else
         simpl("rubber ring", {"rubber sheet": 1 });
 
@@ -379,17 +394,13 @@ function RUN_RECIPES(TECH, simpl)
     {
         simpl("magnetic iron rod", {"iron rod": 1, "redstone": 4});
     }
-    simpl("platinum foil", { "platinum plate": 0.25 });
-    simpl("gold foil", { "gold plate": 0.25 });
-    simpl("copper foil", { "copper plate": 0.25 });
-
     simpl("insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
-    simpl("ic2 copper cable", { "copper plate": 1.0/3 }, "Wiremill");
+    simpl("ic2 copper cable", { "copper plate": 1 }, "Wiremill", 3);
 
     simpl("cupronickel coil", { "cupronickel wire x8": 2 });
 
     simpl("insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
-    simpl("ic2 tin cable", { "tin plate": 0.25 });
+    simpl("ic2 tin cable", { "tin plate": 1 }, "Wiremill", 4);
 
     materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel"]
     for (var k in materials)
@@ -405,20 +416,20 @@ function RUN_RECIPES(TECH, simpl)
         simpl(v + " wire x4", assoc(v + " wire x2", 2));
         simpl(v + " wire x2", assoc(v + " wire x1", 2));
         if (TECH["wiremill"] > NONE)
-            simpl(v + " wire x1", assoc(v, 0.5), "Wiremill");
+            simpl(v + " wire x1", assoc(v, 1), "Wiremill", 2);
         else
             simpl(v + " wire x1", assoc(v + " plate", 1));
     }
 
     if (TECH["extruder"] >= MV)
     {
-        simpl("steel item casing", { "steel": 0.5 }, "Extrude");
-        simpl("iron item casing", {"iron": 0.5 }, "Extrude");
+        simpl("steel item casing", { "steel": 1 }, "Extrude", 2);
+        simpl("iron item casing", {"iron": 1 }, "Extrude", 2);
     }
     else if (TECH["casing mold"] > NONE)
     {
-        simpl("steel item casing", { "steel": 2.0/3 });
-        simpl("iron item casing", {"iron": 2.0/3 });
+        simpl("steel item casing", { "steel": 2 }, "Alloy Smelt: Casing Mold", 3);
+        simpl("iron item casing", {"iron": 2 }, "Alloy Smelt: Casing Mold", 3);
     }
 
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "electrum"];
@@ -429,11 +440,11 @@ function RUN_RECIPES(TECH, simpl)
         var bolt = v + " bolt";
 
         simpl(v+" gear", assoc(v, 4));
-        simpl(v+" fluid pipe", assoc(plate,3));
+        simpl(v+" fluid pipe", assoc(plate, 6), undefined, 2);
 
         simpl(v+" rotor", assoc(plate,4,v+" screw",1,v+" ring",1));
         if (TECH["extruder"] >= MV)
-            simpl(v+" ring", assoc(rod,0.25), "Extrude");
+            simpl(v+" ring", assoc(v, 1), "Extrude", 4);
         else
             simpl(v+" ring", assoc(rod,1));
 
@@ -442,22 +453,25 @@ function RUN_RECIPES(TECH, simpl)
         else
             simpl(v+" screw", assoc(bolt,2));
 
-        simpl(bolt, assoc(rod,0.5));
+        simpl(bolt, assoc(rod, 1), undefined, 2);
 
         simpl("small "+v+" gear", assoc(plate,1));
 
         if (TECH["lathe"] > NONE)
-            simpl(rod, assoc(v,1, "recycled "+ v, -0.5), "Lathe");
+            simpl(rod, assoc(v,1, "recycled "+ v + " small dust", -2), "Lathe");
         else
             simpl(rod, assoc(v,1));
     }
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum",
         "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy",
-        "thaumium", "silicon"]
+        "thaumium", "silicon", "platinum"]
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
-            simpl(v + " plate", assoc(v,1), "Bend Setting 1");
+        {
+            simpl(v +" foil", assoc(v + " plate", 1), "Bend: Setting 1", 4);
+            simpl(v + " plate", assoc(v,1), "Bend: Setting 1");
+        }
         else
             simpl(v + " plate", assoc(v,2));
     }
@@ -472,6 +486,11 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("annealed copper", { "copper": 1, "oxygen": 1000 });
 
+    if (TECH["fluid extractor"] > NONE)
+    {
+        simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144);
+    }
+
     simpl("chest", {"plank": 8});
 
     simpl("blue steel dust", {"rose gold dust":0.125, "brass dust":0.125, "black steel dust":0.5, "steel dust":0.25});
@@ -480,7 +499,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("brass dust", {"zinc dust":0.25, "copper dust":0.75});
     simpl("rose gold dust", {"gold dust":0.8, "copper dust":0.2});
     simpl("red alloy", { "copper": 1, "redstone": 4 });
-    simpl("cupronickel", { "copper": 0.5, "nickel": 0.5 });
+    simpl("cupronickel", { "copper": 1, "nickel": 1 }, "Alloy Smelt", 2);
     simpl("block of redstone", {  "redstone": 9 });
 }
 
