@@ -137,6 +137,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("genetics processor", { "nether quartz": 4, "diamond":4, "pulsating chipset":1 });
     //END GENDUSTRY
 
+    // Compressed air cell
+    if (TECH["compressor"] > NONE)
+        simpl("compressed air cell", { "empty cell": 1}, "Compress");
+
     //THAUMCRAFT
     simpl("mystical construct", { "runic matrix": 1, "arcane stone block": 4, "arcane stone bricks": 4, "arcane pedestal": 1,
         "ignis vis": 25, "terra vis": 25, "ordo vis": 25,
@@ -317,6 +321,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("cauldron", { "iron plate" : 7 });
     //END VANILLA
 
+    // Low level IC2/GT parts
     simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 });
     simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
     simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 });
@@ -325,6 +330,11 @@ function RUN_RECIPES(TECH, simpl)
     simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 });
     simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 });
     simpl("advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
+
+    if (TECH["bending machine"] > NONE)
+        simpl("empty cell", { "tin plate": 2 }, "Bend: Setting 12")
+    // End low level IC2/GT parts
+
 
     // This is for "full tech"
     simpl("basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
