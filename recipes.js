@@ -312,27 +312,38 @@ function RUN_RECIPES(TECH, simpl)
     simpl("advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
 
     // This is for "full tech"
-    if (TECH["assembling machine"] >= LV)
-    {
-        simpl("good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 });
-    }
-    //simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 });
-    //simpl("basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
-
-    simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
+    simpl("basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
 
     if (TECH["assembling machine"] >= LV)
     {
+        simpl("good circuit", { "basic circuit": 1, "nand" : 2, "soldering alloy": 0.25 }, "Assemble");
+        if (TECH["forming press"] >= LV)
+        {
+            simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "soldering alloy": 0.25 }, "Assemble");
+        }
+        else
+        {
+            simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
+        }
         simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "soldering alloy": 0.125 }, "Assemble");
     }
     else
     {
+        simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
         simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
     }
 
-    simpl("etched ev wiring", { "platinum foil": 1 });
-    simpl("etched hv wiring", { "gold foil": 1 });
-    simpl("etched mv wiring", { "copper foil": 1 });
+    if (TECH["forming press"] >= LV)
+    {
+        simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press");
+    }
+
+    if (TECH["forming press"] >= LV) // TODO: laser engraver is separate
+    {
+        simpl("etched ev wiring", { "platinum foil": 1 }, "Laser Engrave: Red Lens");
+        simpl("etched hv wiring", { "gold foil": 1 }, "Laser Engrave: Red Lens");
+        simpl("etched mv wiring", {"copper foil":1}, "Laser Engrave: Red Lens");
+    }
 
     simpl("diamond grinding head", {"industrial diamond": 1, "steel plate": 4, "diamond dust": 4});
 
@@ -440,7 +451,9 @@ function RUN_RECIPES(TECH, simpl)
         else
             simpl(rod, assoc(v,1));
     }
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy", "thaumium"]
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum",
+        "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy",
+        "thaumium", "silicon"]
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
@@ -452,7 +465,6 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lapis plate", {"lapis dust": 1 });
     simpl("olivine plate", { "olivine dust": 1 });
 
-    simpl("silicon plate", { "silicon": 1 });
     if (TECH["extruder"] > NONE)
         simpl("rubber plate", {"rubber": 1}, "Extrude");
     else
