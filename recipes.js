@@ -537,7 +537,7 @@ function basictech() {
         "lathe" : techlevel.none,
         "polarizer" : techlevel.none,
         "laser engraver" : techlevel.none,
-        "cutting saw" : techlevle.none
+        "cutting saw" : techlevel.none
     }
 }
 
