@@ -353,7 +353,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press");
     }
 
-    if (TECH["forming press"] >= LV) // TODO: laser engraver is separate
+    if (TECH["laser engraver"] >= LV)
     {
         simpl("etched ev wiring", { "platinum foil": 1 }, "Laser Engrave: Red Lens");
         simpl("etched hv wiring", { "gold foil": 1 }, "Laser Engrave: Red Lens");
@@ -426,6 +426,11 @@ function RUN_RECIPES(TECH, simpl)
         simpl("steel item casing", { "steel": 1 }, "Extrude", 2);
         simpl("iron item casing", {"iron": 1 }, "Extrude", 2);
     }
+    else if (TECH["cutting saw"] > NONE)
+    {
+        simpl("steel item casing", { "steel plate": 1 }, "Cutting Saw", 2);
+        simpl("iron item casing", {"iron plate": 1 }, "Cutting Saw", 2);
+    }
     else if (TECH["casing mold"] > NONE)
     {
         simpl("steel item casing", { "steel": 2 }, "Alloy Smelt: Casing Mold", 3);
@@ -439,28 +444,44 @@ function RUN_RECIPES(TECH, simpl)
         var rod = v + " rod";
         var bolt = v + " bolt";
 
-        simpl(v+" gear", assoc(v, 4));
+        if (TECH["extruder"] >= MV)
+        {
+            simpl(v+" gear", assoc(v, 4), "Extrude");
+        }
+        else
+        {
+            simpl(v+" gear", assoc(plate, 4, rod, 4));
+        }
         simpl(v+" fluid pipe", assoc(plate, 6), undefined, 2);
 
         simpl(v+" rotor", assoc(plate,4,v+" screw",1,v+" ring",1));
-        if (TECH["extruder"] >= MV)
-            simpl(v+" ring", assoc(v, 1), "Extrude", 4);
-        else
-            simpl(v+" ring", assoc(rod,1));
 
         if (TECH["lathe"] > NONE)
             simpl(v+" screw", assoc(bolt,1), "Lathe");
         else
             simpl(v+" screw", assoc(bolt,2));
 
-        simpl(bolt, assoc(rod, 1), undefined, 2);
-
-        simpl("small "+v+" gear", assoc(plate,1));
-
-        if (TECH["lathe"] > NONE)
-            simpl(rod, assoc(v,1, "recycled "+ v + " small dust", -2), "Lathe");
+        if (TECH["extruder"] >= MV)
+        {
+            simpl(v+" ring", assoc(v, 1), "Extrude", 4);
+            simpl(bolt, assoc(v, 1), "Extrude", 4);
+            simpl(rod, assoc(v,1), "Extrude", 2);
+        }
         else
-            simpl(rod, assoc(v,1));
+        {
+            simpl(v+" ring", assoc(rod,1));
+
+            if (TECH["cutting saw"] > NONE)
+                simpl(bolt, assoc(rod, 1), "Cutting Saw", 4);
+            else
+                simpl(bolt, assoc(rod, 1), undefined, 2);
+
+            if (TECH["lathe"] > NONE)
+                simpl(rod, assoc(v,1, "recycled "+ v + " small dust", -2), "Lathe");
+            else
+                simpl(rod, assoc(v,1));
+        }
+        simpl("small "+v+" gear", assoc(plate,1));
     }
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum",
         "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy",
@@ -505,16 +526,18 @@ function RUN_RECIPES(TECH, simpl)
 
 function basictech() {
     return {
-        "bending machine" : techlevel.lv,
+        "bending machine" : techlevel.none,
         "extruder" : techlevel.none,
         "assembling machine" : techlevel.none,
-        "wiremill" : techlevel.lv,
-        "casing mold" : techlevel.bronze,
-        "plate mold" : techlevel.bronze,
+        "wiremill" : techlevel.none,
+        "casing mold" : techlevel.none,
+        "plate mold" : techlevel.none,
         "forming press" : techlevel.none,
         "fluid extractor" : techlevel.none,
-        "lathe" : techlevel.lv,
-        "polarizer" : techlevel.lv
+        "lathe" : techlevel.none,
+        "polarizer" : techlevel.none,
+        "laser engraver" : techlevel.none,
+        "cutting saw" : techlevle.none
     }
 }
 
