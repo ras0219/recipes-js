@@ -29,11 +29,12 @@ html
           each val, key in techlevel
             td= key
         each tval, tkey in basictech
+          - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
           tr
             td= tkey + ': '
             each lval, lkey in techlevel
               td
-                if lval === tval
+                if lval === user_tech_level
                   input(type="radio", name="#{tkey}", value="#{lval}", checked)
                 else
                   input(type="radio", name="#{tkey}", value="#{lval}")
