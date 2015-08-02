@@ -26,8 +26,8 @@ function make_simpl(basket, cb) {
             var n = orig_n;
             if (batchsize !== undefined)
             {
-                n = Math.ceil(orig_n / batchsize) * batchsize;
-                var extra = n - orig_n;
+                n = Math.ceil(orig_n / batchsize);
+                var extra = n * batchsize - orig_n;
                 if (extra > 0)
                 {
                     basket["recycled " + src] = -extra;
