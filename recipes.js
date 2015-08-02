@@ -464,7 +464,7 @@ function RUN_RECIPES(TECH, simpl)
         if (TECH["extruder"] >= MV)
         {
             simpl(v+" ring", assoc(v, 1), "Extrude", 4);
-            simpl(bolt, assoc(v, 1), "Extrude", 4);
+            simpl(bolt, assoc(v, 1), "Extrude", 8);
             simpl(rod, assoc(v,1), "Extrude", 2);
         }
         else
