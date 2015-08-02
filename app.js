@@ -45,7 +45,7 @@ app.all('/', function (req, res) {
                 console.log("Didn't find tech " + k);
         }
         recipes.run(cur, tl, function (n, src, dst, comment, batchsz) {
-            crafts.push([n, src, dst, comment, batchsz])
+            crafts.push([n * batchsz, src, dst, comment, batchsz])
         })
         res.render('index', {
             basictech: recipes.basictech(),
