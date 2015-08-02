@@ -529,7 +529,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("black bronze dust", {"gold dust":0.2, "silver dust":0.2, "copper dust":0.6});
     simpl("brass dust", {"zinc dust":0.25, "copper dust":0.75});
     simpl("rose gold dust", {"gold dust":0.8, "copper dust":0.2});
-    simpl("red alloy", { "copper": 1, "redstone": 4 });
+    simpl("red alloy", { "copper": 1, "redstone": 4 }, "Alloy Smelt");
     simpl("cupronickel", { "copper": 1, "nickel": 1 }, "Alloy Smelt", 2);
     simpl("block of redstone", {  "redstone": 9 });
 }
