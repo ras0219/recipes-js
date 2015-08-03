@@ -64,7 +64,16 @@ function RUN_RECIPES(TECH, simpl)
     simpl("reactor coolant port", {"reactor casing":4,"bucket":1,"piston":1,"steel":2});
     simpl("reactor casing", {"steel plate": 6, "yellorium": 1, "graphite": 2}, undefined, 4);
 
-    //
+    // IC2 nuclear
+    simpl("nuclear reactor", {"dense lead plate": 4, "reactor chamber": 3, "generator": 1, "advanced circuit": 1});
+    simpl("reactor chamber", {"lead plate": 4, "basic machine casing": 1});
+    simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
+    simpl("heat vent", {"aluminum plate": 4, "iron bars": 4});
+
+    // IC2 nuclear fuels
+    simpl("thorium fuel rod x2", {"thorium fuel rod x1": 2, "iron plate": 1});
+    simpl("thorium fuel rod x1", {"thorium dust": 1, "empty fuel rod": 1});
+    simpl("empty fuel rod", {"iron": 1}, "Extrude: Cell");
 
     //ENDER IO
     simpl("dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
