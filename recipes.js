@@ -53,6 +53,7 @@ function RUN_RECIPES(TECH, simpl)
     var LV = techlevel.lv
     var MV = techlevel.mv
     var HV = techlevel.hv
+    var materials = []
 
     // BigReactors
     simpl("reactor controller", {"yellorium": 2, "redstone": 1, "diamond":1, "reactor casing": 4});
@@ -183,9 +184,6 @@ function RUN_RECIPES(TECH, simpl)
     simpl("implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
 
     simpl("implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminium cable":2,"advanced circuit":2 });
-    simpl("lv energy hatch", { "tin cable x1": 1, "lv hull":1 });
-    simpl("lv input bus", { "lv hull": 1, "chest": 1 });
-    simpl("lv output bus", { "lv hull": 1, "chest":1 });
     simpl("lv muffler hatch", { "lv hull": 1, "steel fluid pipe": 1 });
 
     simpl("solid steel casing", { "steel plate": 6, "steel frame box": 1 });
@@ -207,33 +205,86 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("vacuum freezer", { "frost proof casing": 1, "hv pump": 3, "gold cable x1": 2, "data control circuit": 3 });
 
-    //simpl("hv bending machine", { "gold cable x1": 2, "hv hull": 1, "copper wire x4": 4, "steel rod": 2 });
-    simpl("hv wiremill", { "gold cable x1": 2, "hv hull": 1, "hv motor": 4, "advanced circuit": 2 });
+    var tiermats = {
+        lv: {
+            cable: "tin cable x1",
+            circuit: "basic circuit",
+            rarewire: "gold wire x1",
+            heatwire4: "copper wire x4",
+            pipe: "bronze fluid pipe",
+            lathediamond: "diamond",
+            grinding: "diamond",
+            rotor: "tin rotor",
+            gear: "steel gear"
+        },
+        mv: {
+            cable: "copper cable x1",
+            circuit: "good circuit",
+            rarewire: "silver wire x1",
+            heatwire4: "cupronickel wire x4",
+            pipe: "steel fluid pipe",
+            lathediamond: "industrial diamond",
+            grinding: "industrial diamond",
+            rotor: "bronze rotor",
+            gear: "aluminum gear"
+        },
+        hv: {
+            cable: "gold cable x1",
+            circuit: "advanced circuit",
+            rarewire: "electrum wire x1",
+            heatwire4: "kanthal wire x4",
+            pipe: "stainless steel fluid pipe",
+            lathediamond: "industrial diamond",
+            grinding: "diamond grinding head",
+            rotor: "steel rotor",
+            gear: "stainless steel gear"
+        }
+    };
+    // fill out basic stuff
+    for (var k in tiermats)
+    {
+        var v = tiermats[k];
+        v.hull = k + " hull";
+        v.motor = k + " motor";
+        v.pump = k + " pump";
+        v.piston = k + " piston";
+        v.conveyor = k + " conveyor";
+        v.robotarm = k + " robot arm";
+        v.sensor = k + " sensor";
+        v.emitter = k + " emitter";
 
-    simpl("hv polarizer", { "gold cable x1": 2, "hv hull": 1, "copper wire x4": 4, "steel rod": 2 });
-    simpl("hv laser engraver", { "gold cable x1": 2, "hv hull": 1, "advanced circuit": 3, "hv piston": 2, "hv emitter": 1 });
-    simpl("hv forming press", {"gold cable x1": 4, "hv hull": 1, "advanced circuit":2, "hv piston":2});
-    simpl("hv assembling machine", {"gold cable x1": 2, "hv hull": 1, "advanced circuit":2, "hv conveyor":2, "hv robot arm": 2});
-    simpl("hv chemical bath", { "copper cable x1": 1, "hv hull": 1, "hv pump": 1, "advanced circuit": 2, "glass": 2, "hv conveyor": 2 });
+        simpl(k+" fluid canner", assoc(v.cable, 2, v.hull, 1, v.pump, 2, v.circuit, 2, "glass", 2));
+        simpl(k+" canning machine", assoc(v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2, "glass", 3));
+        simpl(k+" assembling machine", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 2, v.robotarm, 2));
+        simpl(k+" fluid extractor", assoc(v.cable, 2, v.hull, 1, v.piston, 1, v.pump, 1, v.circuit, 2, "glass", 2));
+        simpl(k+" electrolyzer", assoc(v.rarewire, 4, v.hull, 1, v.cable, 1, v.circuit, 2, "glass", 1));
+        simpl(k+" extruder", assoc(v.heatwire4, 4, v.hull, 1, v.piston, 2, v.circuit, 2, v.pipe, 1));
+        simpl(k+" scanner", assoc(v.cable, 2, v.hull, 1, v.emitter, 1, v.circuit, 4, v.sensor, 1));
+        simpl(k+" bending machine", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.motor, 2, v.circuit, 2));
+        simpl(k+" lathe", assoc(v.cable, 3, v.hull, 1, v.piston, 1, v.motor, 1, v.circuit, 2, v.lathediamond, 1));
+        simpl(k+" wiremill", assoc(v.cable, 2, v.hull, 1, v.motor, 4, v.circuit, 2));
+        simpl(k+" steam turbine", assoc(v.cable, 1, v.hull, 1, v.rotor, 2, v.motor, 2, v.circuit, 1, v.pipe, 2));
+        simpl(k+" centrifuge", assoc(v.cable, 2, v.hull, 1, v.motor, 2, v.circuit, 4));
+        simpl(k+" extractor", assoc(v.cable, 2, v.hull, 1, v.piston, 1, v.pump, 1, v.circuit, 2, "glass", 2));
+        simpl(k+" macerator", assoc(v.cable, 3, v.hull, 1, v.piston, 1, v.motor, 1, v.circuit, 2, v.grinding, 1));
+        simpl(k+" ore washing plant", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 2, v.circuit, 2, "glass", 1));
 
-    simpl("vacuum freezer", {"frost proof casing": 1, "hv pump": 3, "gold cable x1":2, "data control circuit": 3});
+        simpl(k+" packager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
+        simpl(k+" forming press", assoc(v.cable, 4, v.hull, 1, v.piston, 2, v.circuit, 2));
+        simpl(k+" diesel generator", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.piston, 2, v.circuit, 1, v.gear, 2));
+        simpl(k+" chemical reactor", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 1, v.circuit, 2, "glass", 2));
+        simpl(k+" chemical bath", assoc(v.cable, 1, v.hull, 1, v.conveyor, 1, v.pump, 1, v.circuit, 2, "glass", 2));
+        simpl(k+" cutting machine", assoc(v.cable, 2, v.hull, 1, v.conveyor, 1, v.motor, 1, v.circuit, 2, "glass", 1, "diamond sawblade", 1));
+        simpl(k+" compressor", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.circuit, 2));
+        simpl(k+" gas turbine", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.rotor, 3, v.circuit, 2));
+        simpl(k+" laser engraver", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.emitter, 1, v.circuit, 3));
 
-    simpl("mv packager", { "copper cable x1": 2, "mv hull": 1, "mv robot arm": 1, "good circuit": 2, "mv conveyor": 1, "chest": 2 });
-    simpl("mv forming press", {"copper cable x1": 4, "mv hull": 1, "good circuit":2, "mv piston":2});
-    simpl("mv fluid extractor", {"glass":2, "copper cable x1":2, "mv hull":1, "mv piston":1,"mv pump":1, "good circuit":2});
-    simpl("mv diesel generator", {"copper cable x1": 1, "mv hull": 1, "mv motor": 2, "good circuit" : 1, "aluminum gear" : 2, "mv piston" : 2});
-    simpl("mv fluid canner", {"copper cable x1": 2, "mv hull": 1, "mv pump": 2, "good circuit" : 2, "glass": 2});
-    simpl("mv chemical reactor", {"copper cable x1": 2, "mv hull": 1, "mv motor": 1, "good circuit" : 2, "glass": 2, "bronze rotor": 1});
-    simpl("mv chemical bath", {"copper cable x1": 1, "mv hull": 1, "mv pump": 1, "good circuit" : 2, "glass": 2, "mv conveyor": 2});
-    simpl("mv centrifuge", {"copper cable x1": 2, "mv hull": 1, "mv motor": 2, "good circuit" : 4});
-    simpl("mv cutting machine", {"copper cable x1": 2, "mv hull": 1, "mv conveyor": 1, "good circuit" : 2, "glass": 1, "mv motor": 1, "diamond sawblade":1});
-    simpl("mv compressor", {"copper cable x1": 2, "mv hull": 1, "mv piston": 2, "good circuit" : 2});
-    simpl("mv gas turbine", {"good circuit": 2, "bronze rotor":3, "mv motor":2, "copper cable x1": 1, "mv hull":1});
-    simpl("mv energy hatch", {"copper cable x1": 1, "mv hull":1});
-    simpl("mv laser engraver", { "copper cable x1": 2, "mv hull": 1, "good circuit": 3, "mv piston": 2, "mv emitter": 1 });
-    simpl("mv extruder", { "cupronickel wire x4": 4, "mv hull": 1, "good circuit": 2, "mv piston": 1, "steel fluid pipe": 1 });
-    simpl("mv electrolyzer", { "copper cable x1": 1, "silver wire x1": 4, "mv hull": 1, "good circuit": 2, "glass": 1 });
-    simpl("mv steam turbine", {"good circuit": 1, "bronze rotor":2, "mv motor":2, "copper cable x1": 1, "mv hull":1, "steel fluid pipe": 2});
+        simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
+        simpl(k+" input bus", assoc(v.cable, 1, "chest", 1));
+        simpl(k+" output bus", assoc(v.cable, 1, "chest", 1));
+    }
+
+    simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
 
     simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
     simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
@@ -244,23 +295,6 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lv battery buffer x9", {"tin wire x8": 4, "lv hull": 1, "chest": 1});
     simpl("lv battery buffer x4", {"tin wire x4": 4, "lv hull": 1, "chest": 1});
     simpl("lv battery buffer x1", {"tin wire x1": 4, "lv hull": 1, "chest": 1});
-
-    simpl("lv fluid canner", {"tin cable x1": 2, "lv hull": 1, "lv pump": 2, "basic circuit" : 2, "glass": 2});
-    simpl("lv canning machine", {"tin cable x1": 2, "lv hull": 1, "lv pump": 1, "basic circuit" : 2, "glass": 3});
-    simpl("lv assembling machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv conveyor":2, "lv robot arm":2 });
-    simpl("lv fluid extractor", {"glass":2, "tin cable x1":2, "lv hull":1, "lv piston":1,"lv pump":1, "basic circuit":2});
-    simpl("lv electrolyzer", {"gold cable x1": 4, "lv hull":1, "tin wire x1":1, "basic circuit":2, "glass": 1});
-    simpl("lv extruder", {"copper wire x4": 4, "lv hull":1, "lv piston":1,"bronze fluid pipe":1, "basic circuit":2});
-    simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
-    simpl("lv scanner", { "tin cable x1": 2, "lv hull": 1, "good circuit":4, "lv emitter":1, "lv sensor":1 });
-    simpl("lv bending machine", { "tin cable x1": 2, "lv hull": 1, "basic circuit":2, "lv motor":2, "lv piston":2 });
-    simpl("lv lathe", { "tin cable x1": 3, "lv hull": 1, "basic circuit":2, "lv motor":1, "lv piston":1, "diamond": 1 });
-    simpl("lv wiremill", { "tin cable x1": 2, "lv hull": 1, "lv motor": 4, "basic circuit": 2 });
-    simpl("lv steam turbine", {"basic circuit": 1, "tin rotor":2, "lv motor":2, "tin cable x1": 1, "lv hull":1, "bronze fluid pipe": 2});
-    simpl("lv centrifuge", {"basic circuit": 4, "lv motor":2, "tin cable x1": 2, "lv hull":1 });
-    simpl("lv extractor", {"basic circuit": 2, "lv piston":1, "tin cable x1": 2, "lv hull":1, "glass": 2, "lv pump": 1 });
-    simpl("lv macerator", {"basic circuit": 2, "lv piston":1, "tin cable x1": 3, "lv hull":1, "diamond": 1, "lv motor": 1 });
-    simpl("lv ore washing plant", {"basic circuit": 2, "lv motor":1, "tin cable x1": 2, "lv hull":1, "glass": 1, "tin rotor": 2 });
 
     simpl("ulv input bus", { "ulv hull": 1, "chest": 1 });
     simpl("ulv output bus", { "ulv hull": 1, "chest": 1 });
@@ -387,8 +421,6 @@ function RUN_RECIPES(TECH, simpl)
     	}
     	return obj;
     }
-
-    var materials
 
     if (TECH["polarizer"] > NONE)
     {
