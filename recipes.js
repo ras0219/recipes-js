@@ -193,7 +193,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("cupronickel coil block", { "cupronickel wire x2": 8 })
 
     simpl("heat proof casing", { "invar plate": 6, "invar frame box": 1 });
-    simpl("invar frame box", { "invar rod": 4 });
+    if (TECH["assembler"] > NONE)
+        simpl("invar frame box", { "invar rod": 4 }, "Assemble: Setting 4");
+    else
+        simpl("invar frame box", { "invar rod": 8 }, undefined, 2);
 
     simpl("electric jetpack", { "advanced circuit": 1, "iron item casing": 4, "glowstone": 2, "batbox": 1 });
     simpl("batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
