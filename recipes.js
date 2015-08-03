@@ -215,7 +215,8 @@ function RUN_RECIPES(TECH, simpl)
             lathediamond: "diamond",
             grinding: "diamond",
             rotor: "tin rotor",
-            gear: "steel gear"
+            gear: "steel gear",
+            plate: "steel plate"
         },
         mv: {
             cable: "copper cable x1",
@@ -226,7 +227,8 @@ function RUN_RECIPES(TECH, simpl)
             lathediamond: "industrial diamond",
             grinding: "industrial diamond",
             rotor: "bronze rotor",
-            gear: "aluminum gear"
+            gear: "aluminum gear",
+            plate: "aluminum plate"
         },
         hv: {
             cable: "gold cable x1",
@@ -237,7 +239,8 @@ function RUN_RECIPES(TECH, simpl)
             lathediamond: "industrial diamond",
             grinding: "diamond grinding head",
             rotor: "steel rotor",
-            gear: "stainless steel gear"
+            gear: "stainless steel gear",
+            plate: "stainless steel plate"
         }
     };
     // fill out basic stuff
@@ -278,6 +281,9 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" compressor", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.circuit, 2));
         simpl(k+" gas turbine", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.rotor, 3, v.circuit, 2));
         simpl(k+" laser engraver", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.emitter, 1, v.circuit, 3));
+
+        simpl(k+" sifting machine", assoc(v.cable, 2, v.hull, 1, v.piston, 2, "item filter", 2, v.circuit, 2));
+        simpl(k+" autoclave", assoc(v.hull, 1, v.pump, 1, "glass", 1, v.circuit, 2, v.plate, 4));
 
         simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
         simpl(k+" input bus", assoc(v.cable, 1, "chest", 1));
@@ -356,14 +362,18 @@ function RUN_RECIPES(TECH, simpl)
     //END VANILLA
 
     // Low level IC2/GT parts
-    simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 });
-    simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
-    simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 });
-    simpl("engraved crystal chip", { "olivine plate": 1 });
+    if (TECH["assembling machine"] >= LV)
+    {
+        simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "Assemble");
+        simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "Assemble");
+        simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "Assemble");
+        simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 });
+        simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 });
+        simpl("advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
+        simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
+        simpl("engraved crystal chip", { "olivine plate": 1 });
+    }
 
-    simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 });
-    simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 });
-    simpl("advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
 
     if (TECH["bending machine"] > NONE)
         simpl("empty cell", { "tin plate": 2 }, "Bend: Setting 12")
@@ -371,8 +381,6 @@ function RUN_RECIPES(TECH, simpl)
 
 
     // This is for "full tech"
-    simpl("basic circuit board", { "etched mv wiring": 4, "silicon plate" : 1 });
-
     if (TECH["assembling machine"] >= LV)
     {
         simpl("good circuit", { "basic circuit": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble");
@@ -568,19 +576,19 @@ function RUN_RECIPES(TECH, simpl)
 
 function basictech() {
     return {
-        "bending machine" : techlevel.none,
-        "extruder" : techlevel.none,
-        "assembling machine" : techlevel.none,
-        "wiremill" : techlevel.none,
-        "casing mold" : techlevel.none,
-        "plate mold" : techlevel.none,
-        "forming press" : techlevel.none,
-        "fluid extractor" : techlevel.none,
-        "lathe" : techlevel.none,
-        "polarizer" : techlevel.none,
-        "laser engraver" : techlevel.none,
-        "cutting saw" : techlevel.none,
-        "compressor" : techlevel.none
+        "bending machine" : techlevel.HV,
+        "extruder" : techlevel.HV,
+        "assembling machine" : techlevel.HV,
+        "wiremill" : techlevel.HV,
+        "casing mold" : techlevel.HV,
+        "plate mold" : techlevel.HV,
+        "forming press" : techlevel.HV,
+        "fluid extractor" : techlevel.HV,
+        "lathe" : techlevel.HV,
+        "polarizer" : techlevel.HV,
+        "laser engraver" : techlevel.HV,
+        "cutting saw" : techlevel.HV,
+        "compressor" : techlevel.HV
     }
 }
 
