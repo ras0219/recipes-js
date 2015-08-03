@@ -64,6 +64,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("reactor coolant port", {"reactor casing":4,"bucket":1,"piston":1,"steel":2});
     simpl("reactor casing", {"steel plate": 6, "yellorium": 1, "graphite": 2}, undefined, 4);
 
+    //
+
     //ENDER IO
     simpl("dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
     simpl("reinforced glider wing", { "enriched soularium alloy": 3, "conductive iron armor plating": 3 });
@@ -193,7 +195,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("cupronickel coil block", { "cupronickel wire x2": 8 })
 
     simpl("heat proof casing", { "invar plate": 6, "invar frame box": 1 });
-    if (TECH["assembler"] > NONE)
+    if (TECH["assembling machine"] > NONE)
         simpl("invar frame box", { "invar rod": 4 }, "Assemble: Setting 4");
     else
         simpl("invar frame box", { "invar rod": 8 }, undefined, 2);
