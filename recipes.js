@@ -75,6 +75,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("thorium fuel rod x1", {"thorium dust": 1, "empty fuel rod": 1});
     simpl("empty fuel rod", {"iron": 1}, "Extrude: Cell");
 
+    // dense plates
+    if (TECH["bending machine"] >= MV)
+        simpl("dense lead plate", {"lead": 9}, "Bend: Setting 9");
+
     //ENDER IO
     simpl("dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
     simpl("reinforced glider wing", { "enriched soularium alloy": 3, "conductive iron armor plating": 3 });
@@ -306,6 +310,10 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
 
+    // IC2 machines
+    simpl("generator", {"re battery": 1, "basic machine casing": 1, "furnace": 1});
+    simpl("cesu", {"bronze plate": 5, "insulated copper cable": 1, "advanced re battery": 3});
+
     simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
     simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
     simpl("mv battery buffer x4", {"copper wire x4": 4, "mv hull": 1, "chest": 1});
@@ -358,6 +366,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("ulv hull", {"ulv casing": 1, "lead cable x1": 2});
     simpl("ulv casing", {"steel plate": 4});
 
+    simpl("basic machine casing", {"iron plate": 8});
+
     simpl("diamond sawblade", {"diamond dust": 1, "cobalt brass gear": 1});
 
     //BEGIN INTERMEDIATE VANILLA
@@ -383,11 +393,13 @@ function RUN_RECIPES(TECH, simpl)
         simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "Assemble");
         simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 });
         simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 });
-        simpl("advanced circuit parts", { "glowstone": 0.5, "lapis plate" : 0.5 });
+        if (TECH["forming press"] >= MV)
+            simpl("advanced circuit parts", { "glowstone": 1, "lapis plate" : 1 }, "Forming Press", 2);
         simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
         simpl("engraved crystal chip", { "olivine plate": 1 });
     }
 
+    simpl("advanced re battery", { "bronze item casing": 5, "insulated copper cable": 2, "sulfur dust": 1, "lead dust": 1 })
 
     if (TECH["bending machine"] > NONE)
         simpl("empty cell", { "tin plate": 2 }, "Bend: Setting 12")
@@ -485,20 +497,23 @@ function RUN_RECIPES(TECH, simpl)
             simpl(v + " wire x1", assoc(v + " plate", 1));
     }
 
-    if (TECH["extruder"] >= MV)
+    materials = ["steel", "iron", "bronze"]
+    for (var k in materials)
     {
-        simpl("steel item casing", { "steel": 1 }, "Extrude", 2);
-        simpl("iron item casing", {"iron": 1 }, "Extrude", 2);
-    }
-    else if (TECH["cutting saw"] > NONE)
-    {
-        simpl("steel item casing", { "steel plate": 1 }, "Cutting Saw", 2);
-        simpl("iron item casing", {"iron plate": 1 }, "Cutting Saw", 2);
-    }
-    else if (TECH["casing mold"] > NONE)
-    {
-        simpl("steel item casing", { "steel": 2 }, "Alloy Smelt: Casing Mold", 3);
-        simpl("iron item casing", {"iron": 2 }, "Alloy Smelt: Casing Mold", 3);
+        var v = materials[k];
+        var casing = v + " item casing";
+        if (TECH["extruder"] >= MV)
+        {
+            simpl(casing, assoc(v, 1), "Extrude", 2);
+        }
+        else if (TECH["cutting saw"] > NONE)
+        {
+            simpl(casing, assoc(v + " plate", 1), "Cutting Saw", 2);
+        }
+        else if (TECH["casing mold"] > NONE)
+        {
+            simpl(casing, assoc(v, 2), "Alloy Smelt: Casing Mold", 3);
+        }
     }
 
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "electrum"];
@@ -549,7 +564,7 @@ function RUN_RECIPES(TECH, simpl)
     }
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum",
         "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy",
-        "thaumium", "silicon", "platinum"]
+        "thaumium", "silicon", "platinum", "lead"]
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
