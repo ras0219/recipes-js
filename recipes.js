@@ -332,7 +332,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("ev robot arm", { "titanium rod": 2, "ev piston": 1, "ev motor": 2, "aluminum cable x1": 3, "data control circuit": 1 });
     simpl("ev conveyor", { "aluminum cable x1": 1, "rubber plate": 6, "ev motor": 2 });
     simpl("ev pump", { "stainless steel rotor": 1, "stainless steel screw": 1, "aluminum cable x1": 1, "rubber ring": 2, "titanium fluid pipe": 1, "ev motor": 1 });
-    simpl("ev piston", { "titanium rod": 2, "ev motor": 1, "aluminum cable x1": 2, "titanium plate": 3, "titanium gear": 1 });
+    simpl("ev piston", { "titanium rod": 2, "ev motor": 1, "aluminum cable x1": 2, "titanium plate": 3, "small titanium gear": 1 });
     simpl("ev motor", { "titanium rod": 2, "magnetic neodynium rod": 1, "aluminum cable x1": 2, "annealed copper wire x8": 4 });
 
     simpl("hv emitter", { "chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2 });
@@ -341,7 +341,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("hv robot arm", {"stainless steel rod": 2, "hv piston":1, "hv motor":2, "gold cable x1": 3, "advanced circuit": 1});
     simpl("hv conveyor", {"gold cable x1": 1, "rubber plate": 6, "hv motor": 2});
     simpl("hv pump", {"steel rotor": 1, "steel screw":1, "gold cable x1": 1, "rubber ring": 2, "stainless steel fluid pipe": 1, "hv motor" : 1});
-    simpl("hv piston", {"stainless steel rod": 2, "hv motor":1, "gold cable x1": 2, "stainless steel plate": 3, "stainless steel gear":1});
+    simpl("hv piston", {"stainless steel rod": 2, "hv motor":1, "gold cable x1": 2, "stainless steel plate": 3, "small stainless steel gear":1});
     simpl("hv motor", {"stainless steel rod": 2, "magnetic steel rod":1, "gold cable x1": 2, "copper wire x4": 4});
 
     simpl("mv hull", {"copper cable x1": 2, "mv casing": 1 });
