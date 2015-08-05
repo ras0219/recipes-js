@@ -576,8 +576,11 @@ function RUN_RECIPES(TECH, simpl)
             simpl(v + " plate", assoc(v,2));
     }
 
-    simpl("lapis plate", {"lapis dust": 1 });
-    simpl("olivine plate", { "olivine dust": 1 });
+    if (TECH["compressor"] > NONE)
+    {
+        simpl("lapis plate", {"lapis dust": 1 }, "Compress");
+        simpl("olivine plate", { "olivine dust": 1 }, "Compress");
+    }
 
     if (TECH["extruder"] > NONE)
         simpl("rubber plate", {"rubber": 1}, "Extrude");
