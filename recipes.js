@@ -233,8 +233,13 @@ function RUN_RECIPES(TECH, simpl)
             lathediamond: "diamond",
             grinding: "diamond",
             rotor: "tin rotor",
+            screw: "tin screw",
             gear: "steel gear",
-            plate: "steel plate"
+            smallgear: "small steel gear",
+            rod: "steel rod",
+            magrod: "magnetic steel rod",
+            plate: "steel plate",
+            motorwire: "copper wire x1",
         },
         mv: {
             cable: "copper cable x1",
@@ -245,8 +250,13 @@ function RUN_RECIPES(TECH, simpl)
             lathediamond: "industrial diamond",
             grinding: "industrial diamond",
             rotor: "bronze rotor",
+            screw: "bronze screw",
             gear: "aluminum gear",
-            plate: "aluminum plate"
+            smallgear: "small aluminum gear",
+            rod: "aluminum rod",
+            magrod: "magnetic steel rod",
+            plate: "aluminum plate",
+            motorwire: "copper wire x2",
         },
         hv: {
             cable: "gold cable x1",
@@ -257,8 +267,13 @@ function RUN_RECIPES(TECH, simpl)
             lathediamond: "industrial diamond",
             grinding: "diamond grinding head",
             rotor: "steel rotor",
+            screw: "steel screw",
             gear: "stainless steel gear",
-            plate: "stainless steel plate"
+            smallgear: "small stainless steel gear",
+            rod: "stainless steel rod",
+            magrod: "magnetic steel rod",
+            plate: "stainless steel plate",
+            motorwire: "copper wire x4",
         }
     };
     // fill out basic stuff
@@ -273,6 +288,7 @@ function RUN_RECIPES(TECH, simpl)
         v.robotarm = k + " robot arm";
         v.sensor = k + " sensor";
         v.emitter = k + " emitter";
+        v.casing = k + " casing";
 
         simpl(k+" fluid canner", assoc(v.cable, 2, v.hull, 1, v.pump, 2, v.circuit, 2, "glass", 2));
         simpl(k+" canning machine", assoc(v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2, "glass", 3));
@@ -306,6 +322,25 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
         simpl(k+" input bus", assoc(v.cable, 1, "chest", 1));
         simpl(k+" output bus", assoc(v.cable, 1, "chest", 1));
+
+/*        simpl("ev hull", { "aluminum cable x1": 2, "ev casing": 1 });
+        simpl("ev casing", { "titanium plate": 8 });
+        simpl("ev robot arm", { "titanium rod": 2, "ev piston": 1, "ev motor": 2, "aluminum cable x1": 3, "data control circuit": 1 });
+        simpl("ev conveyor", { "aluminum cable x1": 1, "rubber plate": 6, "ev motor": 2 });
+        simpl("ev pump", { "stainless steel rotor": 1, "stainless steel screw": 1, "aluminum cable x1": 1, "rubber ring": 2, "titanium fluid pipe": 1, "ev motor": 1 });
+        simpl("ev piston", { "titanium rod": 2, "ev motor": 1, "aluminum cable x1": 2, "titanium plate": 3, "small titanium gear": 1 });
+        simpl("ev motor", { "titanium rod": 2, "magnetic neodynium rod": 1, "aluminum cable x1": 2, "annealed copper wire x8": 4 });
+*/
+        simpl(v.hull, assoc(v.cable, 2, v.casing, 1));
+        simpl(v.casing, assoc(v.plate, 8));
+        simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.cable, 3, v.circuit, 1));
+        simpl(v.conveyor, assoc("rubber plate", 6, v.motor, 2, v.cable, 1));
+        simpl(v.pump, assoc(v.rotor, 1, v.screw, 1, v.cable, 1, "rubber ring", 2, v.pipe, 1, v.motor, 1));
+        simpl(v.piston, assoc(v.rod, 2, v.motor, 1, v.cable, 2, v.plate, 3, v.smallgear, 1));
+        if (k == "lv")
+            simpl("lv motor", {"iron rod": 2, "magnetic iron rod":1, "tin cable x1": 2, "copper wire x1": 4});
+        else
+            simpl(v.motor, assoc(v.rod, 2, v.magrod, 1, v.cable, 2, v.motorwire, 4));
     }
 
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
@@ -327,41 +362,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("ulv input bus", { "ulv hull": 1, "chest": 1 });
     simpl("ulv output bus", { "ulv hull": 1, "chest": 1 });
 
-    simpl("ev hull", { "aluminum cable x1": 2, "ev casing": 1 });
-    simpl("ev casing", { "titanium plate": 8 });
-    simpl("ev robot arm", { "titanium rod": 2, "ev piston": 1, "ev motor": 2, "aluminum cable x1": 3, "data control circuit": 1 });
-    simpl("ev conveyor", { "aluminum cable x1": 1, "rubber plate": 6, "ev motor": 2 });
-    simpl("ev pump", { "stainless steel rotor": 1, "stainless steel screw": 1, "aluminum cable x1": 1, "rubber ring": 2, "titanium fluid pipe": 1, "ev motor": 1 });
-    simpl("ev piston", { "titanium rod": 2, "ev motor": 1, "aluminum cable x1": 2, "titanium plate": 3, "small titanium gear": 1 });
-    simpl("ev motor", { "titanium rod": 2, "magnetic neodynium rod": 1, "aluminum cable x1": 2, "annealed copper wire x8": 4 });
-
     simpl("hv emitter", { "chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2 });
-    simpl("hv hull", {"gold cable x1": 2, "hv casing": 1 });
-    simpl("hv casing", {"stainless steel plate": 8 });
-    simpl("hv robot arm", {"stainless steel rod": 2, "hv piston":1, "hv motor":2, "gold cable x1": 3, "advanced circuit": 1});
-    simpl("hv conveyor", {"gold cable x1": 1, "rubber plate": 6, "hv motor": 2});
-    simpl("hv pump", {"steel rotor": 1, "steel screw":1, "gold cable x1": 1, "rubber ring": 2, "stainless steel fluid pipe": 1, "hv motor" : 1});
-    simpl("hv piston", {"stainless steel rod": 2, "hv motor":1, "gold cable x1": 2, "stainless steel plate": 3, "small stainless steel gear":1});
-    simpl("hv motor", {"stainless steel rod": 2, "magnetic steel rod":1, "gold cable x1": 2, "copper wire x4": 4});
-
-    simpl("mv hull", {"copper cable x1": 2, "mv casing": 1 });
-    simpl("mv casing", {"aluminum plate": 8 });
-    simpl("mv robot arm", { "aluminum rod": 2, "mv piston": 1, "mv motor": 2, "copper cable x1": 3, "good circuit": 1 });
-    simpl("mv conveyor", { "copper cable x1": 1, "rubber plate": 6, "mv motor": 2 });
     simpl("mv emitter", { "electrum rod": 4, "good circuit": 2, "nether quartz": 1, "copper cable x1": 2 });
-    simpl("mv pump", {"bronze rotor": 1, "bronze screw":1, "copper cable x1": 1, "rubber ring": 2, "steel fluid pipe": 1, "mv motor" : 1});
-    simpl("mv piston", {"aluminum rod": 2, "mv motor":1, "copper cable x1": 2, "aluminum plate": 3, "small aluminum gear":1});
-    simpl("mv motor", {"aluminum rod": 2, "magnetic steel rod":1, "copper cable x1": 2, "copper wire x2": 4});
-
-    simpl("lv robot arm", { "steel rod": 2, "lv piston": 1, "lv motor": 2, "tin cable x1": 3, "basic circuit": 1 });
-    simpl("lv conveyor", { "tin cable x1": 1, "rubber plate": 6, "lv motor": 2 });
     simpl("lv sensor", { "brass rod": 1, "basic circuit": 1, "quartzite": 1, "steel plate": 4 });
     simpl("lv emitter", { "brass rod": 4, "basic circuit": 2, "quartzite": 1, "tin cable x1": 2 });
-    simpl("lv hull", { "tin cable x1": 2, "lv casing": 1 });
-    simpl("lv casing", {"steel plate": 8 });
-    simpl("lv pump", {"tin rotor": 1, "tin screw":1, "tin cable x1": 1, "rubber ring": 2, "lv motor": 1, "bronze fluid pipe": 1});
-    simpl("lv piston", {"steel rod": 2, "lv motor":1, "tin cable x1": 2, "steel plate": 3, "small steel gear":1});
-    simpl("lv motor", {"iron rod": 2, "magnetic iron rod":1, "tin cable x1": 2, "copper wire x1": 4});
 
     simpl("ulv hull", {"ulv casing": 1, "lead cable x1": 2});
     simpl("ulv casing", {"steel plate": 4});
