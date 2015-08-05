@@ -389,14 +389,20 @@ function RUN_RECIPES(TECH, simpl)
     if (TECH["assembling machine"] >= LV)
     {
         simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "Assemble");
-        simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "Assemble");
-        simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "Assemble");
-        simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 });
-        simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 });
-        if (TECH["forming press"] >= MV)
-            simpl("advanced circuit parts", { "glowstone": 1, "lapis plate" : 1 }, "Forming Press", 2);
-        simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
-        simpl("engraved crystal chip", { "olivine plate": 1 });
+        //simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "Assemble");
+        //simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "Assemble");
+
+        //simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
+        //simpl("engraved crystal chip", { "olivine plate": 1 });
+    }
+
+    if (TECH["assembling machine"] >= MV)
+        simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 }, "Assemble");
+
+    if (TECH["forming press"] >= MV)
+    {
+        simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 }, "Forming Press");
+        simpl("advanced circuit parts", { "glowstone": 1, "lapis plate" : 1 }, "Forming Press", 2);
     }
 
     simpl("advanced re battery", { "bronze item casing": 5, "insulated copper cable": 2, "sulfur dust": 1, "lead dust": 1 })
