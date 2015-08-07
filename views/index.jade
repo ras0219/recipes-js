@@ -47,13 +47,15 @@ html
         tr
           td
           td Item
-          td Qty
-        each val, index in final
+          td qty
+        - var ingkeys = Object.keys(final);
+        - ingkeys.sort();
+        each index in ingkeys
           tr
             td
               input(type="checkbox")
             td= index
-            td= Number(val)
+            td= Number(final[index])
       h3 Crafting Steps
       ol
         each val in crafts

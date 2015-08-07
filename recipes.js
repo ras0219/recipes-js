@@ -64,20 +64,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("reactor coolant port", {"reactor casing":4,"bucket":1,"piston":1,"steel":2});
     simpl("reactor casing", {"steel plate": 6, "yellorium": 1, "graphite": 2}, undefined, 4);
 
-    // IC2 nuclear
-    simpl("nuclear reactor", {"dense lead plate": 4, "reactor chamber": 3, "generator": 1, "advanced circuit": 1});
-    simpl("reactor chamber", {"lead plate": 4, "basic machine casing": 1});
-    simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
-    simpl("heat vent", {"aluminum plate": 4, "iron bars": 4});
-
     // IC2 nuclear fuels
     simpl("thorium fuel rod x2", {"thorium fuel rod x1": 2, "iron plate": 1});
     simpl("thorium fuel rod x1", {"thorium dust": 1, "empty fuel rod": 1});
     simpl("empty fuel rod", {"iron": 1}, "Extrude: Cell");
-
-    // dense plates
-    if (TECH["bending machine"] >= MV)
-        simpl("dense lead plate", {"lead": 9}, "Bend: Setting 9");
 
     //ENDER IO
     simpl("dark soularium jetplate", {"enriched soularium alloy":2,"ender crystal":1,"reinforced glider wing":2, "vibrant jetpack_104":1,"dark soularium thruster":2,"octadic capacitor pack_104":1});
@@ -223,6 +213,68 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("vacuum freezer", { "frost proof casing": 1, "hv pump": 3, "gold cable x1": 2, "data control circuit": 3 });
 
+    // OpenComputers
+    simpl("opencomputer tier 1 multi", {
+        "computer case tier 1":1,
+        "cpu tier 1":1,
+        "graphics card tier 1":1,
+        "memory tier 1":2,
+        "hard disk drive tier 1":1,
+        "redstone card tier 1":1,
+        "screen tier 1":1,
+        "keyboard":1,
+        "capacitor":1,
+        "power converter":1,
+        "disk drive":1,
+        "floppy disk":2,
+    });
+
+    simpl("floppy disk", { "disk platter": 1, "aluminum plate": 2, "lever": 1, "aluminum screw": 4 });
+
+    simpl("capacitor", { "cesu": 1, "lv casing": 2, "printed circuit board": 2, "transistor": 1 });
+    simpl("power converter", { "microchip tier 2": 1, "aluminum plate": 2, "printed circuit board": 2, "ic2 mv transformer": 1 });
+
+    simpl("hard disk drive tier 1", { "disk platter": 2, "memory tier 1": 4, "microchip tier 2": 1, "aluminum screw": 1 });
+    simpl("disk platter", { "aluminum plate": 4 });
+
+    simpl("component bus tier 1", { "iron nugget": 4, "redstone": 1, "microchip tier 1": 1, "printed circuit board": 1, "control unit": 1 });
+    simpl("screen tier 1", { "aluminum plate": 4, "redstone": 1, "transistor": 1, "glass pane": 1 });
+    simpl("cpu tier 1", { "control unit": 1, "arithmetic logic unit": 1, "microchip tier 2": 2, "aluminum screw": 2, "aluminum plate": 2 });
+
+    simpl("redstone card tier 1", { "card base": 1, "redstone torch": 1, "microchip tier 1": 1 });
+    simpl("graphics card tier 1", { "card base": 1, "arithmetic logic unit": 1, "microchip tier 1": 1, "memory tier 1": 1 });
+    simpl("card base", { "printed circuit board": 2, "iron rod": 2, "microchip tier 2": 1, "transistor": 1, "gold nugget": 2 });
+    simpl("computer case tier 1", { "printed circuit board": 1, "aluminum screw": 2, "microchip tier 1": 1, "component heat vent": 2, "lv casing": 1 });
+
+    simpl("disk drive", { "piston": 1, "glass lens": 1, "microchip tier 2": 3, "lv casing": 1 });
+    simpl("keyboard", { "button group": 4, "arrow keys": 1, "numeric keypad": 1 });
+    simpl("button group", { "button": 6 });
+    simpl("numeric keypad", { "button": 9 });
+    simpl("arrow keys", { "button": 4 });
+    if (TECH["assembling machine"] > NONE)
+    {
+        simpl("control unit", { "transistor": 6, "data control circuit": 1 }, "Assemble", 3);
+        simpl("arithmetic logic unit", { "microchip tier 1": 1, "comparator": 3 }, "Assemble");
+        simpl("memory tier 1", { "microchip tier 1": 3, "printed circuit board": 3 }, "Assemble");
+        simpl("microchip tier 2", { "advanced circuit": 1, "transistor": 8 }, "Assemble", 4);
+        simpl("microchip tier 1", { "basic circuit": 1, "transistor": 4 }, "Assemble", 4);
+        simpl("transistor", { "redstone": 1, "iron rod": 3 }, "Assemble", 6);
+    }
+    simpl("printed circuit board", { "circuit board": 1, "tiny gold dust": 2, "sulfuric acid cell": 1 });
+    simpl("circuit board", { "raw circuit board": 1 }, "Smelt");
+    simpl("raw circuit board", { "clay block": 1, "cactus green": 1 }, "Cutting Wire");
+    // End OpenComputers
+
+    // IC2 nuclear
+    simpl("nuclear reactor", {"dense lead plate": 4, "reactor chamber": 3, "generator": 1, "advanced circuit": 1});
+    simpl("reactor chamber", {"lead plate": 4, "basic machine casing": 1});
+    simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
+    simpl("heat vent", {"aluminum plate": 4, "iron bars": 4});
+
+    // dense plates
+    if (TECH["bending machine"] >= MV)
+        simpl("dense lead plate", {"lead": 9}, "Bend: Setting 9");
+
     var tiermats = {
         lv: {
             cable: "tin cable x1",
@@ -306,6 +358,8 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" macerator", assoc(v.cable, 3, v.hull, 1, v.piston, 1, v.motor, 1, v.circuit, 2, v.grinding, 1));
         simpl(k+" ore washing plant", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 2, v.circuit, 2, "glass", 1));
 
+        simpl(k+" distillery", assoc("blaze rod", 1, "glass", 2, v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2));
+
         simpl(k+" packager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
         simpl(k+" forming press", assoc(v.cable, 4, v.hull, 1, v.piston, 2, v.circuit, 2));
         simpl(k+" diesel generator", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.piston, 2, v.circuit, 1, v.gear, 2));
@@ -346,9 +400,26 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
 
     // IC2 machines
+    simpl("reactor pressure vessel multi", {"reactor pressure vessel": 94, "reactor redstone port": 1, "reactor access hatch": 1, "reactor fluid port": 2}, "Multiblock");
+    simpl("reactor redstone port", {"reactor pressure vessel": 8, "redstone": 1});
+    simpl("reactor access hatch", {"reactor pressure vessel": 8, "trapdoor": 1});
+    simpl("reactor fluid port", {"reactor pressure vessel": 8, "universal fluid cell": 1});
+    simpl("reactor pressure vessel", {"lead plate": 5, "stone": 4}, undefined, 4);
+
+    simpl("liquid heat exchanger", { "empty cell": 2, "glass": 4, "iron item casing": 2, "heat conductor": 1});
+    simpl("ic2 stirling generator", {"iron item casing": 7, "generator": 1, "heat conductor": 1});
+    simpl("heat conductor", { "rubber": 6, "copper plate": 3});
     simpl("generator", {"re battery": 1, "basic machine casing": 1, "furnace": 1});
     simpl("cesu", {"bronze plate": 5, "insulated copper cable": 1, "advanced re battery": 3});
 
+    simpl("ic2 mv transformer", {"basic machine casing": 1, "insulated copper cable": 2});
+
+    simpl("fluid ejector upgrade", {"tin plate": 4, "electric motor": 1});
+    simpl("electric motor", {"tin item casing": 2, "iron": 1, "coil": 2});
+    simpl("coil", {"ic2 copper cable": 8, "iron": 1});
+    simpl("universal fluid cell", {"tin item casing": 4, "glass pane": 1});
+
+    // GT stuff
     simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
     simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
     simpl("mv battery buffer x4", {"copper wire x4": 4, "mv hull": 1, "chest": 1});
@@ -393,15 +464,21 @@ function RUN_RECIPES(TECH, simpl)
     if (TECH["assembling machine"] >= LV)
     {
         simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "Assemble");
-        //simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "Assemble");
-        //simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "Assemble");
-
-        //simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
-        //simpl("engraved crystal chip", { "olivine plate": 1 });
     }
+    if (TECH["assembling machine"] >= HV)
+        simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "Assemble");
 
     if (TECH["assembling machine"] >= MV)
+    {
+        simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "Assemble");
         simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 }, "Assemble");
+    }
+
+    if (TECH["laser engraver"] >= HV)
+        simpl("engraved crystal chip", { "olivine plate": 1 }, "Laser Engrave: Green Lens");
+
+    if (TECH["forming press"] >= HV)
+        simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 });
 
     if (TECH["forming press"] >= MV)
     {
@@ -507,7 +584,7 @@ function RUN_RECIPES(TECH, simpl)
             simpl(v + " wire x1", assoc(v + " plate", 1));
     }
 
-    materials = ["steel", "iron", "bronze"]
+    materials = ["steel", "iron", "bronze", "tin"]
     for (var k in materials)
     {
         var v = materials[k];
@@ -604,6 +681,11 @@ function RUN_RECIPES(TECH, simpl)
         simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144);
     }
 
+    simpl("comparator", { "redstone torch": 3, "* quartz": 1, "stone": 3});
+    simpl("redstone torch", {"stick": 1, "redstone": 1});
+    simpl("piston", {"plank": 3, "cobblestone": 4, "redstone": 1, "iron": 1});
+    simpl("button", {"stone": 1});
+    simpl("lever", {"stick": 1, "cobblestone": 1});
     simpl("chest", {"plank": 8});
 
     simpl("blue steel dust", {"rose gold dust":0.125, "brass dust":0.125, "black steel dust":0.5, "steel dust":0.25});
