@@ -17,35 +17,33 @@ html(lang="en")
       h1= "Recipes-JS "
         small= "[beyond reality mod pack]"
       //p.lead test test 123
-      form
-        .form-group
-          label Items to craft
-          each x in [1,2,3,4,5,6]
-            - var v_name = query['i' + x + 'name'] || ''
-            - var v_qty = query['i' + x + 'qty'] || ''
-            //div.row
-              //input.itembox.col-md-5.col-xs-11(type="text", name="i#{x}name", value="#{v_name}" placeholder="lv bending machine" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
-              //input.col-md-1.col-xs-1(type="text", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
-            div.form-inline
+      form.form-horizontal
+        h3 Items to craft
+        each x in [1,2,3,4,5,6]
+          - var v_name = query['i' + x + 'name'] || ''
+          - var v_qty = query['i' + x + 'qty'] || ''
+          //div.row
+            //input.itembox.col-md-5.col-xs-11(type="text", name="i#{x}name", value="#{v_name}" placeholder="lv bending machine" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+            //input.col-md-1.col-xs-1(type="text", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+          .form-group
+            .col-xs-9.col-md-5.col-md-offset-3
               input.itembox.form-control(type="text", name="i#{x}name", value="#{v_name}" placeholder="lv bending machine" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+            .col-xs-3.col-md-1
               input.form-control(type="text", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
-        .form-group
-          label Tech level
-          table.table
-            each tval, tkey in basictech
-              - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
-              tr
-                td= tkey + ': '
-                td
-                  label(for="techselect#{tkey}")
-                  select.form-control.btn-sm(id="techselect#{tkey}")
-                    each lval, lkey in techlevel
-                      if lval === user_tech_level
-                        //input(type="radio", name="#{tkey}", value="#{lval}", checked)
-                        option= lkey
-                      else
-                        //input(type="radio", name="#{tkey}", value="#{lval}")
-                        option= lkey
+        h3 Tech level
+        each tval, tkey in basictech
+          - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
+          .form-group
+            label.col-md-4.col-xs-8.col-md-offset-3(for="techselect#{tkey}")= tkey
+            .col-md-2.col-xs-4
+              select.form-control.btn-sm(id="techselect#{tkey}" name="#{tkey}")
+                each lval, lkey in techlevel
+                  if lval === user_tech_level
+                    option(value="#{lval}" selected="selected")= lkey
+                    //input(type="radio", name="#{tkey}", value="#{lval}", checked)
+                  else
+                    //input(type="radio", name="#{tkey}", value="#{lval}")
+                    option(value="#{lval}")= lkey
 
         input(type="submit")
       if crafts

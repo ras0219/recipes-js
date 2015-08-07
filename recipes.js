@@ -420,6 +420,14 @@ function RUN_RECIPES(TECH, simpl)
     simpl("coil", {"ic2 copper cable": 8, "iron": 1});
     simpl("universal fluid cell", {"tin item casing": 4, "glass pane": 1});
 
+    // Railcraft
+    simpl("hobbyist steam engine", {"gold nugget": 3, "glass":1, "piston":1, "railcraft gold gear": 2})
+    simpl("commercial steam engine", {"iron plate": 3, "glass":1, "piston":1, "railcraft iron gear": 2})
+    simpl("industrial steam engine", {"steel plate": 3, "glass":1, "piston":1, "railcraft steel gear": 2})
+    simpl("railcraft steel gear", {"steel plate": 4, "tin gear bushing":1})
+    simpl("railcraft iron gear", {"iron plate": 4, "tin gear bushing":1})
+    simpl("tin gear bushing", {"tin plate": 4}, undefined, 2)
+
     // GT stuff
     simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
     simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
