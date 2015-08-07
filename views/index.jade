@@ -1,76 +1,90 @@
-html
+html(lang="en")
   head
-    title hello
-    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible" content="IE=edge")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    title Recipes-JS [beyond reality mod pack]
     link(rel='stylesheet', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css')
-    script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js')
     style(type='text/css')
       | .part { font-weight: bold }
       | .qty { font-weight: bold }
       | .comment > span { font-weight: bold }
       | li
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
+  body
+    .container
+      h1 Recipes JS
+      p.lead test test 123
+      form
+        ul
+          each x in [1,2,3,4,5,6]
+            - var v_name = query['i' + x + 'name'] || ''
+            - var v_qty = query['i' + x + 'qty'] || ''
+            li Item#{x}
+              input.itembox(type="text", name="i#{x}name", value="#{v_name}" placeholder="lv bending machine" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+              input(type="text", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+        h4 Tech level
+        table.table
+          thead
+            tr
+              td
+              each val, key in techlevel
+                td= key
+          tbody
+            each tval, tkey in basictech
+              - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
+              tr
+                td= tkey + ': '
+                each lval, lkey in techlevel
+                  td
+                    if lval === user_tech_level
+                      input(type="radio", name="#{tkey}", value="#{lval}", checked)
+                    else
+                      input(type="radio", name="#{tkey}", value="#{lval}")
+
+        input(type="submit")
+      if crafts
+        // This page contains the results of a crafting request
+        h3 Starting Ingredients
+        table.table.table-striped
+          thead
+            tr
+              td
+              td Item
+              td qty
+          tbody
+            - var ingkeys = Object.keys(final);
+            - ingkeys.sort();
+            each index in ingkeys
+              tr
+                td
+                  input(type="checkbox" id="startinging#{index}")
+                td
+                  label(for="startinging#{index}")= index
+                td
+                  label(for="startinging#{index}")= Number(final[index])
+        h3 Crafting Steps
+        ol
+          each val in crafts
+            li
+              input(type="checkbox")
+              = "Craft "
+              span.qty= Number(val[0])
+              = " "
+              span.part= val[1]
+              = " using recipe "
+              span.recipe= JSON.stringify(val[2])
+              if val[4]
+                span.comment= " = "
+                  span= val[4]
+              if val[3]
+                span.comment= " [COMMENT: "
+                  span= val[3]
+                  = "]"
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js')
     script
       != "var data = " + JSON.stringify(itemlist) + ";"
       | $(function() { $(".itembox").autocomplete({ source: data, delay: 0 }); });
-  body(style="font: comic")
-    h1 Recipes JS
-    form
-      ul
-        each x in [1,2,3,4,5,6]
-          - var v_name = query['i' + x + 'name'] || ''
-          - var v_qty = query['i' + x + 'qty'] || ''
-          li Item#{x}
-            input.itembox(type="text", name="i#{x}name", value="#{v_name}")
-            input(type="text", name="i#{x}qty", value="#{v_qty}")
-      h4 Tech level
-      table
-        tr
-          td
-          each val, key in techlevel
-            td= key
-        each tval, tkey in basictech
-          - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
-          tr
-            td= tkey + ': '
-            each lval, lkey in techlevel
-              td
-                if lval === user_tech_level
-                  input(type="radio", name="#{tkey}", value="#{lval}", checked)
-                else
-                  input(type="radio", name="#{tkey}", value="#{lval}")
-
-      input(type="submit")
-    if crafts
-      // This page contains the results of a crafting request
-      h3 Starting Ingredients
-      table
-        tr
-          td
-          td Item
-          td qty
-        - var ingkeys = Object.keys(final);
-        - ingkeys.sort();
-        each index in ingkeys
-          tr
-            td
-              input(type="checkbox")
-            td= index
-            td= Number(final[index])
-      h3 Crafting Steps
-      ol
-        each val in crafts
-          li
-            input(type="checkbox")
-            = "Craft "
-            span.qty= Number(val[0])
-            = " "
-            span.part= val[1]
-            = " using recipe "
-            span.recipe= JSON.stringify(val[2])
-            if val[4]
-              span.comment= " = "
-                span= val[4]
-            if val[3]
-              span.comment= " [COMMENT: "
-                span= val[3]
-                = "]"
+    script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")

@@ -85,24 +85,25 @@ function RUN_RECIPES(TECH, simpl)
     simpl("electrical steel jetpack", { "electrical steel": 4, "basic capacitor": 1, "electrical steel thruster": 2, "conductive iron jetpack": 1 });
     simpl("conductive iron jetpack", { "conductive iron": 4, "basic capacitor": 1, "leather straps": 1, "conductive iron thruster": 2 });
     simpl("conductive iron thruster", { "basic capacitor": 2, "insulated redstone conduit": 2, "conductive iron": 2, "redstone": 1, "basic gear": 2 });
-    simpl("insulated redstone conduit", { "conduit binder": 6 / 8, "redstone alloy": 3 / 8 });
+    simpl("insulated redstone conduit", { "conduit binder": 6, "redstone alloy": 3 }, undefined, 8);
     simpl("electrical steel thruster", { "electrical steel": 2, "basic capacitor": 2, "energy conduit": 2, "redstone": 1, "machine chassis": 2 });
     simpl("energetic thrusters", {"redstone alloy":1, "pulsating crystal":2,"double-layer capacitor":2,"enhanced energy conduit":2,"energetic alloy":2,});
 
     simpl("pulsating crystal", { "pulsating iron nugget": 8, "diamond": 1 });
-    simpl("pulsating iron nugget", {"pulsating iron":1/9})
-    simpl("pulsating iron", {"iron":1,"ender pearl":1});
+    simpl("pulsating iron nugget", { "pulsating iron":1 }, undefined, 9);
+    simpl("pulsating iron", { "iron":1,"ender pearl":1 });
 
     simpl("advanced photovoltaic cell", { "daylight sensor": 1, "double capacitor": 2, "enlightened fused quartz": 2, "vibrant alloy": 2, "pulsating iron": 2 });
     simpl("pulsating iron", { "iron": 1, "ender pearl": 1 });
-    simpl("vibrant crystal", {"emerald":1,"vibrant alloy":8/9});
+    simpl("vibrant crystal", {"emerald":1,"vibrant alloy nugget":8});
 
-    simpl("energy conduit", { "conduit binder": 6 / 8, "conductive iron": 3 / 8 });
+    simpl("energy conduit", { "conduit binder": 6, "conductive iron": 3 }, undefined, 8);
     simpl("enlightened fused quartz", { "fused quartz": 4, "glowstone": 4 });
     simpl("fused quartz", { "nether quartz": 4 });
 
     simpl("machine chassis", {"basic capacitor":1,"iron":4,"iron bars":4});
     simpl("octadic capacitor", { "vibrant alloy": 2, "glowstone": 1, "double capacitor": 2 });
+    simpl("vibrant alloy nugget", { "vibrant alloy": 1 }, undefined, 9);
     simpl("vibrant alloy", { "energetic alloy": 1, "ender pearl": 1 });
     simpl("double capacitor", { "basic capacitor": 2, "coal dust": 1, "energetic alloy": 6 });
     simpl("basic capacitor", { "redstone": 2, "gold": 4, "red alloy": 1 });

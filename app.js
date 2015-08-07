@@ -7,6 +7,8 @@ recipes.raw_recipes(recipes.basictech(), function(item) { itemlist.push(item); }
 
 app.set('view engine', 'jade')
 
+app.use('/static', express.static('static'));
+
 app.all('/', function (req, res) {
     var cur = {}
     var query = req.query || {};
