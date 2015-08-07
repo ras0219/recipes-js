@@ -420,6 +420,9 @@ function RUN_RECIPES(TECH, simpl)
     simpl("coil", {"ic2 copper cable": 8, "iron": 1});
     simpl("universal fluid cell", {"tin item casing": 4, "glass pane": 1});
 
+    // thermal monitor
+    simpl("thermal monitor", { "lead plate": 7, "redstone": 1, "advanced circuit": 1});
+
     // Railcraft
     simpl("hobbyist steam engine", {"gold nugget": 3, "glass":1, "piston":1, "railcraft gold gear": 2})
     simpl("commercial steam engine", {"iron plate": 3, "glass":1, "piston":1, "railcraft iron gear": 2})
