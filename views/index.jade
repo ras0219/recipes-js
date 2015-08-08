@@ -94,5 +94,5 @@ html(lang="en")
     script
       != "var data = " + JSON.stringify(itemlist) + ";"
       | $(function() { $(".itembox").autocomplete({ source: data, delay: 50 }); });
-      | $(function() { $(".checkable").click(function() { $(this).find("input").prop("checked", function(i,val) { return !val; }); }); });
+      | $(function() { $(".checkable").click(function(e) { if ($(e.target).is('input')) return; $(this).find("input").prop("checked", function(i,val) { return !val; }); }); });
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
