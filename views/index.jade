@@ -16,9 +16,10 @@ html(lang="en")
   body
     .container
       h1= "Recipes-JS "
+        br.visible-xs
         small [beyond reality mod pack]
-      //p.lead test test 123
-      form.form-horizontal
+      // p.lead test test 123
+      form.form-horizontal(action="#craftingSection")
         h4 Items to craft
         each x in [1,2,3,4,5,6]
           - var v_name = query['i' + x + 'name'] || ''
@@ -27,16 +28,16 @@ html(lang="en")
             .col-xs-9.col-md-5.col-md-offset-3
               input.itembox.form-control(type="text", name="i#{x}name", value="#{v_name}" placeholder="lv bending machine" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
             .col-xs-3.col-md-1
-              input.form-control(type="text", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+              input.form-control(type="number", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
         .panel-group
           .panel.panel-default
             #techlevelCollapseHeading.panel-heading(role="button" data-toggle="collapse" href="#techlevelCollapse" aria-expanded="false" aria-controls="tecehlevelCollapse")
               h4.panel-title= "Tech Options "
                 small [tap to toggle]
-            #techlevelCollapse.collapse.panel-collapse(role="tabpanel" aria-labelledby="techlevelCollapseHeading")
+            #techlevelCollapse.collapse.panel-collapse.in(role="tabpanel" aria-labelledby="techlevelCollapseHeading")
               .panel-body
                 each tval, tkey in basictech
-                  - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
+                  - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : 2 ;
                   .form-group
                     label.col-md-4.col-xs-8.col-md-offset-3(for="techselect#{tkey}")= tkey
                     .col-md-2.col-xs-4
@@ -48,10 +49,12 @@ html(lang="en")
                           else
                             //input(type="radio", name="#{tkey}", value="#{lval}")
                             option(value="#{lval}")= lkey
-        input(type="submit")
+        input(type="submit" href="#")
       if crafts
         hr
+        a(id="craftingSection" name="craftingSection")
         // This page contains the results of a crafting request
+        - var leftovers = [];
         h4 Starting Ingredients
         table.table.table-striped
           thead
@@ -64,18 +67,38 @@ html(lang="en")
             - var ingkeys = Object.keys(final);
             - ingkeys.sort();
             each index in ingkeys
-              tr.checkable
-                td
-                  input.col-md-1.col-xs-1(type="checkbox" id="startinging#{index}")
-                  .col-md-5.col-xs-8= index
-                  .col-md-1.col-xs-2= Number(final[index])
+              if final[index] < 0
+                - leftovers.push(index)
+              else if final[index] > 0
+                tr.checkable
+                  td
+                    input.col-md-1.col-xs-1(type="checkbox" id="startinging#{index}")
+                    .col-md-5.col-xs-8= index
+                    .col-md-1.col-xs-2= Number(final[index])
+        if leftovers.length > 0
+          h4 Leftover Ingredients
+          table.table.table-striped
+            thead
+              tr
+                th
+                  .col-md-1.col-xs-1
+                  .col-md-5.col-xs-8 Item
+                  .col-md-1.col-xs-2 Qty
+            tbody
+              each index in leftovers
+                tr.checkable
+                  td
+                    input.col-md-1.col-xs-1(type="checkbox" id="startinging#{index}")
+                    .col-md-5.col-xs-8= index.replace(/recycled /, "")
+                    .col-md-1.col-xs-2= -Number(final[index])
         h4 Crafting Steps
         table.table.table-striped
           each val, idx in crafts
             tr.checkable
               td
                 input.col-md-1.col-xs-1(type="checkbox" id="craftingstep#{idx}")
-                .col-md-10.col-xs-10
+                .col-md-1= "Step "+(idx+1)
+                .col-md-9.col-xs-9
                   = "Craft "
                   span.qty= Number(val[0])
                   = " "
@@ -96,4 +119,6 @@ html(lang="en")
       != "var data = " + JSON.stringify(itemlist) + ";"
       | $(function() { $(".itembox").autocomplete({ source: data, delay: 50 }); });
       | $(function() { $(".checkable").click(function(e) { if ($(e.target).is('input')) return; $(this).find("input").prop("checked", function(i,val) { return !val; }); }); });
+      | $(function() { $("#techlevelCollapse").collapse('hide'); });
+      | $(function() { $("#helpButton").popover({ animation: true }); });
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")

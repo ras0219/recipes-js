@@ -206,8 +206,6 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("electric jetpack", { "advanced circuit": 1, "iron item casing": 4, "glowstone": 2, "batbox": 1 });
     simpl("batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
-    simpl("re battery", { "redstone": 2, "small battery hull": 1 });
-    simpl("small battery hull", { "insulated tin cable":1, "battery alloy plate":2 });
     simpl("maintenance hatch", {"lv hull":1});
 
     simpl("ev macerator", { "aluminum cable x1": 3, "ev hull": 1, "data control circuit": 2, "ev piston": 1, "ev motor": 1, "diamond grinding head":1 });
@@ -275,6 +273,9 @@ function RUN_RECIPES(TECH, simpl)
     // dense plates
     if (TECH["bending machine"] >= MV)
         simpl("dense lead plate", {"lead": 9}, "Bend: Setting 9");
+
+    // LV tools
+    simpl("lv wrench", { "* wrench tip":1, "lv motor":1, "stainless steel plate":2, "small stainless steel gear":2,"stainless steel screw":1, "small * battery":1 });
 
     var tiermats = {
         lv: {
@@ -498,7 +499,16 @@ function RUN_RECIPES(TECH, simpl)
         simpl("advanced circuit parts", { "glowstone": 1, "lapis plate" : 1 }, "Forming Press", 2);
     }
 
+    simpl("re battery", { "molten redstone": 288, "small battery hull": 1 }, "Fluid Canning Machine");
     simpl("advanced re battery", { "bronze item casing": 5, "insulated copper cable": 2, "sulfur dust": 1, "lead dust": 1 })
+
+    simpl("small battery hull", { "insulated tin cable":1, "battery alloy plate":2 });
+
+    simpl("raw carbon mesh", { "raw carbon fibre": 2 });
+    if (TECH["wiremill"] > NONE)
+    {
+        simpl("raw carbon fibre", { "carbon dust": 8 }, "Wiremill");
+    }
 
     if (TECH["bending machine"] > NONE)
         simpl("empty cell", { "tin plate": 2 }, "Bend: Setting 12")
@@ -603,7 +613,7 @@ function RUN_RECIPES(TECH, simpl)
         var casing = v + " item casing";
         if (TECH["extruder"] >= MV)
         {
-            simpl(casing, assoc(v, 1), "Extrude", 2);
+            simpl(casing, assoc(v, 1), "Extrude: Item Casing", 2);
         }
         else if (TECH["cutting saw"] > NONE)
         {
@@ -624,13 +634,14 @@ function RUN_RECIPES(TECH, simpl)
 
         if (TECH["extruder"] >= MV)
         {
-            simpl(v+" gear", assoc(v, 4), "Extrude");
+            simpl(v+" gear", assoc(v, 4), "Extrude: Gear");
+            simpl(v+" fluid pipe", assoc(v, 3), "Extrude: Normal Pipe");
         }
         else
         {
             simpl(v+" gear", assoc(plate, 4, rod, 4));
+            simpl(v+" fluid pipe", assoc(plate, 6), undefined, 2);
         }
-        simpl(v+" fluid pipe", assoc(plate, 6), undefined, 2);
 
         simpl(v+" rotor", assoc(plate,4,v+" screw",1,v+" ring",1));
 
@@ -639,20 +650,22 @@ function RUN_RECIPES(TECH, simpl)
         else
             simpl(v+" screw", assoc(bolt,2));
 
+        // Bolts are hard
+        if (TECH["cutting saw"] > NONE)
+            simpl(bolt, assoc(v + " rod", 1), "Cutting Saw", 4);
+        else if (TECH["extruder"] >= MV)
+            simpl(bolt, assoc(v, 1), "Extrude: Bolt", 8);
+        else
+            simpl(bolt, assoc(rod, 1), undefined, 2);
+
         if (TECH["extruder"] >= MV)
         {
-            simpl(v+" ring", assoc(v, 1), "Extrude", 4);
-            simpl(bolt, assoc(v, 1), "Extrude", 8);
-            simpl(rod, assoc(v,1), "Extrude", 2);
+            simpl(v+" ring", assoc(v, 1), "Extrude: Ring", 4);
+            simpl(rod, assoc(v,1), "Extrude: Rod", 2);
         }
         else
         {
             simpl(v+" ring", assoc(rod,1));
-
-            if (TECH["cutting saw"] > NONE)
-                simpl(bolt, assoc(rod, 1), "Cutting Saw", 4);
-            else
-                simpl(bolt, assoc(rod, 1), undefined, 2);
 
             if (TECH["lathe"] > NONE)
                 simpl(rod, assoc(v,1, "recycled "+ v + " small dust", -2), "Lathe");
@@ -663,7 +676,7 @@ function RUN_RECIPES(TECH, simpl)
     }
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum",
         "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy",
-        "thaumium", "silicon", "platinum", "lead"]
+        "thaumium", "silicon", "platinum", "lead", "zinc"]
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
@@ -682,12 +695,16 @@ function RUN_RECIPES(TECH, simpl)
     }
 
     if (TECH["extruder"] > NONE)
-        simpl("rubber plate", {"rubber": 1}, "Extrude");
+        simpl("rubber plate", {"rubber": 1}, "Extrude: Plate");
     else
         simpl("rubber plate", {"rubber": 2});
 
     simpl("annealed copper", { "copper": 1, "oxygen": 1000 });
 
+    if (TECH["fluid extractor"] > NONE)
+    {
+        simpl("molten redstone", {"redstone": 1}, "Fluid Extract", 144);
+    }
     if (TECH["fluid extractor"] > NONE)
     {
         simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144);
@@ -708,6 +725,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("red alloy", { "copper": 1, "redstone": 4 }, "Alloy Smelt");
     simpl("cupronickel", { "copper": 1, "nickel": 1 }, "Alloy Smelt", 2);
     simpl("block of redstone", {  "redstone": 9 });
+    simpl("yellorium block", {  "yellorium": 9 }, "Compress");
 }
 
 function basictech() {
