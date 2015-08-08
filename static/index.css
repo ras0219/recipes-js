@@ -1,4 +1,15 @@
 body {
-    background-color: #DDDDDD;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container {
+    box-shadow: 0px 0px 15px 0px black;
+}
+
+.panel-default > .panel-heading {
+    background-image: none;
+}
+
+:checked ~ div {
+  text-decoration:line-through
 }
