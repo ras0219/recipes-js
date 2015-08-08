@@ -712,7 +712,7 @@ function RUN_RECIPES(TECH, simpl)
     }
 
     if (TECH["extruder"] > NONE)
-        simpl("rubber plate", {"rubber": 1}, "Extrude: Plate");
+        simpl("rubber plate", {"rubber": 1}, "LV Extrude: Plate");
     else
         simpl("rubber plate", {"rubber": 2});
 
