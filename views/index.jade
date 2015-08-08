@@ -12,6 +12,7 @@ html(lang="en")
       | li
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
+    link(rel="stylesheet" href="/static/index.css")
   body
     .container
       h1= "Recipes-JS "
@@ -30,21 +31,25 @@ html(lang="en")
               input.itembox.form-control(type="text", name="i#{x}name", value="#{v_name}" placeholder="lv bending machine" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
             .col-xs-3.col-md-1
               input.form-control(type="text", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
-        h3 Tech level
-        each tval, tkey in basictech
-          - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
-          .form-group
-            label.col-md-4.col-xs-8.col-md-offset-3(for="techselect#{tkey}")= tkey
-            .col-md-2.col-xs-4
-              select.form-control.btn-sm(id="techselect#{tkey}" name="#{tkey}")
-                each lval, lkey in techlevel
-                  if lval === user_tech_level
-                    option(value="#{lval}" selected="selected")= lkey
-                    //input(type="radio", name="#{tkey}", value="#{lval}", checked)
-                  else
-                    //input(type="radio", name="#{tkey}", value="#{lval}")
-                    option(value="#{lval}")= lkey
-
+        .panel-group
+          .panel.panel-default
+            #techlevelCollapseHeading.panel-heading(role="button" data-toggle="collapse" href="#techlevelCollapse" aria-expanded="false" aria-controls="tecehlevelCollapse")
+              h3.panel-title Tech level
+            #techlevelCollapse.collapse.panel-collapse(role="tabpanel" aria-labelledby="techlevelCollapseHeading")
+              .panel-body
+                each tval, tkey in basictech
+                  - var user_tech_level = (tkey in query) ? (Number(query[tkey])) : (tval) ;
+                  .form-group
+                    label.col-md-4.col-xs-8.col-md-offset-3(for="techselect#{tkey}")= tkey
+                    .col-md-2.col-xs-4
+                      select.form-control.btn-sm(id="techselect#{tkey}" name="#{tkey}")
+                        each lval, lkey in techlevel
+                          if lval === user_tech_level
+                            option(value="#{lval}" selected="selected")= lkey
+                            //input(type="radio", name="#{tkey}", value="#{lval}", checked)
+                          else
+                            //input(type="radio", name="#{tkey}", value="#{lval}")
+                            option(value="#{lval}")= lkey
         input(type="submit")
       if crafts
         // This page contains the results of a crafting request
