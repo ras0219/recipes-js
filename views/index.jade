@@ -16,7 +16,7 @@ html(lang="en")
   body
     .container
       h1= "Recipes-JS "
-        small= "[beyond reality mod pack]"
+        small [beyond reality mod pack]
       //p.lead test test 123
       form.form-horizontal
         h4 Items to craft
@@ -31,7 +31,8 @@ html(lang="en")
         .panel-group
           .panel.panel-default
             #techlevelCollapseHeading.panel-heading(role="button" data-toggle="collapse" href="#techlevelCollapse" aria-expanded="false" aria-controls="tecehlevelCollapse")
-              h4.panel-title Tech Options
+              h4.panel-title= "Tech Options "
+                small [tap to toggle]
             #techlevelCollapse.collapse.panel-collapse(role="tabpanel" aria-labelledby="techlevelCollapseHeading")
               .panel-body
                 each tval, tkey in basictech
@@ -52,7 +53,7 @@ html(lang="en")
         hr
         // This page contains the results of a crafting request
         h4 Starting Ingredients
-        table.table
+        table.table.table-striped
           thead
             tr
               th
@@ -69,7 +70,7 @@ html(lang="en")
                   .col-md-5.col-xs-8= index
                   .col-md-1.col-xs-2= Number(final[index])
         h4 Crafting Steps
-        table.table
+        table.table.table-striped
           each val, idx in crafts
             tr.checkable
               td
