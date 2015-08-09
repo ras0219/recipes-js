@@ -181,6 +181,25 @@ function RUN_RECIPES(TECH, simpl)
     simpl("thaumium axe", {"thaumium plate": 2, "thaumium": 1, "stick": 2})
     //END THAUMCRAFT
 
+    simpl("fusion reactor tier 1 multi", { "superconducting coil block": 32, "luv energy hatch": 4, "lv input hatch": 2, "lv output hatch": 1,  "luv casing" : 120, "fusion control computer mk 1" : 1 });
+    simpl("fusion control computer mk 1", { "iv field generator": 2, "plutonium plate": 1, "nether star plate": 1, "energy flow circuit": 4, "fusion coil": 1});
+    simpl("fusion coil", { "superconducting coil block": 1, "iridium neutron reflector": 2, "energy flow circuit": 4, "mv field generator": 2});
+    simpl("iridium neutron reflector", { "thick neutron reflector": 8, "iridium reinforced plate": 1});
+    simpl("thick neutron reflector", { "neutron reflector": 4, "beryllium plate": 1});
+    simpl("neutron reflector", { "tin dust": 4, "coal dust": 4, "copper plate": 1 });
+    simpl("nether star plate", { "nether star dust": 1 }, "Compress");
+    simpl("nether star dust", { "nether star": 1 }, "Macerate");
+
+    simpl("iv field generator", {"energy flow circuit": 4, "nether star": 1, "osmium wire x16": 4});
+    simpl("mv field generator", {"good circuit": 4, "eye of ender": 1, "osmium wire x2": 4});
+    simpl("superconducting coil block", { "superconductor wire x2": 8});
+    simpl("superconductor wire x2", { "superconductor wire x1": 2});
+    simpl("superconductor wire x1", { "luv wire x1": 3, "superconductor coolant": 2, "lv pump": 2, "tiny tungstensteel fluid pipe": 2 }, undefined, 3);
+
+    simpl("iridium reinforced plate", { "iridium alloy ingot": 1, "industrial tnt": 8}, "Implosion Compressor");
+    simpl("iridium alloy ingot", {"advanced alloy": 4, "iridium plate": 4, "industrial diamond": 1});
+    simpl("advanced alloy", { "mixed metal ingot": 1 }, "Compress");
+
     simpl("electric blast furnace multi", { "electric blast furnace": 1, "cupronickel coil block": 16, "lv input bus": 1, "lv output bus":1,
         "maintenance hatch":1,
         "lv muffler hatch":1,
@@ -379,6 +398,9 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" input bus", assoc(v.cable, 1, "chest", 1));
         simpl(k+" output bus", assoc(v.cable, 1, "chest", 1));
 
+        simpl(k+" input hatch", assoc(v.cable, 1, "glass", 1));
+        simpl(k+" output hatch", assoc(v.cable, 1, "glass", 1));
+
 /*        simpl("ev hull", { "aluminum cable x1": 2, "ev casing": 1 });
         simpl("ev casing", { "titanium plate": 8 });
         simpl("ev robot arm", { "titanium rod": 2, "ev piston": 1, "ev motor": 2, "aluminum cable x1": 3, "data control circuit": 1 });
@@ -398,6 +420,11 @@ function RUN_RECIPES(TECH, simpl)
         else
             simpl(v.motor, assoc(v.rod, 2, v.magrod, 1, v.cable, 2, v.motorwire, 4));
     }
+
+    simpl("luv energy hatch", { "luv hull": 1, "tungsten cable x4": 1 });
+    simpl("fusion casing", { "luv casing": 1, "tungstensteel plate": 6 });
+    simpl("luv hull", { "luv casing": 1, "tungsten cable x4": 2 });
+    simpl("luv casing", { "chrome plate": 8 });
 
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
 
@@ -479,7 +506,21 @@ function RUN_RECIPES(TECH, simpl)
         simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "LV Assemble");
     }
     if (TECH["assembling machine"] >= HV)
+    {
         simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "HV Assemble");
+        simpl("energy flow circuit", { "processor board": 1, "engraved lapotron chip" : 3, "molten soldering alloy": 144 }, "HV Assemble");
+    }
+
+    if (TECH["laser engraver"] >= HV) {
+        simpl("engraved lapotron chip", { "lapotron crystal": 1 }, "HV Laser Engrave: Blue Lens");
+    }
+
+    simpl("lapotron crystal", { "lazurite dust": 6, "advanced circuit": 2, "energy crystal": 1 });
+
+    if (TECH["autoclave"] >= HV)
+        simpl("energy crystal", { "energium dust": 9 }, "HV Autoclave");
+
+    simpl("energium dust", { "redstone": 5, "ruby dust": 4 }, undefined, 9);
 
     if (TECH["assembling machine"] >= MV)
     {
@@ -599,7 +640,12 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("cupronickel coil", { "cupronickel wire x8": 2 });
 
-    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel"]
+    if (TECH["extruder"] >= HV)
+    {
+        simpl("tiny tungstensteel fluid pipe", { "tungstensteel": 1 }, "HV Extrude: Tiny Pipe", 2);
+    }
+
+    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel", "osmium", "tungsten"]
     for (var k in materials)
     {
         var v = materials[k];
@@ -631,10 +677,7 @@ function RUN_RECIPES(TECH, simpl)
         {
             simpl(casing, assoc(v + " plate", 1), "Cutting Saw", 2);
         }
-        else if (TECH["casing mold"] > NONE)
-        {
-            simpl(casing, assoc(v, 2), "Alloy Smelt: Casing Mold", 3);
-        }
+        simpl(casing, assoc(v, 2), "Alloy Smelt: Casing Mold", 3);
     }
 
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "electrum"];
@@ -693,7 +736,7 @@ function RUN_RECIPES(TECH, simpl)
 
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum",
         "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy",
-        "thaumium", "silicon", "platinum", "lead", "zinc"]
+        "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"]
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
@@ -727,6 +770,9 @@ function RUN_RECIPES(TECH, simpl)
         simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144);
     }
 
+    simpl("redstone engine", { "piston": 1, "glass": 1, "plank": 3, "wood gear": 2});
+    simpl("wood gear", {"stick": 4});
+
     simpl("comparator", { "redstone torch": 3, "* quartz": 1, "stone": 3});
     simpl("redstone torch", {"stick": 1, "redstone": 1});
     simpl("piston", {"plank": 3, "cobblestone": 4, "redstone": 1, "iron": 1});
@@ -734,11 +780,12 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lever", {"stick": 1, "cobblestone": 1});
     simpl("chest", {"plank": 8});
 
-    simpl("blue steel dust", {"rose gold dust":0.125, "brass dust":0.125, "black steel dust":0.5, "steel dust":0.25});
-    simpl("black steel dust", {"nickel dust":0.2, "black bronze dust":0.2, "steel dust":0.6});
-    simpl("black bronze dust", {"gold dust":0.2, "silver dust":0.2, "copper dust":0.6});
-    simpl("brass dust", {"zinc dust":0.25, "copper dust":0.75});
-    simpl("rose gold dust", {"gold dust":0.8, "copper dust":0.2});
+    simpl("blue steel dust", {"rose gold dust":1, "brass dust":1, "black steel dust":4, "steel dust":2}, undefined, 8);
+    simpl("black steel dust", {"nickel dust": 1, "black bronze dust": 1, "steel dust": 3}, undefined, 5);
+    simpl("black bronze dust", {"gold dust":1, "silver dust":1, "copper dust":3}, undefined, 5);
+    simpl("brass dust", { "brass":1 });
+    simpl("brass", {"zinc":1, "copper":3}, "Alloy Smelt", 4);
+    simpl("rose gold dust", {"gold dust":3, "copper dust":1}, undefined, 4);
     simpl("red alloy", { "copper": 1, "redstone": 4 }, "Alloy Smelt");
     simpl("cupronickel", { "copper": 1, "nickel": 1 }, "Alloy Smelt", 2);
     simpl("invar", { "nickel": 1, "iron": 2 }, "Alloy Smelt", 3);
@@ -755,15 +802,14 @@ function basictech() {
         "extruder" : techlevel.HV,
         "assembling machine" : techlevel.HV,
         "wiremill" : techlevel.HV,
-        "casing mold" : techlevel.HV,
-        "plate mold" : techlevel.HV,
         "forming press" : techlevel.HV,
         "fluid extractor" : techlevel.HV,
         "lathe" : techlevel.HV,
         "polarizer" : techlevel.HV,
         "laser engraver" : techlevel.HV,
         "cutting saw" : techlevel.HV,
-        "compressor" : techlevel.HV
+        "compressor" : techlevel.HV,
+        "autoclave" : techlevel.HV
     }
 }
 
