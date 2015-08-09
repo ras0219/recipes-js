@@ -99,7 +99,7 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("energy conduit", { "conduit binder": 6, "conductive iron": 3 }, undefined, 8);
     simpl("enlightened fused quartz", { "fused quartz": 4, "glowstone": 4 });
-    simpl("fused quartz", { "nether quartz": 4 });
+    simpl("fused quartz", { "nether quartz": 4 }, "Ender IO Alloy Smelt");
 
     simpl("machine chassis", {"basic capacitor":1,"iron":4,"iron bars":4});
     simpl("octadic capacitor", { "vibrant alloy": 2, "glowstone": 1, "double capacitor": 2 });
