@@ -181,7 +181,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("thaumium axe", {"thaumium plate": 2, "thaumium": 1, "stick": 2})
     //END THAUMCRAFT
 
-    simpl("fusion reactor tier 1 multi", { "superconducting coil block": 32, "luv energy hatch": 4, "lv input hatch": 2, "lv output hatch": 1,  "luv casing" : 120, "fusion control computer mk 1" : 1 });
+    simpl("fusion reactor tier 1 multi", { "superconducting coil block": 32, "luv energy hatch": 4, "luv input hatch": 2, "luv output hatch": 1,  "luv casing" : 120, "fusion control computer mk 1" : 1 });
     simpl("fusion control computer mk 1", { "iv field generator": 2, "plutonium plate": 1, "nether star plate": 1, "energy flow circuit": 4, "fusion coil": 1});
     simpl("fusion coil", { "superconducting coil block": 1, "iridium neutron reflector": 2, "energy flow circuit": 4, "mv field generator": 2});
     simpl("iridium neutron reflector", { "thick neutron reflector": 8, "iridium reinforced plate": 1});
@@ -286,8 +286,14 @@ function RUN_RECIPES(TECH, simpl)
     // IC2 nuclear
     simpl("nuclear reactor", {"dense lead plate": 4, "reactor chamber": 3, "generator": 1, "advanced circuit": 1});
     simpl("reactor chamber", {"lead plate": 4, "basic machine casing": 1});
+    simpl("component heat exchanger", {"heat exchanger": 1, "gold plate": 4});
+    simpl("heat exchanger", {"basic circuit": 1, "tin plate": 3, "copper plate": 5});
     simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
-    simpl("heat vent", {"aluminum plate": 4, "iron bars": 4});
+    simpl("advanced heat vent", {"reactor heat vent": 2, "diamond": 1, "iron bars": 6});
+    simpl("overclocked heat vent", {"reactor heat vent": 1, "gold plate": 4});
+    simpl("reactor heat vent", {"heat vent": 1, "copper plate": 8});
+    simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
+    simpl("heat vent", {"iron plate": 4, "electric motor":1, "iron bars": 4});
 
     // dense plates
     if (TECH["bending machine"] >= MV)
@@ -395,11 +401,11 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" autoclave", assoc(v.hull, 1, v.pump, 1, "glass", 1, v.circuit, 2, v.plate, 4));
 
         simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
-        simpl(k+" input bus", assoc(v.cable, 1, "chest", 1));
-        simpl(k+" output bus", assoc(v.cable, 1, "chest", 1));
+        simpl(k+" input bus", assoc(v.hull, 1, "chest", 1));
+        simpl(k+" output bus", assoc(v.hull, 1, "chest", 1));
 
-        simpl(k+" input hatch", assoc(v.cable, 1, "glass", 1));
-        simpl(k+" output hatch", assoc(v.cable, 1, "glass", 1));
+        simpl(k+" input hatch", assoc(v.hull, 1, "glass", 1));
+        simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
 
 /*        simpl("ev hull", { "aluminum cable x1": 2, "ev casing": 1 });
         simpl("ev casing", { "titanium plate": 8 });
@@ -486,6 +492,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("diamond sawblade", {"diamond dust": 1, "cobalt brass gear": 1});
 
     //BEGIN INTERMEDIATE VANILLA
+    simpl("iron bars", {"iron rod": 6}, undefined, 8);
     simpl("iron axe", {"iron plate": 2, "iron": 1, "stick": 2})
     simpl("daylight sensor", { "glass": 3, "wood slab":3, "nether quartz": 3 });
     simpl("glass pane", { "glass": 6 }, undefined, 16);
@@ -627,7 +634,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
     simpl("insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
 
-    if (TECH["Wiremill"] > NONE)
+    if (TECH["wiremill"] > NONE)
     {
         simpl("ic2 copper cable", { "copper plate": 1 }, "LV Wiremill", 3);
         simpl("ic2 tin cable", { "tin plate": 1 }, "LV Wiremill", 4);
