@@ -430,6 +430,9 @@ function RUN_RECIPES(TECH, simpl)
     simpl("luv energy hatch", { "luv hull": 1, "tungsten cable x4": 1 });
     simpl("fusion casing", { "luv casing": 1, "tungstensteel plate": 6 });
     simpl("luv hull", { "luv casing": 1, "tungsten cable x4": 2 });
+    simpl("luv hull", { "luv casing": 1, "tungsten cable x4": 2 });
+    simpl("luv input hatch", { "luv casing": 1, "glass": 1 });
+    simpl("luv output hatch", { "luv casing": 1, "glass": 1 });
     simpl("luv casing", { "chrome plate": 8 });
 
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
@@ -446,13 +449,21 @@ function RUN_RECIPES(TECH, simpl)
     simpl("heat conductor", { "rubber": 6, "copper plate": 3});
     simpl("generator", {"re battery": 1, "basic machine casing": 1, "furnace": 1});
     simpl("cesu", {"bronze plate": 5, "insulated copper cable": 1, "advanced re battery": 3});
+    simpl("mfsu", {"advanced circuit": 1, "lapotron crystal": 6, "advanced machine casing": 1, "mfe": 1});
+    simpl("mfe", {"insulated gold cable": 4, "energy crystal": 4, "basic machine casing": 1});
 
     simpl("ic2 mv transformer", {"basic machine casing": 1, "insulated copper cable": 2});
+
+
+    simpl("advanced machine casing", {"advanced alloy": 2, "carbon plate": 2, "steel plate": 4, "basic machine casing": 1});
 
     simpl("fluid ejector upgrade", {"tin plate": 4, "electric motor": 1});
     simpl("electric motor", {"tin item casing": 2, "iron": 1, "coil": 2});
     simpl("coil", {"ic2 copper cable": 8, "iron": 1});
     simpl("universal fluid cell", {"tin item casing": 4, "glass pane": 1});
+
+    simpl("carbon plate", {"raw carbon mesh": 1}, "Compress");
+
 
     // thermal monitor
     simpl("thermal monitor", { "lead plate": 7, "redstone": 1, "advanced circuit": 1});
