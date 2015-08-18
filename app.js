@@ -59,7 +59,8 @@ app.all('/', function (req, res) {
             crafts: crafts.reverse(),
             final: cur,
             query: query,
-            itemlist: itemlist
+            itemlist: itemlist,
+            requestedUrl: req.protocol + '://' + req.get('Host') + req.url
         })
         console.log("run recipes.")
         console.log(begin)

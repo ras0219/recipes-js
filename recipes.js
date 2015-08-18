@@ -55,6 +55,20 @@ function RUN_RECIPES(TECH, simpl)
     var HV = techlevel.hv
     var materials = []
 
+    // Galacticraft
+    simpl("tier 1 rocket", {"rocket fin": 4, "tier 1 rocket engine": 1, "nosecone": 1, "heavy duty plate": 8, "chest": 3}, "NASA Workbench");
+    simpl("rocket fin", { "heavy duty plate": 4, "compressed steel": 2 });
+    simpl("nosecone", { "redstone torch": 1, "heavy duty plate": 3 });
+    simpl("tier 1 rocket engine", { "heavy duty plate": 4, "flint and steel": 1, "button": 1, "tin canister": 1, "oxygen vent": 1 });
+    simpl("heavy duty plate", { "heavy duty alloy": 1, "industrial tnt": 8, "recycled tiny stainless steel dust": -2 }, "Implosion Compressor");
+    simpl("heavy duty alloy", { "stainless steel bolt": 4, "compressed bronze": 1, "compressed aluminum": 1, "compressed steel": 1 });
+    simpl("tin canister", { "tin plate": 7 });
+    simpl("oxygen vent", { "compressed tin": 3, "compressed steel": 1 });
+    simpl("compressed steel", { "steel plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
+    simpl("compressed tin", { "tin plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
+    simpl("compressed aluminum", { "aluminum plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
+    simpl("compressed bronze", { "bronze plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
+
     // Botania
     simpl("thermalily", {"orange mana petal": 1, "mystical orange petal": 1, "mystical red petal": 1, "rune of fire": 1, "rune of earth": 1, "seeds": 1}, "Petal Apothecary");
     simpl("jaded amaranthus", {"purple mana petal": 2, "mystical lime petal": 1, "mystical purple petal": 1, "mystical green petal": 1, "redstone root": 1, "rune of spring": 1, "seeds": 1}, "Petal Apothecary");
@@ -170,6 +184,20 @@ function RUN_RECIPES(TECH, simpl)
         simpl("compressed air cell", { "empty cell": 1}, "Compress");
 
     //THAUMCRAFT
+    simpl("ender rift wand focus", { "magic mirror": 1, "eye of ender": 1, "portable hole wand focus": 1, "ordo vis": 10, "perditio vis":10 }, "arcane");
+    simpl("portable hole wand focus", { "ender pearl": 1, "nether quartz": 3, "entropy shard": 1, "earth shard": 1, "aer shard":1,
+        "alienis essentia": 10,
+        "iter essentia": 25,
+        "perditio essentia": 25,
+        "permutatio essentia": 10
+        }, "infusion");
+    simpl("magic mirror", { "mirrored glass": 1, "gold ingot": 3, "ender pearl": 1,
+        "tenebrae essentia": 8,
+        "iter essentia": 8,
+        "permutatio essentia": 8
+        }, "infusion");
+    simpl("mirrored glass", { "quicksilver": 1, "glass pane": 1, "ignis vis": 10, "terra vis":10 }, "arcane");
+
     simpl("mystical construct", { "runic matrix": 1, "arcane stone block": 4, "arcane stone bricks": 4, "arcane pedestal": 1,
         "ignis vis": 25, "terra vis": 25, "ordo vis": 25,
         "aer vis": 25, "perditio vis": 25, "aqua vis": 25
@@ -324,15 +352,47 @@ function RUN_RECIPES(TECH, simpl)
     if (TECH["bending machine"] >= MV)
         simpl("dense lead plate", {"lead": 9}, "MV Bend: Setting 9");
 
-    // LV tools
-    simpl("lv wrench", { "* wrench tip":1, "lv motor":1, "stainless steel plate":2, "small stainless steel gear":2,"stainless steel screw":1, "small * battery":1 });
+    // GT tools
+    simpl("hv jackhammer", { "long * rod":1, "hv piston":1, "titanium plate":3, "titanium screw":1,"titanium spring":1, "large * battery":1 });
+    var tiermats;
+    tiermats = {
+        lv: {
+            material: "stainless steel",
+            battery: "small * battery"
+        },
+        mv: {
+            material: "titanium",
+            battery: "medium * battery"
+        },
+        hv: {
+            material: "tungstensteel",
+            battery: "large * battery"
+        }
+    };
+    for (var k in tiermats)
+    {
+        var v = tiermats[k];
+        var motor = k + " motor";
+        var plate = v.material + " plate";
+        var screw = v.material + " screw";
+        var smallgear = "small " + v.material + " gear";
+        simpl(k + " wrench", assoc("* wrench tip", 1, motor, 1, plate, 2, smallgear, 2, screw, 1, v.battery));
+        simpl(k + " drill", assoc("* drill tip", 1, motor, 1, plate, 2, smallgear, 2, screw, 1, v.battery));
+        simpl(k + " chainsaw", assoc("* chainsaw tip", 1, motor, 1, plate, 2, smallgear, 2, screw, 1, v.battery));
+
+        simpl(k + " screwdriver", assoc("long * rod", 1, motor, 1, plate, 2, smallgear, 2, screw, 1, v.battery));
+    }
+    simpl("titanium spring", {"long titanium rod": 1}, "LV Bend: Setting 1");
+    simpl("long titanium rod", {"titanium rod": 2}, "Hammer");
+    simpl("lv soldering iron", {"iron rod": 1, "small * battery": 1, "* bolt": 1, "rubber plate": 1});
 
     simpl("hv polarizer", { "steel rod": 2, "hv hull": 1, "gold cable x1":2, "copper wire x4":4 });
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
 
-    var tiermats = {
+    tiermats = {
         lv: {
             cable: "tin cable x1",
+            cable4: "tin cable x4",
             circuit: "basic circuit",
             rarewire: "gold wire x1",
             heatwire2: "copper wire x2",
@@ -351,6 +411,7 @@ function RUN_RECIPES(TECH, simpl)
         },
         mv: {
             cable: "copper cable x1",
+            cable4: "copper cable x4",
             circuit: "good circuit",
             rarewire: "silver wire x1",
             heatwire2: "cupronickel wire x2",
@@ -369,6 +430,7 @@ function RUN_RECIPES(TECH, simpl)
         },
         hv: {
             cable: "gold cable x1",
+            cable4: "gold cable x4",
             circuit: "advanced circuit",
             rarewire: "electrum wire x1",
             heatwire2: "kanthal wire x2",
@@ -387,6 +449,7 @@ function RUN_RECIPES(TECH, simpl)
         },
         ev: {
             cable: "aluminum cable x1",
+            cable4: "aluminum cable x4",
             circuit: "data control circuit",
             rarewire: "platinum wire x1",
             heatwire2: "nichrome wire x2",
@@ -405,6 +468,7 @@ function RUN_RECIPES(TECH, simpl)
         },
         iv: {
             cable: "tungsten cable x1",
+            cable4: "tungsten cable x4",
             circuit: "energy flow circuit",
             rarewire: "osmium wire x1",
             heatwire2: "nichrome wire x8",
@@ -436,6 +500,7 @@ function RUN_RECIPES(TECH, simpl)
         v.emitter = k + " emitter";
         v.casing = k + " casing";
 
+        simpl(k+" arc furnace", assoc(v.cable4, 2, v.hull, 1, v.plate, 3, v.circuit, 2, "graphite cell", 1));
         simpl(k+" fluid canner", assoc(v.cable, 2, v.hull, 1, v.pump, 2, v.circuit, 2, "glass", 2));
         simpl(k+" canning machine", assoc(v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2, "glass", 3));
         simpl(k+" disassembling machine", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.robotarm, 4));
@@ -582,6 +647,8 @@ function RUN_RECIPES(TECH, simpl)
     {
         simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "LV Assemble");
     }
+
+    simpl("lapotronic energy orb", { "energy flow circuit": 2, "engraved lapotron chip": 18 }, "EV Assemble");
     if (TECH["assembling machine"] >= HV)
     {
         simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "HV Assemble");
@@ -757,7 +824,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl(casing, assoc(v, 2), "Alloy Smelt: Casing Mold", 3);
     }
 
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "electrum"];
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "tungstensteel", "invar", "cobalt brass", "copper", "gold", "electrum"];
     for (var k in materials) {
         var v = materials[k]
         var plate = v + " plate";
@@ -811,9 +878,10 @@ function RUN_RECIPES(TECH, simpl)
         simpl("small "+v+" gear", assoc(plate,1));
     }
 
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum",
-        "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy",
-        "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"]
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
+        , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
+        , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
+        , "tungstensteel"]
     for (var k in materials) {
         var v = materials[k]
         if (TECH["bending machine"] > NONE)
@@ -835,8 +903,6 @@ function RUN_RECIPES(TECH, simpl)
         simpl("rubber plate", {"rubber": 1}, "LV Extrude: Plate");
     else
         simpl("rubber plate", {"rubber": 2});
-
-    simpl("annealed copper", { "copper": 1, "oxygen": 1000 });
 
     if (TECH["fluid extractor"] > NONE)
     {
