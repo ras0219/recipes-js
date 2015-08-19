@@ -15,5 +15,21 @@ tr.checkable {
 }
 
 :checked ~ div {
-    text-decoration:line-through
+    text-decoration:line-through;
+}
+
+.part {
+    font-weight: bold;
+}
+.qty {
+    font-weight: bold;
+}
+.produces {
+    font-weight: bold;
+}
+.comment {
+    font-weight: bold;
+}
+.table-striped > tbody > tr[attr-craftable="warn"] {
+    background-color: mistyrose;
 }

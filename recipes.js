@@ -3,7 +3,8 @@ var techlevel = {
     "bronze": 1,
     "lv": 2,
     "mv": 3,
-    "hv": 4
+    "hv": 4,
+    "ev": 5
 };
 
 function console_logger(n, src, dst, comment, batchsize)
@@ -20,7 +21,7 @@ function console_logger(n, src, dst, comment, batchsize)
 }
 
 function make_simpl(basket, cb) {
-    return function (src, dst, comment, batchsize) {
+    return function (src, dst, comment, batchsize, attr) {
         if (src in basket) {
             var orig_n = basket[src]
             var n = orig_n;
@@ -40,7 +41,7 @@ function make_simpl(basket, cb) {
                 }
                 basket[k] += dst[k] * n
             }
-            cb(n, src, dst, comment, batchsize)
+            cb(n, src, dst, comment, batchsize, attr)
         }
     }
 }
@@ -53,7 +54,19 @@ function RUN_RECIPES(TECH, simpl)
     var LV = techlevel.lv
     var MV = techlevel.mv
     var HV = techlevel.hv
+    var EV = techlevel.ev
     var materials = []
+
+    function warn_if_not(techtype, level)
+    {
+        if (TECH[techtype] >= level)
+            return undefined;
+        else
+            return "warn";
+    }
+
+    // Advanced solar panels
+    simpl("molecular transformer", { "ic2 ev transformer": 2, "advanced machine casing": 4, "advanced circuit": 2, "mv assembling machine": 1});
 
     // Galacticraft
     simpl("tier 1 rocket", {"rocket fin": 4, "tier 1 rocket engine": 1, "nosecone": 1, "heavy duty plate": 8, "chest": 3}, "NASA Workbench");
@@ -131,7 +144,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("vibrant crystal", {"emerald":1,"vibrant alloy nugget":8});
 
     simpl("energy conduit", { "conduit binder": 6, "conductive iron": 3 }, undefined, 8);
-    simpl("enlightened fused quartz", { "fused quartz": 4, "glowstone": 4 });
+    simpl("enlightened fused quartz", { "fused quartz": 4, "glowstone dust": 4 });
     simpl("fused quartz", { "nether quartz": 4 }, "Ender IO Alloy Smelt");
 
     simpl("machine chassis", {"basic capacitor":1,"iron":4,"iron bars":4});
@@ -180,8 +193,7 @@ function RUN_RECIPES(TECH, simpl)
     //END GENDUSTRY
 
     // Compressed air cell
-    if (TECH["compressor"] > NONE)
-        simpl("compressed air cell", { "empty cell": 1}, "Compress");
+    simpl("compressed air cell", { "empty cell": 1}, "Compress", undefined, warn_if_not("compressor", BRONZE));
 
     //THAUMCRAFT
     simpl("ender rift wand focus", { "magic mirror": 1, "eye of ender": 1, "portable hole wand focus": 1, "ordo vis": 10, "perditio vis":10 }, "arcane");
@@ -220,7 +232,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("stone golem", { "stone bricks": 1, "humanus essentia": 4, "motus essentia": 4, "spiritus essentia": 4 }, "crucible");
     simpl("golem core harvest", { "golem animation core": 1, "meto essentia": 5, "messis essentia": 5 }, "crucible");
     simpl("golem animation core", { "brick": 4, "nitor": 1, "ordo vis": 5, "ignis vis": 5 }, "arcane");
-    simpl("nitor", { "glowstone": 1, "ignis essentia": 3, "lux essentia": 3, "potentia essentia": 3 }, "crucible");
+    simpl("nitor", { "glowstone dust": 1, "ignis essentia": 3, "lux essentia": 3, "potentia essentia": 3 }, "crucible");
     simpl("boots of the traveler", { "air shard": 2, "raw fish": 1, "feather": 1, "leather boots": 1, "enchanted fabric": 2, "iter essentia": 25, "volatus essentia":25}, "infusion")
     simpl("enchanted fabric", { "wool": 1, "string": 4,
         "ignis vis": 1, "ordo vis": 1, "aqua vis": 1,
@@ -274,11 +286,11 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("heat proof casing", { "invar plate": 6, "invar frame box": 1 });
     if (TECH["assembling machine"] > NONE)
-        simpl("invar frame box", { "invar rod": 4 }, "LV Assemble: Setting 4");
+        simpl("invar frame box", { "invar rod": 4 }, "Assemble: Setting 4");
     else
         simpl("invar frame box", { "invar rod": 8 }, undefined, 2);
 
-    simpl("electric jetpack", { "advanced circuit": 1, "iron item casing": 4, "glowstone": 2, "batbox": 1 });
+    simpl("electric jetpack", { "advanced circuit": 1, "iron item casing": 4, "glowstone dust": 2, "batbox": 1 });
     simpl("batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
     simpl("maintenance hatch", {"lv hull":1});
 
@@ -322,15 +334,14 @@ function RUN_RECIPES(TECH, simpl)
     simpl("button group", { "button": 6 });
     simpl("numeric keypad", { "button": 9 });
     simpl("arrow keys", { "button": 4 });
-    if (TECH["assembling machine"] > NONE)
-    {
-        simpl("control unit", { "transistor": 6, "data control circuit": 1 }, "LV Assemble", 3);
-        simpl("arithmetic logic unit", { "microchip tier 1": 1, "comparator": 3 }, "LV Assemble");
-        simpl("memory tier 1", { "microchip tier 1": 3, "printed circuit board": 3 }, "LV Assemble");
-        simpl("microchip tier 2", { "advanced circuit": 1, "transistor": 8 }, "LV Assemble", 4);
-        simpl("microchip tier 1", { "basic circuit": 1, "transistor": 4 }, "LV Assemble", 4);
-        simpl("transistor", { "redstone": 1, "iron rod": 3 }, "LV Assemble", 6);
-    }
+
+    simpl("control unit", { "transistor": 6, "data control circuit": 1 }, "Assemble", 3, warn_if_not("assembling machine", LV));
+    simpl("arithmetic logic unit", { "microchip tier 1": 1, "comparator": 3 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
+    simpl("memory tier 1", { "microchip tier 1": 3, "printed circuit board": 3 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
+    simpl("microchip tier 2", { "advanced circuit": 1, "transistor": 8 }, "Assemble", 4, warn_if_not("assembling machine", LV));
+    simpl("microchip tier 1", { "basic circuit": 1, "transistor": 4 }, "Assemble", 4, warn_if_not("assembling machine", LV));
+    simpl("transistor", { "redstone": 1, "iron rod": 3 }, "Assemble", 6, warn_if_not("assembling machine", LV));
+
     simpl("printed circuit board", { "circuit board": 1, "tiny gold dust": 2, "sulfuric acid cell": 1 });
     simpl("circuit board", { "raw circuit board": 1 }, "Smelt");
     simpl("raw circuit board", { "clay block": 1, "cactus green": 1 }, "Cutting Wire");
@@ -349,8 +360,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("heat vent", {"iron plate": 4, "electric motor":1, "iron bars": 4});
 
     // dense plates
-    if (TECH["bending machine"] >= MV)
-        simpl("dense lead plate", {"lead": 9}, "MV Bend: Setting 9");
+    simpl("dense lead plate", {"lead": 9}, "MV Bend: Setting 9", undefined, warn_if_not("assembling machine", MV));
 
     // GT tools
     simpl("hv jackhammer", { "long * rod":1, "hv piston":1, "titanium plate":3, "titanium screw":1,"titanium spring":1, "large * battery":1 });
@@ -382,7 +392,7 @@ function RUN_RECIPES(TECH, simpl)
 
         simpl(k + " screwdriver", assoc("long * rod", 1, motor, 1, plate, 2, smallgear, 2, screw, 1, v.battery));
     }
-    simpl("titanium spring", {"long titanium rod": 1}, "LV Bend: Setting 1");
+    simpl("titanium spring", {"long titanium rod": 1}, "Bend: Setting 1");
     simpl("long titanium rod", {"titanium rod": 2}, "Hammer");
     simpl("lv soldering iron", {"iron rod": 1, "small * battery": 1, "* bolt": 1, "rubber plate": 1});
 
@@ -576,6 +586,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("mfsu", {"advanced circuit": 1, "lapotron crystal": 6, "advanced machine casing": 1, "mfe": 1});
     simpl("mfe", {"insulated gold cable": 4, "energy crystal": 4, "basic machine casing": 1});
 
+    simpl("ic2 ev transformer", {"lapotron crystal": 1, "insulated hv cable": 2, "advanced circuit": 1, "ic2 hv transformer": 1});
+    simpl("ic2 hv transformer", {"ic2 mv transformer": 1, "insulated gold cable": 2, "basic circuit": 1, "advanced re battery": 1});
     simpl("ic2 mv transformer", {"basic machine casing": 1, "insulated copper cable": 2});
 
 
@@ -643,46 +655,27 @@ function RUN_RECIPES(TECH, simpl)
     //END VANILLA
 
     // Low level IC2/GT parts
-    if (TECH["assembling machine"] >= LV)
-    {
-        simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "LV Assemble");
-    }
+    simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
 
-    simpl("lapotronic energy orb", { "energy flow circuit": 2, "engraved lapotron chip": 18 }, "EV Assemble");
-    if (TECH["assembling machine"] >= HV)
-    {
-        simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "HV Assemble");
-        simpl("energy flow circuit", { "processor board": 1, "engraved lapotron chip" : 3, "molten soldering alloy": 144 }, "HV Assemble");
-    }
+    simpl("lapotronic energy orb", { "energy flow circuit": 2, "engraved lapotron chip": 18 }, "EV Assemble", undefined, warn_if_not("assembling machine", EV));
+    simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
+    simpl("energy flow circuit", { "processor board": 1, "engraved lapotron chip" : 3, "molten soldering alloy": 144 }, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
 
-    if (TECH["laser engraver"] >= HV) {
-        simpl("engraved lapotron chip", { "lapotron crystal": 1 }, "HV Laser Engrave: Blue Lens");
-    }
+    simpl("engraved lapotron chip", { "lapotron crystal": 1 }, "HV Laser Engrave: Blue Lens", undefined, warn_if_not("laser engraver", HV));
 
     simpl("lapotron crystal", { "lazurite dust": 6, "advanced circuit": 2, "energy crystal": 1 });
-
-    if (TECH["autoclave"] >= HV)
-        simpl("energy crystal", { "energium dust": 9 }, "HV Autoclave");
-
+    simpl("energy crystal", { "energium dust": 9 }, "HV Autoclave", undefined, warn_if_not("autoclave", HV));
     simpl("energium dust", { "redstone": 5, "ruby dust": 4 }, undefined, 9);
 
-    if (TECH["assembling machine"] >= MV)
-    {
-        simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "MV Assemble");
-        simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 }, "MV Assemble");
-    }
+    simpl("data storage chip", { "advanced circuit board": 1, "engraved crystal chip" : 1, "molten soldering alloy": 72 }, "MV Assemble", undefined, warn_if_not("assembling machine", MV));
+    simpl("advanced circuit", { "advanced circuit board": 1, "advanced circuit parts" : 2, "molten soldering alloy": 72 }, "MV Assemble", undefined, warn_if_not("assembling machine", MV));
 
-    if (TECH["laser engraver"] >= HV)
-        simpl("engraved crystal chip", { "olivine plate": 1 }, "HV Laser Engrave: Green Lens");
+    simpl("engraved crystal chip", { "emerald plate": 1 }, "HV Laser Engrave: Green Lens", undefined, warn_if_not("laser engraver", HV));
 
-    if (TECH["forming press"] >= HV)
-        simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 }, "MV Forming Press");
+    simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 }, "HV Forming Press", undefined, warn_if_not("forming press", HV));
 
-    if (TECH["forming press"] >= MV)
-    {
-        simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 }, "MV Forming Press");
-        simpl("advanced circuit parts", { "glowstone": 1, "lapis plate" : 1 }, "MV Forming Press", 2);
-    }
+    simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 }, "MV Forming Press", undefined, warn_if_not("forming press", MV));
+    simpl("advanced circuit parts", { "glowstone dust": 1, "lapis plate" : 1 }, "MV Forming Press", 2, undefined, warn_if_not("forming press", MV));
 
     simpl("re battery", { "molten redstone": 288, "small battery hull": 1 }, "Fluid Canning Machine");
     simpl("advanced re battery", { "bronze item casing": 5, "insulated copper cable": 2, "sulfur dust": 1, "lead dust": 1 })
@@ -690,29 +683,25 @@ function RUN_RECIPES(TECH, simpl)
     simpl("small battery hull", { "insulated tin cable":1, "battery alloy plate":2 });
 
     simpl("raw carbon mesh", { "raw carbon fibre": 2 });
-    if (TECH["wiremill"] > NONE)
-    {
-        simpl("raw carbon fibre", { "carbon dust": 8 }, "Wiremill");
-    }
+    simpl("raw carbon fibre", { "carbon dust": 8 }, "Wiremill", undefined, warn_if_not("wiremill", LV));
 
-    if (TECH["bending machine"] > NONE)
-        simpl("empty cell", { "tin plate": 2 }, "Bend: Setting 12")
+    simpl("empty cell", { "tin plate": 2 }, "Bend: Setting 12", undefined, warn_if_not("bending machine", LV))
     // End low level IC2/GT parts
 
 
     // This is for "full tech"
+    simpl("good circuit", { "basic circuit": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
     if (TECH["assembling machine"] >= LV)
     {
-        simpl("good circuit", { "basic circuit": 1, "nand" : 2, "molten soldering alloy": 36 }, "LV Assemble");
         if (TECH["forming press"] >= LV)
         {
-            simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "molten soldering alloy": 36 }, "LV Assemble");
+            simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble");
         }
         else
         {
             simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
         }
-        simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "molten soldering alloy": 18 }, "LV Assemble");
+        simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "molten soldering alloy": 18 }, "Assemble");
     }
     else
     {
@@ -720,21 +709,11 @@ function RUN_RECIPES(TECH, simpl)
         simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
     }
 
-    if (TECH["forming press"] >= LV)
-    {
-        simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "LV Forming Press");
-    }
+    simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
 
-    if (TECH["laser engraver"] >= MV)
-    {
-        simpl("etched ev wiring", { "platinum foil": 1 }, "MV Laser Engrave: Red Lens");
-    }
-
-    if (TECH["laser engraver"] >= LV)
-    {
-        simpl("etched hv wiring", { "gold foil": 1 }, "LV Laser Engrave: Red Lens");
-        simpl("etched mv wiring", {"copper foil":1}, "LV Laser Engrave: Red Lens");
-    }
+    simpl("etched ev wiring", { "platinum foil": 1 }, "HV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", HV));
+    simpl("etched hv wiring", { "gold foil": 1 }, "MV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", MV));
+    simpl("etched mv wiring", {"copper foil":1}, "Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", LV));
 
     simpl("diamond grinding head", {"industrial diamond": 1, "steel plate": 4, "diamond dust": 4});
 
@@ -742,7 +721,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("aluminum frame box", {"aluminum rod": 4});
 
     if (TECH["extruder"] >= LV)
-        simpl("rubber ring", {"rubber": 1 }, "LV Extrude: Ring", 4);
+        simpl("rubber ring", {"rubber": 1 }, "Extrude: Ring", 4);
     else
         simpl("rubber ring", {"rubber sheet": 1 });
 
@@ -756,38 +735,38 @@ function RUN_RECIPES(TECH, simpl)
 
     if (TECH["polarizer"] > NONE)
     {
-        materials = ["iron", "steel"];
-        for (var k in materials) {
-            var v = materials[k];
-            simpl("magnetic "+v+" rod", assoc(v+" rod", 1), "LV Polarize");
-        }
-        if (TECH["polarizer"] >= HV)
-            simpl("magnetic neodynium rod", {"neodynium rod": 1}, "HV Polarize");
+        simpl("magnetic iron rod", {"iron rod": 1}, "Polarize");
     }
     else
     {
         simpl("magnetic iron rod", {"iron rod": 1, "redstone": 4});
     }
+    simpl("magnetic steel rod", {"steel rod": 1}, "Polarize", undefined, warn_if_not("polarizer", LV));
+    simpl("magnetic neodynium rod", {"neodynium rod": 1}, "HV Polarize", undefined, warn_if_not("polarizer", HV));
+
+    simpl("insulated hv cable", { "ic2 hv cable": 1, "rubber": 3 });
+    simpl("insulated gold cable", { "ic2 gold cable": 1, "rubber": 2 });
     simpl("insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
     simpl("insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
 
     if (TECH["wiremill"] > NONE)
     {
-        simpl("ic2 copper cable", { "copper plate": 1 }, "LV Wiremill", 3);
-        simpl("ic2 tin cable", { "tin plate": 1 }, "LV Wiremill", 4);
+        simpl("ic2 hv cable", { "iron plate": 1 }, "Wiremill", 6);
+        simpl("ic2 gold cable", { "gold plate": 1 }, "Wiremill", 6);
+        simpl("ic2 copper cable", { "copper plate": 1 }, "Wiremill", 3);
+        simpl("ic2 tin cable", { "tin plate": 1 }, "Wiremill", 4);
     }
     else
     {
+        simpl("ic2 hv cable", { "iron plate": 1 }, undefined, 3);
+        simpl("ic2 gold cable", { "gold plate": 1 }, undefined, 4);
         simpl("ic2 copper cable", { "copper plate": 1 }, undefined, 2);
         simpl("ic2 tin cable", { "tin plate": 1 }, undefined, 3);
     }
 
     simpl("cupronickel coil", { "cupronickel wire x8": 2 });
 
-    if (TECH["extruder"] >= HV)
-    {
-        simpl("tiny tungstensteel fluid pipe", { "tungstensteel": 1 }, "HV Extrude: Tiny Pipe", 2);
-    }
+    simpl("tiny tungstensteel fluid pipe", { "tungstensteel": 1 }, "HV Extrude: Tiny Pipe", 2, warn_if_not("extruder", HV));
 
     materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel", "osmium", "tungsten", "kanthal", "nichrome"];
     for (var k in materials)
@@ -803,7 +782,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl(v + " wire x4", assoc(v + " wire x2", 2));
         simpl(v + " wire x2", assoc(v + " wire x1", 2));
         if (TECH["wiremill"] > NONE)
-            simpl(v + " wire x1", assoc(v, 1), "LV Wiremill", 2);
+            simpl(v + " wire x1", assoc(v, 1), "Wiremill", 2);
         else
             simpl(v + " wire x1", assoc(v + " plate", 1));
     }
@@ -821,7 +800,10 @@ function RUN_RECIPES(TECH, simpl)
         {
             simpl(casing, assoc(v + " plate", 1), "Cutting Saw", 2);
         }
-        simpl(casing, assoc(v, 2), "Alloy Smelt: Casing Mold", 3);
+        else
+        {
+            simpl(casing, assoc(v, 2), "Alloy Smelt: Casing Mold", 3);
+        }
     }
 
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "tungstensteel", "invar", "cobalt brass", "copper", "gold", "electrum"];
@@ -868,9 +850,9 @@ function RUN_RECIPES(TECH, simpl)
 
             if (TECH["lathe"] > NONE) {
                 if (["invar", "iron", "bronze", "tin", "copper", "electrum", "gold"].indexOf(v) != -1)
-                    simpl(rod, assoc(v,1), "LV Lathe Loop", 2);
+                    simpl(rod, assoc(v,1), "Lathe Loop", 2);
                 else
-                    simpl(rod, assoc(v,1, "recycled small "+ v + " dust", -2), "LV Lathe");
+                    simpl(rod, assoc(v,1, "recycled small "+ v + " dust", -2), "Lathe");
             }
             else
                 simpl(rod, assoc(v,1));
@@ -884,9 +866,11 @@ function RUN_RECIPES(TECH, simpl)
         , "tungstensteel"]
     for (var k in materials) {
         var v = materials[k]
+
+        simpl(v +" foil", assoc(v + " plate", 1), "Bend: Setting 1", 4, warn_if_not("bending machine", LV));
+
         if (TECH["bending machine"] > NONE)
         {
-            simpl(v +" foil", assoc(v + " plate", 1), "Bend: Setting 1", 4);
             simpl(v + " plate", assoc(v,1), "Bend: Setting 1");
         }
         else
@@ -900,9 +884,9 @@ function RUN_RECIPES(TECH, simpl)
     }
 
     if (TECH["extruder"] > NONE)
-        simpl("rubber plate", {"rubber": 1}, "LV Extrude: Plate");
+        simpl("rubber plate", {"rubber": 1}, "Extrude: Plate");
     else
-        simpl("rubber plate", {"rubber": 2});
+        simpl("rubber plate", {"rubber": 2}, "Alloy Smelt: Plate Mold");
 
     if (TECH["fluid extractor"] > NONE)
     {

@@ -5,11 +5,6 @@ html(lang="en")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     title Recipes-JS [beyond reality mod pack]
     link(rel='stylesheet', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css')
-    style(type='text/css')
-      | .part { font-weight: bold }
-      | .qty { font-weight: bold }
-      | .comment > span { font-weight: bold }
-      | li
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
     link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css")
     link(rel="stylesheet" href="/static/index.css")
@@ -25,7 +20,6 @@ html(lang="en")
       h1= "Recipes-JS "
         br.visible-xs
         small [beyond reality mod pack]
-      // p.lead test test 123
       form.form-horizontal(action="#craftingSection")
         h4 Items to craft
         each x in [1,2,3,4,5,6]
@@ -52,9 +46,7 @@ html(lang="en")
                         each lval, lkey in techlevel
                           if lval === user_tech_level
                             option(value="#{lval}" selected="selected")= lkey
-                            //input(type="radio", name="#{tkey}", value="#{lval}", checked)
                           else
-                            //input(type="radio", name="#{tkey}", value="#{lval}")
                             option(value="#{lval}")= lkey
         input(type="submit" href="#")
       if crafts
@@ -69,9 +61,8 @@ html(lang="en")
           thead
             tr
               th
-                .col-md-1.col-xs-1
-                .col-md-5.col-xs-8 Item
-                .col-md-1.col-xs-2 Qty
+              th Item
+              th Qty
           tbody
             - var ingkeys = Object.keys(final);
             - ingkeys.sort();
@@ -84,89 +75,90 @@ html(lang="en")
                 - essentia.push(index)
               else if final[index] > 0
                 tr.checkable
-                  td
-                    input.col-md-1.col-xs-1(type="checkbox" id="startinging#{index}")
-                    .col-md-5.col-xs-8= index
-                    .col-md-1.col-xs-2= Number(final[index])
+                  td(width="10em")
+                    input(type="checkbox" id="startinging#{index}")
+                  td= index
+                  td= Number(final[index])
         if leftovers.length > 0
           h4 Leftover Ingredients
           table.table.table-striped
             thead
               tr
                 th
-                  .col-md-1.col-xs-1
-                  .col-md-5.col-xs-8 Item
-                  .col-md-1.col-xs-2 Qty
+                th Item
+                th Qty
             tbody
               each index in leftovers
                 tr.checkable
-                  td
-                    input.col-md-1.col-xs-1(type="checkbox" id="Lstartinging#{index}")
-                    .col-md-5.col-xs-8= index.replace(/recycled /, "")
-                    .col-md-1.col-xs-2= -Number(final[index])
+                  td(width="10em")
+                    input(type="checkbox" id="Lstartinging#{index}")
+                  td= index.replace(/recycled /, "")
+                  td= -Number(final[index])
         if essentia.length > 0
           h4 Essentia Ingredients
           table.table.table-striped
             thead
               tr
                 th
-                  .col-md-1.col-xs-1
-                  .col-md-5.col-xs-8 Item
-                  .col-md-1.col-xs-2 Qty
+                th Item
+                th Qty
             tbody
               each index in essentia
                 tr.checkable
-                  td
-                    input.col-md-1.col-xs-1(type="checkbox" id="Estartinging#{index}")
-                    .col-md-5.col-xs-8= index
-                    .col-md-1.col-xs-2= Number(final[index])
+                  td(width="10em")
+                    input(type="checkbox" id="Estartinging#{index}")
+                  td= index
+                  td= Number(final[index])
         if vis.length > 0
           h4 Vis Ingredients
           table.table.table-striped
             thead
               tr
                 th
-                  .col-md-1.col-xs-1
-                  .col-md-5.col-xs-8 Item
-                  .col-md-1.col-xs-2 Qty
+                th Item
+                th Qty
             tbody
               each index in vis
                 tr.checkable
-                  td
-                    input.col-md-1.col-xs-1(type="checkbox" id="Vstartinging#{index}")
-                    .col-md-5.col-xs-8= index
-                    .col-md-1.col-xs-2= Number(final[index])
+                  td(width="10em")
+                    input(type="checkbox" id="Vstartinging#{index}")
+                  td= index
+                  td= Number(final[index])
         h4 Crafting Steps
         table.table.table-striped
           each val, idx in crafts
-            tr.checkable
+            - var attr = val[5]
+            tr.checkable(attr-craftable="#{attr}")
+              td(width="10em")
+                input(type="checkbox" id="craftingstep#{idx}")
+              td!= "Step&nbsp;"+(idx+1)
               td
-                input.col-md-1.col-xs-1(type="checkbox" id="craftingstep#{idx}")
-                .col-md-1= "Step "+(idx+1)
-                .col-md-9.col-xs-9
-                  - var numcrafts = Number(val[0]) / (Number(val[4]) || 1);
-                  = "Craft "
-                  span.qty= Number(val[0])
-                  = " "
-                  span.part= val[1]
-                  = " using recipe "
-                  span.recipe= JSON.stringify(val[2])
-                  if val[4]
-                    span.comment= " = "
-                      span= val[4]
-                  if val[3]
-                    br.visible-xs
-                    span.comment= " [COMMENT: "
-                      span= val[3]
-                      = "]"
-                  if numcrafts > 1
-                    - var obj2 = {}
-                    - for (var k in val[2]) {
-                    -   obj2[k] = val[2][k] * numcrafts;
-                    - }
-                    span= " ["+numcrafts+" TIMES = "
-                    span= JSON.stringify(obj2)
-                    span= "]"
+                - var numcrafts = Number(val[0]) / (Number(val[4]) || 1);
+                = "Craft "
+                span.qty= Number(val[0])
+                = " "
+                span.part= val[1]
+                = " using recipe "
+                br.visible-sm.visible-xs.visible-md
+                span.recipe= JSON.stringify(val[2])
+                if val[4]
+                  span.visible-md-inline.visible-lg-inline= " produces "
+                  span.visible-sm-inline.visible-xs-inline= " = "
+                  span.produces= val[4]
+              td
+                if val[3]
+                  span.comment!= val[3].replace(/ /g,'&nbsp;')
+              if numcrafts > 1
+                td
+                  - var obj2 = {}
+                  - for (var k in val[2]) {
+                  -   obj2[k] = val[2][k] * numcrafts;
+                  - }
+                  = numcrafts+" times using "
+                  br.visible-sm.visible-xs
+                  = JSON.stringify(obj2)
+              else
+                td
       if requestedUrl
         form(action="http://tinyurl.com/create.php" method="post" target="_blank")
           input(type="hidden" name="url" value="#{requestedUrl}")
