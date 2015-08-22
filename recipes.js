@@ -65,6 +65,12 @@ function RUN_RECIPES(TECH, simpl)
             return "warn";
     }
 
+    // CompactWaterTurbines
+    simpl("ev water turbine", { "hv water turbine": 4, "ev pump": 1, "stainless steel rotor":2, "ev hull": 1, "energy flow circuit": 1 });
+    simpl("hv water turbine", { "mv water turbine": 4, "hv pump": 1, "steel rotor":2, "hv hull": 1, "data control circuit": 1 });
+    simpl("mv water turbine", { "lv water turbine": 4, "mv pump": 1, "bronze rotor":2, "mv hull": 1, "advanced circuit": 1 });
+    simpl("lv water turbine", { "steel plate": 4, "lv pump": 1, "tin rotor":2, "lv hull": 1, "basic circuit": 1 });
+
     // Advanced solar panels
     simpl("molecular transformer", { "ic2 ev transformer": 2, "advanced machine casing": 4, "advanced circuit": 2, "mv assembling machine": 1});
 
