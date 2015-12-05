@@ -65,6 +65,11 @@ function RUN_RECIPES(TECH, simpl)
             return "warn";
     }
 
+    // Power converters
+    simpl("energy bridge", { "dense lead plate": 2, "mv transformer": 1, "cobalt plate": 2, "glass fiber cable": 2, "cobalt cable x2": 2});
+    simpl("eu hv consumer", { "ic2 mv transformer":1, "gold plate": 4, "insulated gold cable": 4});
+    simpl("rf producer", { "dense lead plate": 4, "insulated tin cable": 4, "lv battery buffer x1": 1});
+
     // CompactWaterTurbines
     simpl("ev water turbine", { "hv water turbine": 4, "ev pump": 1, "stainless steel rotor":2, "ev hull": 1, "energy flow circuit": 1 });
     simpl("hv water turbine", { "mv water turbine": 4, "hv pump": 1, "steel rotor":2, "hv hull": 1, "data control circuit": 1 });
@@ -75,12 +80,25 @@ function RUN_RECIPES(TECH, simpl)
     simpl("molecular transformer", { "ic2 ev transformer": 2, "advanced machine casing": 4, "advanced circuit": 2, "mv assembling machine": 1});
 
     // Galacticraft
+    simpl("oxygen collector", { "compressed steel": 3, "compressed aluminum": 2, "oxygen vent": 1, "oxygen fan":1, "tin canister": 1, "oxygen concentrator":1 });
+    simpl("oxygen compressor", { "compressed steel": 4, "compressed aluminum": 3, "compressed bronze": 1, "oxygen concentrator":1 });
+    simpl("heavy oxygen tank", { "red wool": 3, "tin canister": 3, "compressed steel": 3 });
+    simpl("fuel loader", { "compressed aluminum": 2, "compressed steel": 5, "tin canister": 1, "basic wafer": 1})
+    simpl("basic wafer", { "diamond": 1, "basic circuit board": 1 }, "Assemble", undefined, warn_if_not("assembling machine", LV))
+    simpl("parachute", { "string": 3, "canvas": 3 });
+    simpl("canvas", { "stick": 2, "string": 5 });
+    simpl("oxygen mask", { "glass pane": 8, "iron helmet": 1 });
+    simpl("oxygen gear", { "oxygen pipe": 5, "oxygen concentrator": 1 });
+    simpl("oxygen fan", { "compressed steel": 4, "basic wafer":1, "redstone":1 });
+    simpl("oxygen pipe", { "glass pane": 6 }, undefined, 4);
+    simpl("oxygen concentrator", { "compressed steel": 4, "compressed tin": 3, "tin canister": 1, "oxygen vent": 1 });
     simpl("tier 1 rocket", {"rocket fin": 4, "tier 1 rocket engine": 1, "nosecone": 1, "heavy duty plate": 8, "chest": 3}, "NASA Workbench");
     simpl("rocket fin", { "heavy duty plate": 4, "compressed steel": 2 });
     simpl("nosecone", { "redstone torch": 1, "heavy duty plate": 3 });
     simpl("tier 1 rocket engine", { "heavy duty plate": 4, "flint and steel": 1, "button": 1, "tin canister": 1, "oxygen vent": 1 });
     simpl("heavy duty plate", { "heavy duty alloy": 1, "industrial tnt": 8, "recycled tiny stainless steel dust": -2 }, "Implosion Compressor");
     simpl("heavy duty alloy", { "stainless steel bolt": 4, "compressed bronze": 1, "compressed aluminum": 1, "compressed steel": 1 });
+    simpl("empty canister", { "tin canister": 1, "glass":1, "compressed steel": 1, "compressed tin": 6 });
     simpl("tin canister", { "tin plate": 7 });
     simpl("oxygen vent", { "compressed tin": 3, "compressed steel": 1 });
     simpl("compressed steel", { "steel plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
@@ -405,8 +423,23 @@ function RUN_RECIPES(TECH, simpl)
     simpl("hv polarizer", { "steel rod": 2, "hv hull": 1, "gold cable x1":2, "copper wire x4":4 });
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
 
+    // GT stuff
+    simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
+    simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
+    simpl("mv battery buffer x4", {"copper wire x4": 4, "mv hull": 1, "chest": 1});
+    simpl("mv battery buffer x1", {"copper wire x1": 4, "mv hull": 1, "chest": 1});
+
+    simpl("lv battery buffer x16", {"tin wire x16": 4, "lv hull": 1, "chest": 1});
+    simpl("lv battery buffer x9", {"tin wire x8": 4, "lv hull": 1, "chest": 1});
+    simpl("lv battery buffer x4", {"tin wire x4": 4, "lv hull": 1, "chest": 1});
+    simpl("lv battery buffer x1", {"tin wire x1": 4, "lv hull": 1, "chest": 1});
+
+    simpl("ulv input bus", { "ulv hull": 1, "chest": 1 });
+    simpl("ulv output bus", { "ulv hull": 1, "chest": 1 });
+
     tiermats = {
         lv: {
+            upcable: "copper cable x1",
             cable: "tin cable x1",
             cable4: "tin cable x4",
             circuit: "basic circuit",
@@ -426,6 +459,7 @@ function RUN_RECIPES(TECH, simpl)
             motorwire: "copper wire x1",
         },
         mv: {
+            upcable: "gold cable x1",
             cable: "copper cable x1",
             cable4: "copper cable x4",
             circuit: "good circuit",
@@ -445,6 +479,7 @@ function RUN_RECIPES(TECH, simpl)
             motorwire: "copper wire x2",
         },
         hv: {
+            upcable: "aluminum cable x1",
             cable: "gold cable x1",
             cable4: "gold cable x4",
             circuit: "advanced circuit",
@@ -464,6 +499,7 @@ function RUN_RECIPES(TECH, simpl)
             motorwire: "copper wire x4",
         },
         ev: {
+            upcable: "tungsten cable x1",
             cable: "aluminum cable x1",
             cable4: "aluminum cable x4",
             circuit: "data control circuit",
@@ -483,6 +519,7 @@ function RUN_RECIPES(TECH, simpl)
             motorwire: "annealed copper wire x8",
         },
         iv: {
+            upcable: "tungsten cable x4",
             cable: "tungsten cable x1",
             cable4: "tungsten cable x4",
             circuit: "energy flow circuit",
@@ -557,6 +594,8 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" input hatch", assoc(v.hull, 1, "glass", 1));
         simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
 
+        simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1));
+
         simpl(v.hull, assoc(v.cable, 2, v.casing, 1));
         simpl(v.casing, assoc(v.plate, 8));
         simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.cable, 3, v.circuit, 1));
@@ -618,20 +657,6 @@ function RUN_RECIPES(TECH, simpl)
     simpl("railcraft iron gear", {"iron plate": 4, "tin gear bushing":1})
     simpl("tin gear bushing", {"tin plate": 4}, undefined, 2)
 
-    // GT stuff
-    simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
-    simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
-    simpl("mv battery buffer x4", {"copper wire x4": 4, "mv hull": 1, "chest": 1});
-    simpl("mv battery buffer x1", {"copper wire x1": 4, "mv hull": 1, "chest": 1});
-
-    simpl("lv battery buffer x16", {"tin wire x16": 4, "lv hull": 1, "chest": 1});
-    simpl("lv battery buffer x9", {"tin wire x8": 4, "lv hull": 1, "chest": 1});
-    simpl("lv battery buffer x4", {"tin wire x4": 4, "lv hull": 1, "chest": 1});
-    simpl("lv battery buffer x1", {"tin wire x1": 4, "lv hull": 1, "chest": 1});
-
-    simpl("ulv input bus", { "ulv hull": 1, "chest": 1 });
-    simpl("ulv output bus", { "ulv hull": 1, "chest": 1 });
-
     simpl("hv emitter", { "chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2 });
     simpl("mv emitter", { "electrum rod": 4, "good circuit": 2, "nether quartz": 1, "copper cable x1": 2 });
     simpl("lv sensor", { "brass rod": 1, "basic circuit": 1, "quartzite": 1, "steel plate": 4 });
@@ -653,6 +678,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("furnace", { "cobblestone": 8 });
     simpl("gold nugget", { "gold" : 1 }, undefined, 9);
     //simpl("quicksilver drop", { "quicksilver" : 1.0/9 });
+    simpl("iron helmet", { "iron plate" : 5 });
     simpl("cauldron", { "iron plate" : 7 });
     simpl("bookshelf", { "book" : 3, "plank" : 6 });
     simpl("book", { "paper" : 3, "leather" : 1 });
@@ -661,6 +687,7 @@ function RUN_RECIPES(TECH, simpl)
     //END VANILLA
 
     // Low level IC2/GT parts
+    simpl("glass fiber cable", { "glass": 6, "energium dust": 2, "silver dust": 1 });
     simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
 
     simpl("lapotronic energy orb", { "energy flow circuit": 2, "engraved lapotron chip": 18 }, "EV Assemble", undefined, warn_if_not("assembling machine", EV));
@@ -707,15 +734,15 @@ function RUN_RECIPES(TECH, simpl)
         {
             simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
         }
+        simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
         simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "molten soldering alloy": 18 }, "Assemble");
     }
     else
     {
         simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
+        simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
         simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
     }
-
-    simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
 
     simpl("etched ev wiring", { "platinum foil": 1 }, "HV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", HV));
     simpl("etched hv wiring", { "gold foil": 1 }, "MV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", MV));
@@ -774,7 +801,7 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("tiny tungstensteel fluid pipe", { "tungstensteel": 1 }, "HV Extrude: Tiny Pipe", 2, warn_if_not("extruder", HV));
 
-    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel", "osmium", "tungsten", "kanthal", "nichrome"];
+    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel", "osmium", "tungsten", "kanthal", "nichrome", "cobalt"];
     for (var k in materials)
     {
         var v = materials[k];
@@ -869,7 +896,7 @@ function RUN_RECIPES(TECH, simpl)
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
         , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
         , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
-        , "tungstensteel"]
+        , "tungstensteel", "cobalt"]
     for (var k in materials) {
         var v = materials[k]
 
