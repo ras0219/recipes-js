@@ -57,6 +57,10 @@ function RUN_RECIPES(TECH, simpl)
     // simpl("energium dust", { "redstone": 5, "ruby dust": 4 }, undefined, 9);
 
 
+    simpl("thermal centrifuge", {"mining laser": 1, "coil": 2, "iron": 4, "electric motor": 1, "advanced machine casing": 1})
+    simpl("mining laser", {"redstone": 2, "energy crystal": 1, "advanced circuit": 1, "advanced alloy": 3, "iron turning blank handle": 1})
+    simpl("iron turning blank handle", {"iron turning blank": 1}, "Turning Table: 43222")
+
     simpl("nuclear reactor", {"reactor chamber": 3, "advanced circuit": 1, "dense lead plate": 4, "generator": 1})
     simpl("reactor chamber", {"basic machine casing": 1, "lead plate": 4})
 
@@ -167,7 +171,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("tin cable", {"tin": 1 }, "Metal Former: Extrude", 3)
 
     simpl("advanced alloy", {"mixed metal ingot":1}, "Compressor")
-    simpl("mixed metal ingot", {"iron plate":3, "bronze plate": 3, "tin plate": 3}, "Compressor")
+    simpl("mixed metal ingot", {"iron plate":3, "bronze plate": 3, "tin plate": 3}, undefined, 2)
 
     simpl("tin item casing", {"tin plate":1}, "Metal Former: Rolling", 2)
     simpl("tin plate", {"tin":1}, "Metal Former: Rolling")
