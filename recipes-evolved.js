@@ -56,6 +56,22 @@ function RUN_RECIPES(TECH, simpl)
     // simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
     // simpl("energium dust", { "redstone": 5, "ruby dust": 4 }, undefined, 9);
 
+    simpl("fluxed armor plating", {"fluxed electrum nugget": 6, "flux crystal": 2, "fluxed electrum ingot": 1})
+    simpl("fluxed electrum nugget", {"fluxed electrum ingot": 1}, undefined, 9)
+    simpl("fluxed electrum ingot", {"electrum ingot": 2, "redstone": 4, "pyrotheum dust": 1}, "Alloy Smelter", 2)
+    simpl("flux crystal", {"diamond": 1, "destabilized redstone": 200}, "Fluid Transposer")
+
+    simpl("molecular transformer", {"advanced machine casing": 4, "ev transformer": 2, "advanced circuit": 2, "mt core": 1})
+    simpl("mt core", {"irradiant glass pane": 6, "thick neutron reflector": 2})
+    simpl("thick neutron reflector", {"neutron reflector": 4, "copper plate": 5})
+    simpl("neutron reflector", {"coal dust": 4, "tin dust": 4, "copper plate": 1})
+    simpl("irradiant glass pane", {"reinforced glass": 6, "irradiant uranium": 2, "glowstone dust": 1}, undefined, 6)
+
+    simpl("reinforced glass", {"glass": 7, "advanced alloy": 2}, undefined, 7)
+
+    simpl("ev transformer", {"insulated hv cable": 2, "lapotron crystal": 1, "advanced circuit": 1, "hv transformer": 1})
+    simpl("hv transformer", {"mv transformer": 1, "insulated gold cable": 2, "electronic circuit": 1, "advanced re-battery": 1})
+    simpl("mv transformer", {"basic machine casing": 1, "insulated copper cable": 2})
 
     simpl("thermal centrifuge", {"mining laser": 1, "coil": 2, "iron": 4, "electric motor": 1, "advanced machine casing": 1})
     simpl("mining laser", {"redstone": 2, "energy crystal": 1, "advanced circuit": 1, "advanced alloy": 3, "iron turning blank handle": 1})
@@ -163,6 +179,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("double-layer capacitor", {"basic capacitor": 2, "energetic alloy": 2, "blazing electron tube": 1})
     simpl("basic capacitor", {"signalum nugget": 4, "lapis electron tube": 1, "redstone chipset": 2})
 
+    simpl("insulated hv cable", {"hv cable": 1, "rubber": 3})
+    simpl("hv cable", {"iron": 1}, "Metal Former: Extrude", 4)
     simpl("insulated gold cable", {"gold cable": 1, "rubber": 2})
     simpl("gold cable", {"gold": 1 }, "Metal Former: Extrude", 4)
     simpl("insulated copper cable", {"copper cable": 1, "rubber": 1})
