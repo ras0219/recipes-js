@@ -65,6 +65,16 @@ function RUN_RECIPES(TECH, simpl)
             return "warn";
     }
 
+	//Gregtech x683, z883, y12
+	//BBF = 3x4x3, hollow, empty on top
+	//at least 32 bronze plated bricks 
+	simpl("bbf multi", {"bronze plated blast furnace":1,"bronze plated bricks":32});
+	simpl("bronze plated bricks", {"bronze plate":6, "bricks":1}, "", undefined, warn_if_not("wrench",undefined)  );
+	//controller block
+	simpl("bronze plated blast furnace",{"bronze plate":4,"furnace":4 }, "", undefined, warn_if_not("wrench",undefined) );
+	
+	
+	
     //// Power converters
     //simpl("energy bridge", { "dense lead plate": 2, "mv transformer": 1, "cobalt plate": 2, "glass fiber cable": 2, "cobalt cable x2": 2});
     //simpl("eu hv consumer", { "ic2 mv transformer":1, "gold plate": 4, "insulated gold cable": 4});
@@ -675,7 +685,7 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("daylight sensor", { "glass": 3, "wood slab":3, "nether quartz": 3 });
     //simpl("glass pane", { "glass": 6 }, undefined, 16);
     //simpl("bucket", { "iron plate": 3 });
-    //simpl("furnace", { "cobblestone": 8 });
+    simpl("furnace", { "cobblestone": 8 });
     //simpl("gold nugget", { "gold" : 1 }, undefined, 9);
     ////simpl("quicksilver drop", { "quicksilver" : 1.0/9 });
     //simpl("iron helmet", { "iron plate" : 5 });
@@ -984,7 +994,7 @@ if (require.main === module)
     var tech = basictech()
     tech["bending machine"] = techlevel.lv
     tech["wiremill"] = techlevel.lv
-    var cur = {"hv wiremill": 1}
+    var cur = {"bbf multi": 1}
     RUN_RECIPES(cur, tech, make_simpl(console_logger))
     console.log("=======================================INGREDIENT=========================");
     for (var k in cur) {
