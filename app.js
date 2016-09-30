@@ -3,11 +3,16 @@ var app = express()
 var recipes = require('./recipes')
 var recipesevo = require('./recipes-evolved')
 
+var recipesinfi = require('./recipes-infitech')
+
 var itemlist = [];
 recipes.raw_recipes(recipes.basictech(), function(item) { itemlist.push(item); });
 
 var itemlistevo = [];
 recipesevo.raw_recipes(recipesevo.basictech(), function(item) { itemlistevo.push(item); });
+
+var itemlistinfi = [];
+recipesinfi.raw_recipes(recipesinfi.basictech(), function (item) { itemlistinfi.push(item); });
 
 app.set('view engine', 'jade')
 
@@ -146,6 +151,70 @@ app.all('/gt5u', function (req, res) {
             title: "[beyond reality mod pack]",
             basictech: recipes.basictech(),
             techlevel: recipes.techlevel,
+            query: query,
+            itemlist: itemlist
+        })
+})
+
+app.all('/infitech2', function (req, res) {
+    var cur = {}
+    var query = req.query || {};
+    function parseparam(name, qty) {
+        if (name) {
+            if (qty === "" || qty === undefined)
+                cur[name] = 1
+            else
+                cur[name] = Number(qty)
+        }
+    }
+    parseparam(query.i1name, query.i1qty)
+    parseparam(query.i2name, query.i2qty)
+    parseparam(query.i3name, query.i3qty)
+    parseparam(query.i4name, query.i4qty)
+    parseparam(query.i5name, query.i5qty)
+    parseparam(query.i6name, query.i6qty)
+    if (Object.keys(cur).length > 0) {
+        // do recipes here
+        var crafts = []
+        // This is terrible... but the best way to clone an object afaict
+        var begin = JSON.parse(JSON.stringify(cur));
+        var tl = recipesinfi.basictech()
+        // Evaluate tech level based on submission values
+        for (var k in tl) {
+            if (k in query) {
+                tl[k] = Number(query[k])
+                console.log("Found tech " + k + " " + query[k]);
+            }
+            else
+                console.log("Didn't find tech " + k);
+        }
+        recipesinfi.run(cur, tl, function (n, src, dst, comment, batchsz, attr) {
+            if (batchsz)
+                crafts.push([n * batchsz, src, dst, comment, batchsz, attr])
+            else
+                crafts.push([n, src, dst, comment, batchsz, attr])
+        })
+        res.render('index', {
+            title: "[infitech 2]",
+            basictech: recipesinfi.basictech(),
+            techlevel: recipesinfi.techlevel,
+            begin: begin,
+            crafts: crafts.reverse(),
+            final: cur,
+            query: query,
+            itemlist: itemlist,
+            requestedUrl: req.protocol + '://' + req.get('Host') + req.url
+        })
+        console.log("run recipes.")
+        console.log(begin)
+        console.log(crafts)
+        console.log(cur)
+    }
+    else
+        res.render('index', {
+            title: "[infitech 2]",
+            basictech: recipesinfi.basictech(),
+            techlevel: recipesinfi.techlevel,
             query: query,
             itemlist: itemlist
         })
