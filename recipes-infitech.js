@@ -68,10 +68,10 @@ function RUN_RECIPES(TECH, simpl)
 	//Gregtech x683, z883, y12
 	//BBF = 3x4x3, hollow, empty on top
 	//at least 32 bronze plated bricks
-	simpl("bbf multi", {"bronze plated blast furnace":1,"bronze plated bricks":32});
+	simpl("bronze blast furnace multi", {"bronze plated blast furnace":1,"bronze plated bricks":32}, "multiblock structure");
+	simpl("bronze plated blast furnace", {"bronze plate":4,"furnace":4 });
 	simpl("bronze plated bricks", {"bronze plate":6, "bricks":1});
 	//controller block
-	simpl("bronze plated blast furnace",{"bronze plate":4,"furnace":4 });
 
 
 
