@@ -466,6 +466,7 @@ function RUN_RECIPES(TECH, simpl)
            rod: "steel rod",
            magrod: "magnetic steel rod",
            plate: "steel plate",
+           plate2: "wrought iron plate",
            motorwire: "copper wire x1",
        },
        mv: {
@@ -486,6 +487,7 @@ function RUN_RECIPES(TECH, simpl)
            rod: "aluminum rod",
            magrod: "magnetic steel rod",
            plate: "aluminum plate",
+           plate2: "wrought iron plate",
            motorwire: "copper wire x2",
        },
        hv: {
@@ -506,6 +508,7 @@ function RUN_RECIPES(TECH, simpl)
            rod: "stainless steel rod",
            magrod: "magnetic steel rod",
            plate: "stainless steel plate",
+           plate2: "polyethylene sheet",
            motorwire: "copper wire x4",
        },
        ev: {
@@ -526,6 +529,7 @@ function RUN_RECIPES(TECH, simpl)
            rod: "titanium rod",
            magrod: "magnetic neodynium rod",
            plate: "titanium plate",
+           plate2: "polyethylene sheet",
            motorwire: "annealed copper wire x8",
        },
        iv: {
@@ -546,6 +550,7 @@ function RUN_RECIPES(TECH, simpl)
            rod: "tungstensteel rod",
            magrod: "magnetic neodynium rod",
            plate: "tungstensteel plate",
+           plate2: "polyethylene sheet",
            motorwire: "annealed copper wire x16",
        }
     };
@@ -606,7 +611,7 @@ function RUN_RECIPES(TECH, simpl)
 
        simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1));
 
-       simpl(v.hull, assoc(v.cable, 2, v.casing, 1));
+       simpl(v.hull, assoc(v.cable, 2, v.casing, 1, v.plate, 3));
        simpl(v.casing, assoc(v.plate, 8));
        simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.cable, 3, v.circuit, 1));
        simpl(v.conveyor, assoc("rubber plate", 6, v.motor, 2, v.cable, 1));
@@ -821,6 +826,10 @@ function RUN_RECIPES(TECH, simpl)
         {
             simpl(v + " cable x1", assoc(v + " wire x1", 1, "black carpet", 1, "string", 1));
         }
+        else if (v == "red alloy")
+        {
+            simpl(v + " cable x1", assoc(v + " wire x1", 1, "paper", 1));
+        }
         else
         {
             simpl(v + " cable x1", assoc(v + " wire x1", 1, "rubber", 2), "Alloy Smelter");
@@ -904,7 +913,7 @@ function RUN_RECIPES(TECH, simpl)
                    simpl(rod, assoc(v,1, "recycled small "+ v + " dust", -2), "Lathe");
            }
            else
-               simpl(rod, assoc(v,1));
+               simpl(rod, assoc(v,1), "File");
        }
        simpl("small "+v+" gear", assoc(plate,1));
     }
