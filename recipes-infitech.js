@@ -733,25 +733,25 @@ function RUN_RECIPES(TECH, simpl)
 
     // This is for "full tech"
     simpl("good circuit", { "basic circuit": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
+
+    if (TECH["forming press"] >= LV && TECH["assembling machine"] >= LV)
+    {
+        simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble");
+    }
+    else
+    {
+        simpl("basic circuit", { "copper cable x1": 6, "nand" : 2, "steel plate": 1 });
+    }
+
     if (TECH["assembling machine"] >= LV)
     {
-       if (TECH["forming press"] >= LV)
-       {
-           simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble");
-       }
-       else
-       {
-           simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
-       }
-       simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
        simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "molten soldering alloy": 18 }, "Assemble");
     }
     else
     {
-       simpl("basic circuit", { "insulated copper cable": 6, "nand" : 2, "steel plate": 1 });
-       simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
        simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
     }
+    simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
 
     simpl("etched ev wiring", { "platinum foil": 1 }, "HV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", HV));
     simpl("etched hv wiring", { "gold foil": 1 }, "MV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", MV));
@@ -813,20 +813,27 @@ function RUN_RECIPES(TECH, simpl)
     materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "cupronickel", "osmium", "tungsten", "kanthal", "nichrome", "cobalt"];
     for (var k in materials)
     {
-       var v = materials[k];
-       simpl(v + " cable x8", assoc(v + " wire x8", 1, "rubber plate", 3));
-       simpl(v + " cable x4", assoc(v + " wire x4", 1, "rubber plate", 2));
-       simpl(v + " cable x2", assoc(v + " wire x2", 1, "rubber plate", 1));
-       simpl(v + " cable x1", assoc(v + " wire x1", 1, "rubber plate", 1));
+        var v = materials[k];
+        //simpl(v + " cable x8", assoc(v + " wire x8", 1, "rubber plate", 3), "Alloy Smelter");
+        //simpl(v + " cable x4", assoc(v + " wire x4", 1, "rubber plate", 2), "Alloy Smelter");
+        //simpl(v + " cable x2", assoc(v + " wire x2", 1, "rubber plate", 1), "Alloy Smelter");
+        if (v == "tin")
+        {
+            simpl(v + " cable x1", assoc(v + " wire x1", 1, "black carpet", 1, "string", 1));
+        }
+        else
+        {
+            simpl(v + " cable x1", assoc(v + " wire x1", 1, "rubber", 2), "Alloy Smelter");
+        }
 
-       simpl(v + " wire x16", assoc(v + " wire x8", 2));
-       simpl(v + " wire x8", assoc(v + " wire x4", 2));
-       simpl(v + " wire x4", assoc(v + " wire x2", 2));
-       simpl(v + " wire x2", assoc(v + " wire x1", 2));
-       if (TECH["wiremill"] > NONE)
-           simpl(v + " wire x1", assoc(v, 1), "Wiremill", 2);
-       else
-           simpl(v + " wire x1", assoc(v + " plate", 1));
+        simpl(v + " wire x16", assoc(v + " wire x8", 2));
+        simpl(v + " wire x8", assoc(v + " wire x4", 2));
+        simpl(v + " wire x4", assoc(v + " wire x2", 2));
+        simpl(v + " wire x2", assoc(v + " wire x1", 2));
+        if (TECH["wiremill"] > NONE)
+            simpl(v + " wire x1", assoc(v, 1), "Wiremill", 2);
+        else
+            simpl(v + " wire x1", assoc(v + " plate", 1), "Wire Cutters");
     }
 
     materials = ["steel", "iron", "bronze", "tin"]
