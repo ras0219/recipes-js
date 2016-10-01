@@ -611,7 +611,7 @@ function RUN_RECIPES(TECH, simpl)
 
        simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1));
 
-       simpl(v.hull, assoc(v.cable, 2, v.casing, 1, v.plate, 3));
+       simpl(v.hull, assoc(v.cable, 2, v.casing, 1, v.plate, 1, v.plate2, 2));
        simpl(v.casing, assoc(v.plate, 8));
        simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.cable, 3, v.circuit, 1));
        simpl(v.conveyor, assoc("rubber plate", 6, v.motor, 2, v.cable, 1));
