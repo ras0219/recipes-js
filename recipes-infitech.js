@@ -864,7 +864,7 @@ function RUN_RECIPES(TECH, simpl)
        }
     }
 
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "tungstensteel", "invar", "cobalt brass", "copper", "gold", "electrum"];
+    materials = ["wrought iron", "bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "tungstensteel", "invar", "cobalt brass", "copper", "gold", "electrum"];
     for (var k in materials) {
        var v = materials[k]
        var plate = v + " plate";
