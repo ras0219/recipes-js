@@ -830,9 +830,13 @@ function RUN_RECIPES(TECH, simpl)
         {
             simpl(v + " cable x1", assoc(v + " wire x1", 1, "paper", 1));
         }
-        else
+        else if (v == "copper" && (TECH["assembling machine"] == NONE || TECH["fluid extractor"] == NONE))
         {
             simpl(v + " cable x1", assoc(v + " wire x1", 1, "rubber", 2), "Alloy Smelter");
+        }
+        else
+        {
+            simpl(v + " cable x1", assoc(v + " wire x1", 1, "molten rubber", 144), "Assemble: 24", undefined, warn_if_not("assembling machine", LV) || warn_if_not("fluid extractor", LV));
         }
 
         simpl(v + " wire x16", assoc(v + " wire x8", 2));
@@ -935,25 +939,17 @@ function RUN_RECIPES(TECH, simpl)
            simpl(v + " plate", assoc(v,2));
     }
 
-    if (TECH["compressor"] > NONE)
-    {
-       simpl("lapis plate", {"lapis dust": 1 }, "Compress");
-       simpl("olivine plate", { "olivine dust": 1 }, "Compress");
-    }
+    simpl("lapis plate", {"lapis dust": 1 }, "Compress", undefined, warn_if_not("compressor", LV));
+    simpl("olivine plate", { "olivine dust": 1 }, "Compress", undefined, warn_if_not("compressor", LV));
 
     if (TECH["extruder"] > NONE)
        simpl("rubber plate", {"rubber": 1}, "Extrude: Plate");
     else
        simpl("rubber plate", {"rubber": 2}, "Alloy Smelt: Plate Mold");
 
-    if (TECH["fluid extractor"] > NONE)
-    {
-       simpl("molten redstone", {"redstone": 1}, "Fluid Extract", 144);
-    }
-    if (TECH["fluid extractor"] > NONE)
-    {
-       simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144);
-    }
+    simpl("molten redstone", {"redstone": 1}, "Fluid Extract", 144, warn_if_not("fluid extractor", LV));
+    simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144, warn_if_not("fluid extractor", LV));
+    simpl("molten rubber", {"rubber": 1}, "Fluid Extract", 144, warn_if_not("fluid extractor", LV));
 
     simpl("redstone engine", { "piston": 1, "glass": 1, "plank": 3, "wood gear": 2});
     simpl("wood gear", {"stick": 4});
