@@ -868,7 +868,10 @@ function RUN_RECIPES(TECH, simpl)
        }
     }
 
-    materials = ["wrought iron", "bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "tungstensteel", "invar", "cobalt brass", "copper", "gold", "electrum"];
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
+       , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
+       , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
+       , "tungstensteel", "cobalt", "wrought iron", "electrum"]
     for (var k in materials) {
        var v = materials[k]
        var plate = v + " plate";
@@ -895,7 +898,7 @@ function RUN_RECIPES(TECH, simpl)
 
        // Bolts are hard
        if (TECH["cutting saw"] > NONE)
-           simpl(bolt, assoc(v + " rod", 1), "Cutting Saw", 4);
+           simpl(bolt, assoc(rod, 1), "Cutting Saw", 4);
        else if (TECH["extruder"] >= MV)
            simpl(bolt, assoc(v, 1), "MV Extrude: Bolt", 8);
        else
@@ -920,23 +923,15 @@ function RUN_RECIPES(TECH, simpl)
                simpl(rod, assoc(v,1), "File");
        }
        simpl("small "+v+" gear", assoc(plate,1));
-    }
 
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
-       , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
-       , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
-       , "tungstensteel", "cobalt"]
-    for (var k in materials) {
-       var v = materials[k]
-
-       simpl(v +" foil", assoc(v + " plate", 1), "Bend: Setting 1", 4, warn_if_not("bending machine", LV));
+       simpl(v +" foil", assoc(plate, 1), "Bend: Setting 1", 4, warn_if_not("bending machine", LV));
 
        if (TECH["bending machine"] > NONE)
        {
-           simpl(v + " plate", assoc(v,1), "Bend: Setting 1");
+           simpl(plate, assoc(v,1), "Bend: Setting 1");
        }
        else
-           simpl(v + " plate", assoc(v,2));
+           simpl(plate, assoc(v,2));
     }
 
     simpl("lapis plate", {"lapis dust": 1 }, "Compress", undefined, warn_if_not("compressor", LV));
