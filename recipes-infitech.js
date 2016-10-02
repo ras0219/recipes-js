@@ -750,7 +750,7 @@ function RUN_RECIPES(TECH, simpl)
 
     if (TECH["assembling machine"] >= LV)
     {
-       simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 1, "molten soldering alloy": 18 }, "Assemble");
+       simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "molten soldering alloy": 18 }, "Assemble");
     }
     else
     {
