@@ -665,7 +665,9 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("carbon plate", {"raw carbon mesh": 1}, "Compress");
 
-
+	simpl("ic2 pump", {"empty cell":4,"treetap":1,"mining pipe":2,"basic circuit":1,"basic machine casing":1});
+	simpl("mining pipe", {"iron plate":6, "treetap":1},undefined,8);
+	
     //// thermal monitor
     //simpl("thermal monitor", { "lead plate": 7, "redstone": 1, "advanced circuit": 1});
 
@@ -1003,7 +1005,7 @@ if (require.main === module)
     var tech = basictech()
     // tech["bending machine"] = techlevel.lv
     // tech["wiremill"] = techlevel.lv
-    var cur = {"bbf multi": 1}
+    var cur = {"ic2 pump": 1}
     RUN_RECIPES(tech, make_simpl(cur, console_logger))
     console.log("=======================================INGREDIENT=========================");
     for (var k in cur) {
