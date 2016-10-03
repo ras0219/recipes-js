@@ -638,6 +638,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("reactor fluid port", {"reactor pressure vessel": 8, "universal fluid cell": 1});
     simpl("reactor pressure vessel", {"lead plate": 5, "stone": 4}, undefined, 4);
 
+    simpl("fluid/solid canning machine", {"tin item casing": 7, "basic machine casing": 1, "basic circuit": 1});
+
     simpl("liquid heat exchanger", { "empty cell": 2, "glass": 4, "iron item casing": 2, "heat conductor": 1});
     simpl("ic2 stirling generator", {"iron item casing": 7, "generator": 1, "heat conductor": 1});
     simpl("heat conductor", { "rubber": 6, "copper plate": 3});
