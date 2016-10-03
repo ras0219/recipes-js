@@ -601,6 +601,10 @@ function RUN_RECIPES(TECH, simpl)
        simpl(k+" sifting machine", assoc(v.cable, 2, v.hull, 1, v.piston, 2, "item filter", 2, v.circuit, 2));
        simpl(k+" autoclave", assoc(v.hull, 1, v.pump, 1, "glass", 1, v.circuit, 2, v.plate, 4));
        simpl(k+" electric furnace", assoc(v.hull, 1, v.heatwire2, 4, v.circuit, 2, v.cable, 2));
+       simpl(k+" alloy smelter", assoc(v.hull, 1, v.heatwire4, 4, v.circuit, 2, v.cable, 2));
+       simpl(k+" mixer", assoc(v.hull, 1, v.rotor, 1, v.circuit, 2, "glass", 4, v.motor, 1));
+
+       simpl(k+" recycler", assoc(v.hull, 1, "glowstone dust", 2, v.circuit, 2, v.cable, 2, v.piston, 2));
 
        simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
        simpl(k+" input bus", assoc(v.hull, 1, "chest", 1));
