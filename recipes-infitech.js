@@ -604,6 +604,8 @@ function RUN_RECIPES(TECH, simpl)
        simpl(k+" alloy smelter", assoc(v.hull, 1, v.heatwire4, 4, v.circuit, 2, v.cable, 2));
        simpl(k+" mixer", assoc(v.hull, 1, v.rotor, 1, v.circuit, 2, "glass", 4, v.motor, 1));
 
+       simpl(k+" thermal centrifuge", assoc(v.hull, 1, v.motor, 2, v.circuit, 2, v.cable, 2, v.heatwire4, 2));
+
        simpl(k+" recycler", assoc(v.hull, 1, "glowstone dust", 2, v.circuit, 2, v.cable, 2, v.piston, 2));
 
        simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
