@@ -592,7 +592,7 @@ function RUN_RECIPES(TECH, simpl)
        simpl(k+" forming press", assoc(v.cable, 4, v.hull, 1, v.piston, 2, v.circuit, 2));
        simpl(k+" diesel generator", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.piston, 2, v.circuit, 1, v.gear, 2));
        simpl(k+" chemical reactor", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 1, v.circuit, 2, "glass", 2));
-       simpl(k+" chemical bath", assoc(v.cable, 1, v.hull, 1, v.conveyor, 1, v.pump, 1, v.circuit, 2, "glass", 2));
+       simpl(k+" chemical bath", assoc(v.cable, 1, v.hull, 1, v.conveyor, 2, v.pump, 1, v.circuit, 2, "glass", 2));
        simpl(k+" cutting machine", assoc(v.cable, 2, v.hull, 1, v.conveyor, 1, v.motor, 1, v.circuit, 2, "glass", 1, "diamond sawblade", 1));
        simpl(k+" compressor", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.circuit, 2));
        simpl(k+" gas turbine", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.rotor, 3, v.circuit, 2));
@@ -667,7 +667,7 @@ function RUN_RECIPES(TECH, simpl)
 
 	simpl("ic2 pump", {"empty cell":4,"treetap":1,"mining pipe":2,"basic circuit":1,"basic machine casing":1});
 	simpl("mining pipe", {"iron plate":6, "treetap":1},undefined,8);
-	
+
     //// thermal monitor
     //simpl("thermal monitor", { "lead plate": 7, "redstone": 1, "advanced circuit": 1});
 
