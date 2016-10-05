@@ -749,7 +749,7 @@ function RUN_RECIPES(TECH, simpl)
     // This is for "full tech"
     simpl("good circuit", { "basic circuit": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
 
-    if (TECH["forming press"] >= LV && TECH["assembling machine"] >= LV)
+    if (TECH["forming press"] >= LV && TECH["assembling machine"] >= LV && TECH["plastic"] >= LV && TECH["laser engraver"] >= LV)
     {
         simpl("basic circuit", { "basic circuit board": 1, "nand" : 2, "molten soldering alloy": 36 }, "Assemble");
     }
@@ -760,13 +760,21 @@ function RUN_RECIPES(TECH, simpl)
 
     if (TECH["assembling machine"] >= LV)
     {
-       simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "molten soldering alloy": 18 }, "Assemble");
+        if (TECH["plastic"] >= LV)
+        {
+            simpl("nand", { "polyethylene sheet": 1, "red alloy wire x1" : 1, "molten soldering alloy": 18 }, "Assemble");
+        }
+        else
+        {
+            simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "molten soldering alloy": 18 }, "Assemble");
+        }
     }
     else
     {
-       simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
+        simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
     }
-    simpl("basic circuit board", {"silicon plate":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
+    simpl("basic circuit board", {"empty circuit board":1, "etched mv wiring": 4}, "Forming Press", undefined, warn_if_not("forming press", LV));
+    simpl("empty circuit board", {"silicon plate":1, "polyethylene sheet": 1}, "Assemble", undefined, warn_if_not("assembling machine", LV) || warn_if_not("plastic", LV));
 
     simpl("etched ev wiring", { "platinum foil": 1 }, "HV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", HV));
     simpl("etched hv wiring", { "gold foil": 1 }, "MV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", MV));
@@ -997,7 +1005,8 @@ function basictech() {
         "laser engraver" : techlevel.NONE,
         "cutting saw" : techlevel.NONE,
         "compressor" : techlevel.BRONZE,
-        "autoclave" : techlevel.NONE
+        "autoclave" : techlevel.NONE,
+        "plastic" : techlevel.NONE
     }
 }
 
