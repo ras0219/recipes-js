@@ -302,7 +302,7 @@ function RUN_RECIPES(TECH, simpl)
        "heat proof casing":10
        });
 
-    simpl("oil drilling rig multi", { "oil drilling rig": 1, "solid steel casing": 8, "steel frame box": 5, "lv output hatch": 1, "maintenance hatch": 1, "lv energy hatch": 1 });
+    simpl("oil drilling rig multi", { "oil drilling rig": 1, "solid steel casing": 8, "steel frame box": 15, "lv output hatch": 1, "maintenance hatch": 1, "lv energy hatch": 1 });
     simpl("oil drilling rig", { "steel frame box": 3, "mv motor": 3, "mv hull": 1, "good circuit": 3 });
 
     simpl("vacuum freezer multi", { "frost proof casing": 21, "vacuum freezer": 1, "lv input bus": 1, "lv output bus": 1, "maintenance hatch": 1, "mv energy hatch": 1 });
