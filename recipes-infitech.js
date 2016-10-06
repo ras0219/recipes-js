@@ -303,7 +303,7 @@ function RUN_RECIPES(TECH, simpl)
        });
 
     simpl("oil drilling rig multi", { "oil drilling rig": 1, "solid steel casing": 8, "steel frame box": 5, "lv output hatch": 1, "maintenance hatch": 1, "lv energy hatch": 1 });
-    simpl("oil drilling rig", { "steel frame box": 3, "mv motor": 3, "mv hull": 2, "good circuit": 3 });
+    simpl("oil drilling rig", { "steel frame box": 3, "mv motor": 3, "mv hull": 1, "good circuit": 3 });
 
     simpl("vacuum freezer multi", { "frost proof casing": 21, "vacuum freezer": 1, "lv input bus": 1, "lv output bus": 1, "maintenance hatch": 1, "mv energy hatch": 1 });
     simpl("vacuum freezer", { "frost proof casing": 1, "hv pump": 3, "gold cable x1": 2, "data control circuit": 3 });
@@ -329,7 +329,7 @@ function RUN_RECIPES(TECH, simpl)
 
     //simpl("electric jetpack", { "advanced circuit": 1, "iron item casing": 4, "glowstone dust": 2, "batbox": 1 });
     //simpl("batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
-    //simpl("maintenance hatch", {"lv hull":1});
+    simpl("maintenance hatch", {"lv hull":1});
 
     //simpl("ev macerator", { "aluminum cable x1": 3, "ev hull": 1, "data control circuit": 2, "ev piston": 1, "ev motor": 1, "diamond grinding head":1 });
 
