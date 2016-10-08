@@ -471,6 +471,7 @@ function RUN_RECIPES(TECH, simpl)
            plate: "steel plate",
            plate2: "wrought iron plate",
            motorwire: "copper wire x1",
+           chempipe: "glass",
        },
        mv: {
            upcable: "gold cable x1",
@@ -492,6 +493,7 @@ function RUN_RECIPES(TECH, simpl)
            plate: "aluminum plate",
            plate2: "wrought iron plate",
            motorwire: "copper wire x2",
+           chempipe: "plastic pipe",
        },
        hv: {
            upcable: "aluminum cable x1",
@@ -513,6 +515,7 @@ function RUN_RECIPES(TECH, simpl)
            plate: "stainless steel plate",
            plate2: "polyethylene sheet",
            motorwire: "copper wire x4",
+           chempipe: "plastic pipe",
        },
        ev: {
            upcable: "tungsten cable x1",
@@ -534,6 +537,7 @@ function RUN_RECIPES(TECH, simpl)
            plate: "titanium plate",
            plate2: "polyethylene sheet",
            motorwire: "annealed copper wire x8",
+           chempipe: "large plastic pipe",
        },
        iv: {
            upcable: "tungsten cable x4",
@@ -555,6 +559,7 @@ function RUN_RECIPES(TECH, simpl)
            plate: "tungstensteel plate",
            plate2: "polyethylene sheet",
            motorwire: "annealed copper wire x16",
+           chempipe: "huge plastic pipe",
        }
     };
     // fill out basic stuff
@@ -594,7 +599,7 @@ function RUN_RECIPES(TECH, simpl)
        simpl(k+" packager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
        simpl(k+" forming press", assoc(v.cable, 4, v.hull, 1, v.piston, 2, v.circuit, 2));
        simpl(k+" diesel generator", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.piston, 2, v.circuit, 1, v.gear, 2));
-       simpl(k+" chemical reactor", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 1, v.circuit, 2, "glass", 2));
+       simpl(k+" chemical reactor", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 1, v.circuit, 2, v.chempipe, 2));
        simpl(k+" chemical bath", assoc(v.cable, 1, v.hull, 1, v.conveyor, 2, v.pump, 1, v.circuit, 2, "glass", 2));
        simpl(k+" cutting machine", assoc(v.cable, 2, v.hull, 1, v.conveyor, 1, v.motor, 1, v.circuit, 2, "glass", 1, "diamond sawblade", 1));
        simpl(k+" compressor", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.circuit, 2));
@@ -733,9 +738,10 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("engraved crystal chip", { "emerald plate": 1 }, "HV Laser Engrave: Green Lens", undefined, warn_if_not("laser engraver", HV));
 
-    simpl("processor board", { "etched ev wiring": 4, "silicon plate" : 2 }, "HV Forming Press", undefined, warn_if_not("forming press", HV));
+    simpl("processor board", { "etched ev wiring": 4, "empty processor board" : 1 }, "HV Forming Press", undefined, warn_if_not("forming press", HV));
+    simpl("empty processor board", { "polytetrafluoroethylene plate": 1, "silicon plate" : 2 }, "HV Forming Press", undefined, warn_if_not("forming press", HV));
 
-    simpl("advanced circuit board", { "etched hv wiring": 4, "silicon plate" : 1 }, "MV Forming Press", undefined, warn_if_not("forming press", MV));
+    simpl("advanced circuit board", { "etched hv wiring": 4, "empty circuit board" : 1 }, "MV Forming Press", undefined, warn_if_not("forming press", MV));
     simpl("advanced circuit parts", { "glowstone dust": 1, "lapis plate" : 1 }, "MV Forming Press", 2, undefined, warn_if_not("forming press", MV));
 
     simpl("re battery", { "molten redstone": 288, "small battery hull": 1 }, "Fluid Canning Machine");
