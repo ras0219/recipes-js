@@ -331,6 +331,16 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
     simpl("maintenance hatch", {"lv hull":1});
 
+    simpl("machine controller", {"iron plate":1, "molten soldering alloy": 72, "lever": 1}, "Assemble")
+    simpl("item detector", {"iron plate":1, "molten soldering alloy": 72, "gold pressure plate": 1}, "Assemble")
+    simpl("activity detector", {"iron plate":1, "molten soldering alloy": 72, "redstone torch": 1}, "Assemble")
+    simpl("fluid detector", {"iron plate":1, "molten soldering alloy": 72, "iron pressure plate": 1}, "Assemble")
+    simpl("energy detector", {"iron plate":1, "molten soldering alloy": 72, "eu-reader": 1}, "Assemble")
+    simpl("eu-reader", {"glowstone":1, "basic circuit": 1, "copper cable x1": 4})
+
+
+
+
     //simpl("ev macerator", { "aluminum cable x1": 3, "ev hull": 1, "data control circuit": 2, "ev piston": 1, "ev motor": 1, "diamond grinding head":1 });
 
     //// OpenComputers
