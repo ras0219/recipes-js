@@ -941,7 +941,14 @@ function RUN_RECIPES(TECH, simpl)
            simpl(v+" fluid pipe", assoc(plate, 6), undefined, 2);
        }
 
-       simpl(v+" rotor", assoc(plate,4,v+" screw",1,v+" ring",1));
+        if (TECH["assembling machine"] >= LV)
+        {
+            simpl(v+" rotor", assoc(plate,4,v+" ring",1,"molten soldering alloy",16), "Assemble");
+        }
+        else
+        {
+            simpl(v+" rotor", assoc(plate,4,v+" screw",1,v+" ring",1));
+        }
 
        if (TECH["lathe"] > NONE)
            simpl(v+" screw", assoc(bolt,1), "Lathe");
