@@ -420,10 +420,10 @@ function RUN_RECIPES(TECH, simpl)
     //// dense plates
     //simpl("dense lead plate", {"lead": 9}, "MV Bend: Setting 9", undefined, warn_if_not("assembling machine", MV));
 
-	
-	simpl("ic2 jetpack",{"low voltage battery charger":1, "solid steel casing":4,"glowstone":4,"advanced circuit":1});
-	simpl("low voltage battery charger", {"tin wire x16": 4, "lv hull": 1, "chest": 1, "basic circuit":1,"small lithium battery":2});
-	simpl("small lithium battery",{"small battery hull":1,"lithium dust":2},"Canning Machine", undefined, warn_if_not("canning machine", LV));
+
+	simpl("ic2 jetpack",{"lv battery charger":1, "steel item casing":4,"glowstone":2,"advanced circuit":1});
+	simpl("lv battery charger", {"tin wire x16": 4, "lv hull": 1, "chest": 1, "basic circuit":1,"small lithium battery":2});
+	simpl("small lithium battery",{"small battery hull":1, "lithium dust":2},"Canning Machine", undefined, warn_if_not("canning machine", LV));
     // GT tools
     simpl("hv jackhammer", { "long * rod":1, "hv piston":1, "titanium plate":3, "titanium screw":1,"titanium spring":1, "large * battery":1 });
     var tiermats;
@@ -772,7 +772,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("re battery", { "molten redstone": 288, "small battery hull": 1 }, "Fluid Canning Machine");
     simpl("advanced re battery", { "bronze item casing": 5, "insulated copper cable": 2, "sulfur dust": 1, "lead dust": 1 })
 
-    simpl("small battery hull", { "insulated tin cable":1, "battery alloy plate":2 });
+    simpl("small battery hull", { "tin cable x1":1, "battery alloy plate":2 });
 
     simpl("raw carbon mesh", { "raw carbon fibre": 2 });
     simpl("raw carbon fibre", { "carbon dust": 8 }, "Wiremill", undefined, warn_if_not("wiremill", LV));
