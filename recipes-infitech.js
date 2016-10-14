@@ -409,6 +409,10 @@ function RUN_RECIPES(TECH, simpl)
     //// dense plates
     //simpl("dense lead plate", {"lead": 9}, "MV Bend: Setting 9", undefined, warn_if_not("assembling machine", MV));
 
+	
+	simpl("ic2 jetpack",{"low voltage battery charger":1, "solid steel casing":4,"glowstone":4,"advanced circuit":1});
+	simpl("low voltage battery charger", {"tin wire x16": 4, "lv hull": 1, "chest": 1, "basic circuit":1,"small lithium battery":2});
+	simpl("small lithium battery",{"small battery hull":1,"lithium dust":2},"Canning Machine", undefined, warn_if_not("canning machine", LV));
     // GT tools
     simpl("hv jackhammer", { "long * rod":1, "hv piston":1, "titanium plate":3, "titanium screw":1,"titanium spring":1, "large * battery":1 });
     var tiermats;
@@ -1035,7 +1039,7 @@ if (require.main === module)
     var tech = basictech()
     // tech["bending machine"] = techlevel.lv
     // tech["wiremill"] = techlevel.lv
-    var cur = {"ic2 pump": 1}
+    var cur = {"ic2 jetpack": 4}
     RUN_RECIPES(tech, make_simpl(cur, console_logger))
     console.log("=======================================INGREDIENT=========================");
     for (var k in cur) {
