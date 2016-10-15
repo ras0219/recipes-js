@@ -643,8 +643,10 @@ function RUN_RECIPES(TECH, simpl)
        simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
 
        simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1));
-
-       simpl(v.hull, assoc(v.cable, 2, v.casing, 1, v.plate, 1, v.plate2, 2));
+        if (k == "mv" || k == "lv")
+            simpl(v.hull, assoc(v.cable, 2, v.casing, 1, v.plate, 1, v.plate2, 2));
+        else
+            simpl(v.hull, assoc(v.cable, 2, v.casing, 1, "molten polyethylene", 288), "Assemble", undefined, warn_if_not("assembling machine", LV));
        simpl(v.casing, assoc(v.plate, 8));
        simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.cable, 3, v.circuit, 1));
        simpl(v.conveyor, assoc("rubber plate", 6, v.motor, 2, v.cable, 1));
