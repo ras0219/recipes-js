@@ -462,24 +462,13 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lv polarizer", { "iron rod": 2, "lv hull": 1, "tin cable x1":2, "tin wire x2":4 });
 
     // GT stuff
-    simpl("mv battery buffer x16", {"copper wire x16": 4, "mv hull": 1, "chest": 1});
-    simpl("mv battery buffer x9", {"copper wire x8": 4, "mv hull": 1, "chest": 1});
-    simpl("mv battery buffer x4", {"copper wire x4": 4, "mv hull": 1, "chest": 1});
-    simpl("mv battery buffer x1", {"copper wire x1": 4, "mv hull": 1, "chest": 1});
-
-    simpl("lv battery buffer x16", {"tin wire x16": 4, "lv hull": 1, "chest": 1});
-    simpl("lv battery buffer x9", {"tin wire x8": 4, "lv hull": 1, "chest": 1});
-    simpl("lv battery buffer x4", {"tin wire x4": 4, "lv hull": 1, "chest": 1});
-    simpl("lv battery buffer x1", {"tin wire x1": 4, "lv hull": 1, "chest": 1});
-
     simpl("ulv input bus", { "ulv hull": 1, "chest": 1 });
     simpl("ulv output bus", { "ulv hull": 1, "chest": 1 });
 
     tiermats = {
        lv: {
+           wiremat: "tin",
            upcable: "copper cable x1",
-           cable: "tin cable x1",
-           cable4: "tin cable x4",
            circuit: "basic circuit",
            rarewire: "gold wire x1",
            heatwire2: "copper wire x2",
@@ -499,9 +488,8 @@ function RUN_RECIPES(TECH, simpl)
            chempipe: "glass",
        },
        mv: {
+           wiremat: "copper",
            upcable: "gold cable x1",
-           cable: "copper cable x1",
-           cable4: "copper cable x4",
            circuit: "good circuit",
            rarewire: "silver wire x1",
            heatwire2: "cupronickel wire x2",
@@ -521,9 +509,8 @@ function RUN_RECIPES(TECH, simpl)
            chempipe: "plastic pipe",
        },
        hv: {
+           wiremat: "gold",
            upcable: "aluminum cable x1",
-           cable: "gold cable x1",
-           cable4: "gold cable x4",
            circuit: "advanced circuit",
            rarewire: "electrum wire x1",
            heatwire2: "kanthal wire x2",
@@ -543,9 +530,8 @@ function RUN_RECIPES(TECH, simpl)
            chempipe: "plastic pipe",
        },
        ev: {
+           wiremat: "aluminum",
            upcable: "tungsten cable x1",
-           cable: "aluminum cable x1",
-           cable4: "aluminum cable x4",
            circuit: "data control circuit",
            rarewire: "platinum wire x1",
            heatwire2: "nichrome wire x2",
@@ -565,9 +551,8 @@ function RUN_RECIPES(TECH, simpl)
            chempipe: "large plastic pipe",
        },
        iv: {
+           wiremat: "tungsten",
            upcable: "tungsten cable x4",
-           cable: "tungsten cable x1",
-           cable4: "tungsten cable x4",
            circuit: "energy flow circuit",
            rarewire: "osmium wire x1",
            heatwire2: "nichrome wire x8",
@@ -600,6 +585,17 @@ function RUN_RECIPES(TECH, simpl)
        v.sensor = k + " sensor";
        v.emitter = k + " emitter";
        v.casing = k + " casing";
+       v.wire = k.wiremat + " wire x1";
+       v.wire4 = k.wiremat + " wire x4";
+       v.wire8 = k.wiremat + " wire x8";
+       v.wire16 = k.wiremat + " wire x16";
+       v.cable = k.wiremat + " cable x1";
+       v.cable4 = k.wiremat + " cable x4";
+
+        simpl(k+" battery buffer x16", assoc(v.hull, 1, "chest", 1, v.wire16, 4))
+        simpl(k+" battery buffer x9", assoc(v.hull, 1, "chest", 1, v.wire8, 4))
+        simpl(k+" battery buffer x4", assoc(v.hull, 1, "chest", 1, v.wire4, 4))
+        simpl(k+" battery buffer x1", assoc(v.hull, 1, "chest", 1, v.wire, 4))
 
        simpl(k+" arc furnace", assoc(v.cable4, 2, v.hull, 1, v.plate, 3, v.circuit, 2, "graphite cell", 1));
        simpl(k+" fluid canner", assoc(v.cable, 2, v.hull, 1, v.pump, 2, v.circuit, 2, "glass", 2));
