@@ -342,13 +342,14 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("batbox", {"plank":5,"insulated tin cable":1,"re battery":3});
     simpl("maintenance hatch", {"lv hull":1});
 
-    simpl("machine controller", {"iron plate":1, "molten soldering alloy": 72, "lever": 1}, "Assemble")
-    simpl("item detector", {"iron plate":1, "molten soldering alloy": 72, "gold pressure plate": 1}, "Assemble")
-    simpl("activity detector", {"iron plate":1, "molten soldering alloy": 72, "redstone torch": 1}, "Assemble")
-    simpl("fluid detector", {"iron plate":1, "molten soldering alloy": 72, "iron pressure plate": 1}, "Assemble")
-    simpl("energy detector", {"iron plate":1, "molten soldering alloy": 72, "eu-reader": 1}, "Assemble")
-    simpl("eu-reader", {"glowstone":1, "basic circuit": 1, "copper cable x1": 4})
-
+    simpl("machine controller", {"iron plate":1, "molten soldering alloy": 72, "lever": 1}, "Assemble");
+    simpl("item detector", {"iron plate":1, "molten soldering alloy": 72, "gold pressure plate": 1}, "Assemble");
+    simpl("activity detector", {"iron plate":1, "molten soldering alloy": 72, "redstone torch": 1}, "Assemble");
+    simpl("fluid detector", {"iron plate":1, "molten soldering alloy": 72, "iron pressure plate": 1}, "Assemble");
+    simpl("energy detector", {"iron plate":1, "molten soldering alloy": 72, "eu-reader": 1}, "Assemble");
+    simpl("eu-reader", {"glowstone":1, "basic circuit": 1, "copper cable x1": 4});
+	//extra utilities
+	simpl("drum", {"steel plate":6, "cauldron": 1, "iron ring": 1,"weighted pressure plate(heavy)":1});
 
 
 
