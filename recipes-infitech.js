@@ -585,12 +585,12 @@ function RUN_RECIPES(TECH, simpl)
        v.sensor = k + " sensor";
        v.emitter = k + " emitter";
        v.casing = k + " casing";
-       v.wire = k.wiremat + " wire x1";
-       v.wire4 = k.wiremat + " wire x4";
-       v.wire8 = k.wiremat + " wire x8";
-       v.wire16 = k.wiremat + " wire x16";
-       v.cable = k.wiremat + " cable x1";
-       v.cable4 = k.wiremat + " cable x4";
+       v.wire = v.wiremat + " wire x1";
+       v.wire4 = v.wiremat + " wire x4";
+       v.wire8 = v.wiremat + " wire x8";
+       v.wire16 = v.wiremat + " wire x16";
+       v.cable = v.wiremat + " cable x1";
+       v.cable4 = v.wiremat + " cable x4";
 
         simpl(k+" battery buffer x16", assoc(v.hull, 1, "chest", 1, v.wire16, 4))
         simpl(k+" battery buffer x9", assoc(v.hull, 1, "chest", 1, v.wire8, 4))
