@@ -743,7 +743,7 @@ function RUN_RECIPES(TECH, simpl)
 
     // Low level IC2/GT parts
     simpl("glass fiber cable", { "glass": 6, "energium dust": 2, "silver dust": 1 });
-    simpl("item filter", { "raw carbon mesh": 4, "zinc foil": 16 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
+    simpl("item filter", { "fine steel wire": 64, "zinc foil": 16 }, "Assemble", undefined, warn_if_not("assembling machine", LV));
 
     simpl("lapotronic energy orb", { "energy flow circuit": 2, "engraved lapotron chip": 18 }, "EV Assemble", undefined, warn_if_not("assembling machine", EV));
     simpl("data control circuit", { "processor board": 1, "data storage chip" : 3, "molten soldering alloy": 144 }, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
@@ -887,6 +887,8 @@ function RUN_RECIPES(TECH, simpl)
         {
             simpl(v + " cable x1", assoc(v + " wire x1", 1, "molten rubber", 144), "Assemble: 24", undefined, warn_if_not("assembling machine", LV) || warn_if_not("fluid extractor", LV));
         }
+
+        simpl("fine " + v + " wire", assoc(v + " wire x1", 1), "Wiremill", 4, warn_if_not("wiremill", LV));
 
         simpl(v + " wire x16", assoc(v + " wire x8", 2));
         simpl(v + " wire x8", assoc(v + " wire x4", 2));
