@@ -64,7 +64,12 @@ function RUN_RECIPES(TECH, simpl)
         else
             return "warn";
     }
-
+	//clean stainless steel casing
+	simpl("distillation tower multi", {"distillation tower":1,"ulv input hatch":1,"mv output hatch":5,"mv output bus":1,"maintenance hatch":1,"hv energy hatch":1,"clean stainless steel casing":26}, "multiblock structure");
+	simpl("distillation tower",{"energy flow circuit":4, "ev hull":1, "ev pump":2, "large stainless steel fluid pipe":2});
+	
+	
+	
 	//Gregtech x683, z883, y12
 	//BBF = 3x4x3, hollow, empty on top
 	//at least 32 bronze plated bricks
@@ -314,6 +319,7 @@ function RUN_RECIPES(TECH, simpl)
         "maintenance hatch": 1,
         "lv energy hatch": 1
     });
+	simpl("clean stainless steel casing",{"stainless steel plate":6,"stainless steel frame box":1},"Assemble");
     simpl("oil cracking unit", { "cupronickel coil block": 4, "hv pump": 2, "hv hull": 1, "advanced circuit": 2 });
 
     simpl("vacuum freezer multi", { "frost proof casing": 21, "vacuum freezer": 1, "lv input bus": 1, "lv output bus": 1, "maintenance hatch": 1, "mv energy hatch": 1 });
@@ -665,7 +671,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("luv input hatch", { "luv casing": 1, "glass": 1 });
     simpl("luv output hatch", { "luv casing": 1, "glass": 1 });
     simpl("luv casing", { "chrome plate": 8 });
-
+//george is best
+	simpl("ulv input hatch", { "ulv hull": 1, "glass": 1 });
+	simpl("ulv hull",{"ulv casing":1,"lead cable x1":2,"wood plank":2,"wrought iron plate":1});
+	simpl("ulv casing",{"wrought iron plate":8},"Assemble");
     // IC2 machines
     simpl("reactor pressure vessel multi", {"reactor pressure vessel": 94, "reactor redstone port": 1, "reactor access hatch": 1, "reactor fluid port": 2}, "Multiblock");
     simpl("reactor redstone port", {"reactor pressure vessel": 8, "redstone": 1});
@@ -716,9 +725,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("lv sensor", { "brass rod": 1, "basic circuit": 1, "quartzite": 1, "steel plate": 4 });
     simpl("lv emitter", { "brass rod": 4, "basic circuit": 2, "quartzite": 1, "tin cable x1": 2 });
 
-    simpl("ulv hull", {"ulv casing": 1, "lead cable x1": 2});
-    simpl("ulv casing", {"steel plate": 4});
-
+	//git blame?
+   // simpl("ulv hull", {"ulv casing": 1, "lead cable x1": 2});
+   // simpl("ulv casing", {"steel plate": 4});
+   //
     simpl("basic machine casing", {"iron plate": 8});
 
     simpl("diamond sawblade", {"diamond dust": 1, "cobalt brass gear": 1});
@@ -931,6 +941,7 @@ function RUN_RECIPES(TECH, simpl)
        {
            simpl(v+" gear", assoc(v, 4), "MV Extrude: Gear");
            simpl(v+" fluid pipe", assoc(v, 3), "MV Extrude: Normal Pipe");
+		   simpl("large " + v+" fluid pipe", assoc(v, 6), "MV Extrude: Large Pipe");
        }
        else
        {
@@ -1059,7 +1070,7 @@ if (require.main === module)
     var tech = basictech()
     // tech["bending machine"] = techlevel.lv
     // tech["wiremill"] = techlevel.lv
-    var cur = {"advanced miner II": 1}
+    var cur = {"distillation tower multi": 1}
     RUN_RECIPES(tech, make_simpl(cur, console_logger))
     console.log("=======================================INGREDIENT=========================");
     for (var k in cur) {
