@@ -25,12 +25,11 @@ function make_response_function(my_subtitle, my_recipes_module) {
                     cur[name] = Number(qty)
             }
         }
-        parseparam(query.i1name, query.i1qty)
-        parseparam(query.i2name, query.i2qty)
-        parseparam(query.i3name, query.i3qty)
-        parseparam(query.i4name, query.i4qty)
-        parseparam(query.i5name, query.i5qty)
-        parseparam(query.i6name, query.i6qty)
+        var num_items = Number(query.num_items || 6);
+        for (var k = 1; k <= num_items; ++k)
+        {
+            parseparam(query["i"+k+"name"], query["i"+k+"qty"])
+        }
         if (Object.keys(cur).length > 0)
         {
             // do recipes here
@@ -64,7 +63,8 @@ function make_response_function(my_subtitle, my_recipes_module) {
                 final: cur,
                 query: query,
                 itemlist: my_itemlist,
-                requestedUrl: req.protocol + '://' + req.get('Host') + req.url
+                requestedUrl: req.protocol + '://' + req.get('Host') + req.url,
+                num_items: num_items
             })
             console.log("run recipes.")
             console.log(begin)
@@ -77,7 +77,8 @@ function make_response_function(my_subtitle, my_recipes_module) {
                 basictech: my_recipes_module.basictech(),
                 techlevel: my_recipes_module.techlevel,
                 query: query,
-                itemlist: my_itemlist
+                itemlist: my_itemlist,
+                num_items: num_items
             })
     }
 }

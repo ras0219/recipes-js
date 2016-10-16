@@ -22,7 +22,7 @@ html(lang="en")
         small= title
       form.form-horizontal(action="#craftingSection")
         h4 Items to craft
-        each x in [1,2,3,4,5,6]
+        - for (var x=1; x<=num_items; ++x) {
           - var v_name = query['i' + x + 'name'] || ''
           - var v_qty = query['i' + x + 'qty'] || ''
           .form-group
@@ -30,6 +30,7 @@ html(lang="en")
               input.itembox.form-control(type="text", name="i#{x}name", value="#{v_name}" placeholder="metal former" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
             .col-xs-3.col-md-1
               input.form-control(type="number", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
+        - }
         .panel-group
           .panel.panel-default
             #techlevelCollapseHeading.panel-heading(role="button" data-toggle="collapse" href="#techlevelCollapse" aria-expanded="false" aria-controls="tecehlevelCollapse")
@@ -48,6 +49,7 @@ html(lang="en")
                             option(value="#{lval}" selected="selected")= lkey
                           else
                             option(value="#{lval}")= lkey
+        input(type="hidden", name="num_items", value="#{num_items}")
         input(type="submit" href="#")
       if crafts
         hr
