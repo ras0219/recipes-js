@@ -163,17 +163,21 @@ html(lang="en")
     script
       != "var data = " + JSON.stringify(itemlist) + ";"
       | var itemCount = 0;
-      | function addItem() {
+      | function addItem(val, qty) {
       |   var i = itemCount + 1;
-      |   var input = '<div class="form-group"><div class="col-xs-9 col-md-5 col-md-offset-3"><input type="text" name="i' + i + 'name" value="" placeholder="metal former" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="itembox form-control ui-autocomplete-input"></div><div class="col-xs-3 col-md-1"><input type="number" name="i' + i + 'qty" value="" placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control"></div></div>'
+      |   var input = '<div class="form-group"><div class="col-xs-9 col-md-5 col-md-offset-3"><input type="text" name="i' + i + 'name" value="'+val+'" placeholder="metal former" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="itembox form-control ui-autocomplete-input"></div><div class="col-xs-3 col-md-1"><input type="number" name="i' + i + 'qty" value="'+qty+'" placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control"></div></div>'
       |   $('#craftingItems').append(input);
       |   $(".itembox").autocomplete({ source: data, delay: 50 });
       |   itemCount++;
       |   $('input[name="num_items"]').val(itemCount);
       | }
-      | for (var i = 0; i < #{num_items}; ++i) { addItem() }
+      - for (var i = 1; i <= num_items; ++i) {
+          - var v_name = query['i'+i+'name'] || ''
+          - var v_qty = query['i'+i+'qty'] || ''
+          != "addItem("+JSON.stringify(v_name)+", "+ JSON.stringify(v_qty)+");"
+      - }
       | $(function() { $(".checkable").click(function(e) { if ($(e.target).is('input')) return; $(this).find("input").prop("checked", function(i,val) { return !val; }); }); });
       | $(function() { $("#techlevelCollapse").collapse('hide'); });
       | $(function() { $("#helpButton").popover({ animation: true }); });
-      | $(function() { $("#craftingItemsAdd").click(function(e) { addItem(); })});
+      | $(function() { $("#craftingItemsAdd").click(function(e) { addItem("",""); })});
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
