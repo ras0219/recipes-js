@@ -37,7 +37,7 @@ function make_response_function(my_subtitle, my_recipes_module) {
                     cur[name] = Number(qty)
             }
         }
-        var num_items = Number(query.num_items || 6);
+        var num_items = Number(query.num_items || 1);
         for (var k = 1; k <= num_items; ++k)
         {
             parseparam(query["i"+k+"name"], query["i"+k+"qty"])

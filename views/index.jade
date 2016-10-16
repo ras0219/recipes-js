@@ -21,16 +21,9 @@ html(lang="en")
         br.visible-xs
         small= title
       form.form-horizontal(action="#craftingSection")
-        h4 Items to craft
-        - for (var x=1; x<=num_items; ++x) {
-          - var v_name = query['i' + x + 'name'] || ''
-          - var v_qty = query['i' + x + 'qty'] || ''
-          .form-group
-            .col-xs-9.col-md-5.col-md-offset-3
-              input.itembox.form-control(type="text", name="i#{x}name", value="#{v_name}" placeholder="metal former" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
-            .col-xs-3.col-md-1
-              input.form-control(type="number", name="i#{x}qty", value="#{v_qty}", placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false")
-        - }
+        #craftingItems.panel-heading(role="button" href="#craftingItems" aria-expanded="false" aria-controls="craftingItems")
+          h4 Items to craft
+            #craftingItemsAdd.small [add item]
         .panel-group
           .panel.panel-default
             #techlevelCollapseHeading.panel-heading(role="button" data-toggle="collapse" href="#techlevelCollapse" aria-expanded="false" aria-controls="tecehlevelCollapse")
@@ -169,8 +162,18 @@ html(lang="en")
     script(src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js')
     script
       != "var data = " + JSON.stringify(itemlist) + ";"
+      | var itemCount = 0;
+      | function addItem() {
+      |   var i = itemCount + 1;
+      |   var input = '<div class="form-group"><div class="col-xs-9 col-md-5 col-md-offset-3"><input type="text" name="i' + i + 'name" value="" placeholder="metal former" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="itembox form-control ui-autocomplete-input"></div><div class="col-xs-3 col-md-1"><input type="number" name="i' + i + 'qty" value="" placeholder="1" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="form-control"></div></div>'
+      |   $('#craftingItems').append(input);
+      |   $('input[name="num_items"]').val(itemCount);
+      |   itemCount++;
+      | }
+      | for (var i = 0; i < #{num_items}; ++i) { addItem() }
       | $(function() { $(".itembox").autocomplete({ source: data, delay: 50 }); });
       | $(function() { $(".checkable").click(function(e) { if ($(e.target).is('input')) return; $(this).find("input").prop("checked", function(i,val) { return !val; }); }); });
       | $(function() { $("#techlevelCollapse").collapse('hide'); });
       | $(function() { $("#helpButton").popover({ animation: true }); });
+      | $(function() { $("#craftingItemsAdd").click(function(e) { addItem(); })});
     script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js")
