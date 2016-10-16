@@ -1,8 +1,20 @@
 var express = require('express')
 var app = express()
-var recipes = require('./recipes')
-var recipesevo = require('./recipes-evolved')
-var recipesinfi = require('./recipes-infitech')
+
+var recipes = {
+    beyond : {
+        name: "beyond reality mod pack",
+        recipes : require('./recipes-beyond')
+    },
+    evolved : {
+        name: "ftb infinity evolved expert mode",
+        recipes : require('./recipes-evolved')
+    },
+    infitech2 : {
+        name: "infitech 2",
+        recipes : require('./recipes-infitech')
+    }
+};
 
 app.set('view engine', 'jade')
 
@@ -83,9 +95,9 @@ function make_response_function(my_subtitle, my_recipes_module) {
     }
 }
 
-app.all('/', make_response_function("[ftb infinity evolved expert mode]", recipesevo));
-app.all('/gt5u', make_response_function("[beyond reality mod pack]", recipes));
-app.all('/infitech2', make_response_function("[infitech 2]", recipesinfi));
+Object.keys(recipes).forEach(function (key) {
+    app.all("/" + key, make_response_function("[" + recipes[key].name + "]", recipes[key].recipes));
+});
 
 var port = 3000
 if ('PORT' in process.env)
