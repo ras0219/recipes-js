@@ -1037,14 +1037,14 @@ function RUN_RECIPES(TECH, simpl)
 
 function basictech() {
     return {
-        "bending machine" : techlevel.lv,
+        "bending machine" : techlevel.mv,
         "extruder" : techlevel.mv,
         "assembling machine" : techlevel.hv,
         "wiremill" : techlevel.lv,
         "forming press" : techlevel.hv,
         "fluid extractor" : techlevel.mv,
         "lathe" : techlevel.lv,
-        "polarizer" : techlevel.lv,
+        "polarizer" : techlevel.hv,
         "laser engraver" : techlevel.hv,
         "cutting saw" : techlevel.lv,
         "compressor" : techlevel.lv,
