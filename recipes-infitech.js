@@ -67,9 +67,9 @@ function RUN_RECIPES(TECH, simpl)
 	//clean stainless steel casing
 	simpl("distillation tower multi", {"distillation tower":1,"ulv input hatch":1,"mv output hatch":5,"mv output bus":1,"maintenance hatch":1,"hv energy hatch":1,"clean stainless steel casing":26}, "multiblock structure");
 	simpl("distillation tower",{"energy flow circuit":4, "ev hull":1, "ev pump":2, "large stainless steel fluid pipe":2});
-	
-	
-	
+
+
+
 	//Gregtech x683, z883, y12
 	//BBF = 3x4x3, hollow, empty on top
 	//at least 32 bronze plated bricks
@@ -543,8 +543,8 @@ function RUN_RECIPES(TECH, simpl)
            pipe: "titanium fluid pipe",
            lathediamond: "industrial diamond",
            grinding: "diamond grinding head",
-           rotor: "steel rotor",
-           screw: "steel screw",
+           rotor: "stainless steel rotor",
+           screw: "stainless steel screw",
            gear: "titanium gear",
            smallgear: "small titanium gear",
            rod: "titanium rod",
@@ -673,7 +673,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("luv casing", { "chrome plate": 8 });
 //george is best
 	simpl("ulv input hatch", { "ulv hull": 1, "glass": 1 });
-	simpl("ulv hull",{"ulv casing":1,"lead cable x1":2,"wood plank":2,"wrought iron plate":1});
+	simpl("ulv hull",{"ulv casing":1,"lead cable x1":2, "wood plate":2,"wrought iron plate":1});
 	simpl("ulv casing",{"wrought iron plate":8},"Assemble");
     // IC2 machines
     simpl("reactor pressure vessel multi", {"reactor pressure vessel": 94, "reactor redstone port": 1, "reactor access hatch": 1, "reactor fluid port": 2}, "Multiblock");
@@ -758,7 +758,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("data control circuit", { "processor board": 1, "data storage circuit" : 3, "molten soldering alloy": 144 }, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
     simpl("energy flow circuit", { "processor board": 1, "engraved lapotron chip" : 3, "molten soldering alloy": 144 }, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
 
-    simpl("engraved lapotron chip", { "lapotron crystal": 1 }, "HV Laser Engrave: Blue Lens", undefined, warn_if_not("laser engraver", HV));
+    simpl("engraved lapotron chip", { "lapotron crystal": 1 }, "HV Laser Engrave: Blue Lens", 3, warn_if_not("laser engraver", HV));
 
     simpl("lapotron crystal", { "lazurite dust": 6, "advanced circuit": 2, "energy crystal": 1 });
     simpl("energy crystal", { "energium dust": 9 }, "HV Autoclave", undefined, warn_if_not("autoclave", HV));
