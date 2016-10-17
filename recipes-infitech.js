@@ -132,8 +132,20 @@ function RUN_RECIPES(TECH, simpl)
     simpl("fluix crystal", {"charged certus quartz": 1, "nether quartz": 1, "redstone": 1}, "Mixer", 2)
 
     simpl("logic processor", {"printed logic circuit": 1, "printed silicon": 1, "molten redstone": 144}, "Assemble")
+    simpl("engineering processor", {"printed engineering circuit": 1, "printed silicon": 1, "molten redstone": 144}, "Assemble")
+    simpl("calculation processor", {"printed calculation circuit": 1, "printed silicon": 1, "molten redstone": 144}, "Assemble")
     simpl("printed logic circuit", {"gold plate": 1}, "Forming Press: Inscriber Logic Press")
-    //simpl("printed silicon", {"gold plate": 1}, "Forming Press: Inscriber Logic Press")
+    simpl("printed engineering circuit", {"diamond plate": 1}, "Forming Press: Inscriber Engineering Press")
+    simpl("printed calculation circuit", {"certus quartz plate": 1}, "Forming Press: Inscriber Calculation Press")
+    simpl("printed silicon", {"silicon plate": 1}, "Forming Press: Inscriber Silicon Press")
+
+    simpl("me cable", {"certus quartz rod": 4, "fluix dust": 2, "quartz fiber": 3}, undefined, 3)
+    simpl("quartz fiber", {"certus quartz rod": 2}, "MV Wiremill", undefined, warn_if_not("wiremill", MV))
+    simpl("certus quartz rod", {"certus quartz": 1, "recycled small certus quartz dust": -2}, "Lathe")
+
+    simpl("quartzite screw", {"quartzite bolt": 1}, "Lathe")
+    simpl("quartzite bolt", {"quartzite rod": 1}, "Cutting Saw", 4)
+    simpl("quartzite rod", {"quartzite": 1, "recycled small quartzite dust": -2}, "Lathe")
 
     // Iron Chests
     simpl("silver chest", {"iron chest": 1, "glass": 4, "silver plate": 4});
@@ -944,6 +956,8 @@ function RUN_RECIPES(TECH, simpl)
            simpl(casing, assoc(v, 2), "Alloy Smelt: Casing Mold", 3);
        }
     }
+    simpl("diamond plate", {"diamond block":1}, "Cutting Saw", 9, warn_if_not("cutting saw", LV))
+    simpl("certus quartz plate", {"certus quartz dust":1}, "Compress", warn_if_not("compressor", BRONZE))
 
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
        , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
@@ -1045,6 +1059,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("button", {"stone": 1});
     simpl("lever", {"stick": 1, "cobblestone": 1});
     simpl("chest", {"plank": 8});
+    simpl("diamond block", {"diamond": 9}, "Compress", undefined, warn_if_not("compressor", BRONZE));
 
     simpl("blue steel dust", {"rose gold dust":1, "brass dust":1, "black steel dust":4, "steel dust":2}, undefined, 8);
     simpl("black steel dust", {"nickel dust": 1, "black bronze dust": 1, "steel dust": 3}, undefined, 5);
