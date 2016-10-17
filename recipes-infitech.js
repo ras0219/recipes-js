@@ -121,6 +121,24 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("compressed aluminum", { "aluminum plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
     //simpl("compressed bronze", { "bronze plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
 
+    //// Applied Energistics
+    simpl("me drive", {"me chest": 1, "advanced circuit": 1, "me cable": 2, "titanium plate": 4, "engineering processor": 1});
+    simpl("me chest", {"silver chest": 1, "good circuit": 2, "me cable": 2, "stainless steel plate": 4});
+
+    simpl("1k storage cell", {"universal storage housing": 1, "1k storage component": 1});
+    simpl("universal storage housing", {"aluminum plate": 1, "stainless steel plate": 2, "glass pane": 2, "certus quartz plate": 1, "quartzite screw": 2});
+    simpl("1k storage component", {"nand": 4, "fluix dust": 4, "logic processor": 1});
+    simpl("fluix dust", {"fluix crystal": 1}, "Macerate")
+    simpl("fluix crystal", {"charged certus quartz": 1, "nether quartz": 1, "redstone": 1}, "Mixer", 2)
+
+    simpl("logic processor", {"printed logic circuit": 1, "printed silicon": 1, "molten redstone": 144}, "Assemble")
+    simpl("printed logic circuit", {"gold plate": 1}, "Forming Press: Inscriber Logic Press")
+    //simpl("printed silicon", {"gold plate": 1}, "Forming Press: Inscriber Logic Press")
+
+    // Iron Chests
+    simpl("silver chest", {"iron chest": 1, "glass": 4, "silver plate": 4});
+    simpl("iron chest", {"chest": 1, "iron plate": 8});
+
     //// Botania
     //simpl("thermalily", {"orange mana petal": 1, "mystical orange petal": 1, "mystical red petal": 1, "rune of fire": 1, "rune of earth": 1, "seeds": 1}, "Petal Apothecary");
     //simpl("jaded amaranthus", {"purple mana petal": 2, "mystical lime petal": 1, "mystical purple petal": 1, "mystical green petal": 1, "redstone root": 1, "rune of spring": 1, "seeds": 1}, "Petal Apothecary");
