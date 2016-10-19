@@ -799,8 +799,8 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("engraved crystal chip", { "olivine plate OR emerald plate": 1 }, "HV Laser Engrave: Green Lens", undefined, warn_if_not("laser engraver", HV));
 
-    simpl("processor board", { "etched ev wiring": 4, "empty processor board" : 1 }, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
-    simpl("empty processor board", { "polytetrafluoroethylene plate": 1, "silicon plate" : 2 }, "HV Forming Press", undefined, warn_if_not("forming press", HV));
+    simpl("processor board", { "etched ev wiring": 4, "empty processor board" : 1 }, "HV Forming Press", undefined, warn_if_not("forming press", HV));
+    simpl("empty processor board", { "polytetrafluoroethylene plate": 1, "silicon plate" : 2 }, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
 
     simpl("advanced circuit board", { "etched hv wiring": 4, "empty circuit board" : 1 }, "MV Forming Press", undefined, warn_if_not("forming press", MV));
     simpl("advanced circuit parts", { "glowstone dust": 1, "lapis plate" : 1 }, "MV Forming Press", 2, undefined, warn_if_not("forming press", MV));
