@@ -122,20 +122,20 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("compressed bronze", { "bronze plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
 
     //// Applied Energistics
-	
-	
+
+
     simpl("me drive", {"me chest": 1, "advanced circuit": 1, "me cable": 2, "titanium plate": 4, "engineering processor": 1});
     simpl("me chest", {"silver chest": 1, "good circuit": 2, "me cable": 2, "stainless steel plate": 4});
 
-	
 
-	
+
+
 	simpl("64k storage cell", {"universal storage housing": 1, "64k storage component": 1});
 	simpl("16k storage cell", {"universal storage housing": 1, "16k storage component": 1});
 	simpl("4k storage cell", {"universal storage housing": 1, "4k storage component": 1});
     simpl("1k storage cell", {"universal storage housing": 1, "1k storage component": 1});
-	
-	
+
+
 	simpl("64k storage component",{"calculation processor":1,"advanced circuit":4,"16k storage component":4});
 	simpl("16k storage component",{"calculation processor":1,"good circuit":4,"4k storage component":4});
 	simpl("4k storage component",{"logic processor":1,"basic circuit":4,"1k storage component":4});
@@ -162,8 +162,8 @@ function RUN_RECIPES(TECH, simpl)
 
 	///energy gregtech
 	simpl("lapotronic energy orb",{"energy flow circuit":2,"engraved lapotron chip":18},"Assemble",undefined, warn_if_not("Assemble",EV));
-	
-	
+
+
     // Iron Chests
     simpl("silver chest", {"iron chest": 1, "glass": 4, "silver plate": 4});
     simpl("iron chest", {"chest": 1, "iron plate": 8});
@@ -459,17 +459,17 @@ function RUN_RECIPES(TECH, simpl)
     //// IC2 nuclear
     //simpl("nuclear reactor", {"dense lead plate": 4, "reactor chamber": 3, "generator": 1, "advanced circuit": 1});
     //simpl("reactor chamber", {"lead plate": 4, "basic machine casing": 1});
-    //simpl("component heat exchanger", {"heat exchanger": 1, "gold plate": 4});
-    //simpl("heat exchanger", {"basic circuit": 1, "tin plate": 3, "copper plate": 5});
-    //simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
-    //simpl("advanced heat vent", {"reactor heat vent": 2, "diamond": 1, "iron bars": 6});
-    //simpl("overclocked heat vent", {"reactor heat vent": 1, "gold plate": 4});
-    //simpl("reactor heat vent", {"heat vent": 1, "copper plate": 8});
-    //simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
-    //simpl("heat vent", {"iron plate": 4, "electric motor":1, "iron bars": 4});
+    simpl("component heat exchanger", {"heat exchanger": 1, "gold plate": 4});
+    simpl("heat exchanger", {"basic circuit": 1, "tin plate": 3, "copper plate": 5});
+    simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
+    simpl("advanced heat vent", {"reactor heat vent": 2, "diamond": 1, "iron bars": 6});
+    simpl("overclocked heat vent", {"reactor heat vent": 1, "gold plate": 4});
+    simpl("reactor heat vent", {"heat vent": 1, "copper plate": 8});
+    simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
+    simpl("heat vent", {"aluminum plate": 4, "iron bars": 4});
 
     //// dense plates
-    //simpl("dense lead plate", {"lead": 9}, "MV Bend: Setting 9", undefined, warn_if_not("assembling machine", MV));
+    simpl("dense lead plate", {"lead": 9}, "MV Bend: Setting 9", undefined, warn_if_not("bending machine", MV));
 
 
 	simpl("ic2 jetpack",{"lv battery charger":1, "steel item casing":4,"glowstone":2,"advanced circuit":1});
