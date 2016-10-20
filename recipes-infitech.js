@@ -122,10 +122,23 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("compressed bronze", { "bronze plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
 
     //// Applied Energistics
+	
+	
     simpl("me drive", {"me chest": 1, "advanced circuit": 1, "me cable": 2, "titanium plate": 4, "engineering processor": 1});
     simpl("me chest", {"silver chest": 1, "good circuit": 2, "me cable": 2, "stainless steel plate": 4});
 
+	
+
+	
+	simpl("64k storage cell", {"universal storage housing": 1, "64k storage component": 1});
+	simpl("16k storage cell", {"universal storage housing": 1, "16k storage component": 1});
+	simpl("4k storage cell", {"universal storage housing": 1, "4k storage component": 1});
     simpl("1k storage cell", {"universal storage housing": 1, "1k storage component": 1});
+	
+	
+	simpl("64k storage component",{"calculation processor":1,"advanced circuit":4,"16k storage component":4});
+	simpl("16k storage component",{"calculation processor":1,"good circuit":4,"4k storage component":4});
+	simpl("4k storage component",{"logic processor":1,"basic circuit":4,"1k storage component":4});
     simpl("universal storage housing", {"aluminum plate": 1, "stainless steel plate": 2, "glass pane": 2, "certus quartz plate": 1, "quartzite screw": 2});
     simpl("1k storage component", {"nand": 4, "fluix dust": 4, "logic processor": 1});
     simpl("fluix dust", {"fluix crystal": 1}, "Macerate")
@@ -147,6 +160,10 @@ function RUN_RECIPES(TECH, simpl)
     simpl("quartzite bolt", {"quartzite rod": 1}, "Cutting Saw", 4)
     simpl("quartzite rod", {"quartzite": 1, "recycled small quartzite dust": -2}, "Lathe")
 
+	///energy gregtech
+	simpl("lapotronic energy orb",{"energy flow circuit":2,"engraved lapotron chip":18},"Assemble",undefined, warn_if_not("Assemble",EV));
+	
+	
     // Iron Chests
     simpl("silver chest", {"iron chest": 1, "glass": 4, "silver plate": 4});
     simpl("iron chest", {"chest": 1, "iron plate": 8});
