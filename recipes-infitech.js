@@ -461,7 +461,6 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("reactor chamber", {"lead plate": 4, "basic machine casing": 1});
     simpl("component heat exchanger", {"heat exchanger": 1, "gold plate": 4});
     simpl("heat exchanger", {"basic circuit": 1, "tin plate": 3, "copper plate": 5});
-    simpl("component heat vent", {"heat vent": 1, "tin plate": 4, "iron bars": 4});
     simpl("advanced heat vent", {"reactor heat vent": 2, "diamond": 1, "iron bars": 6});
     simpl("overclocked heat vent", {"reactor heat vent": 1, "gold plate": 4});
     simpl("reactor heat vent", {"heat vent": 1, "copper plate": 8});
@@ -739,9 +738,9 @@ function RUN_RECIPES(TECH, simpl)
     simpl("mfsu", {"advanced circuit": 1, "lapotron crystal": 6, "advanced machine casing": 1, "mfe": 1});
     simpl("mfe", {"insulated gold cable": 4, "energy crystal": 4, "basic machine casing": 1});
 
-    simpl("ic2 ev transformer", {"lapotron crystal": 1, "insulated hv cable": 2, "advanced circuit": 1, "ic2 hv transformer": 1});
-    simpl("ic2 hv transformer", {"ic2 mv transformer": 1, "insulated gold cable": 2, "basic circuit": 1, "advanced re battery": 1});
-    simpl("ic2 mv transformer", {"basic machine casing": 1, "insulated copper cable": 2});
+    simpl("ic2 ev transformer", {"lapotron crystal": 1, "aluminum cable x1": 2, "advanced circuit": 1, "ic2 hv transformer": 1});
+    simpl("ic2 hv transformer", {"ic2 mv transformer": 1, "gold cable x1": 2, "basic circuit": 1, "advanced re battery": 1});
+    simpl("ic2 mv transformer", {"basic machine casing": 1, "copper cable x1": 2});
 
     simpl("advanced machine casing", {"advanced alloy": 2, "carbon plate": 2, "steel plate": 4, "basic machine casing": 1});
 
