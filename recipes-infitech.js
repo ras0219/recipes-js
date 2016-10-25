@@ -64,9 +64,46 @@ function RUN_RECIPES(TECH, simpl)
         else
             return "warn";
     }
+
+    simpl("large heat exchanger multi",
+        { "large heat exchanger":1
+        , "titanium pipe machine casing":2
+        , "stable titanium casing":24
+        , "lv output hatch":2
+        , "lv input hatch":2
+        , "maintenance hatch":1 }, "multiblock structure");
+    simpl("large heat exchanger", {"ev pump":4,"titanium fluid pipe":4,"titanium pipe machine casing":1});
+	simpl("stable titanium casing",{"titanium plate":6,"titanium frame box":1},"Assemble");
+
+    simpl("large steam turbine multi",
+    { "large steam turbine": 1
+    , "hv dynamo hatch": 1
+    , "turbine casing": 29
+    , "maintenance hatch": 1
+    , "lv input hatch": 1
+    , "lv output hatch": 1
+    })
+    simpl("large steam turbine",
+    { "steel gear": 4
+    , "advanced circuit": 2
+    , "hv hull": 1
+    , "large stainless steel fluid pipe": 2
+    })
+    simpl("turbine casing",
+    { "magnalium plate": 6
+    , "blue steel frame box": 1
+    })
+
 	//clean stainless steel casing
 	simpl("distillation tower multi", {"distillation tower":1,"ulv input hatch":1,"mv output hatch":5,"mv output bus":1,"maintenance hatch":1,"hv energy hatch":1,"clean stainless steel casing":26}, "multiblock structure");
 	simpl("distillation tower",{"energy flow circuit":4, "ev hull":1, "ev pump":2, "large stainless steel fluid pipe":2});
+
+    materials = ["titanium", "bronze", "tungstensteel", "steel"]
+    for (var k in materials)
+    {
+        var v = materials[k];
+        simpl(v+" pipe machine casing", assoc(v+" plate", 4, v+" fluid pipe", 4, v+" frame box", 1))
+    }
 
 
 
@@ -668,6 +705,7 @@ function RUN_RECIPES(TECH, simpl)
        simpl(k+" distillery", assoc("blaze rod", 1, "glass", 2, v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2));
 
        simpl(k+" packager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
+       simpl(k+" unpackager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
        simpl(k+" forming press", assoc(v.cable, 4, v.hull, 1, v.piston, 2, v.circuit, 2));
        simpl(k+" diesel generator", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.piston, 2, v.circuit, 1, v.gear, 2));
        simpl(k+" chemical reactor", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 1, v.circuit, 2, v.chempipe, 2));
@@ -691,6 +729,7 @@ function RUN_RECIPES(TECH, simpl)
        simpl(k+" input bus", assoc(v.hull, 1, "chest", 1));
        simpl(k+" output bus", assoc(v.hull, 1, "chest", 1));
 
+       simpl(k+" dynamo hatch", assoc(v.hull, 1, v.cable, 1));
        simpl(k+" input hatch", assoc(v.hull, 1, "glass", 1));
        simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
 
@@ -978,7 +1017,7 @@ function RUN_RECIPES(TECH, simpl)
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
        , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
        , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
-       , "tungstensteel", "cobalt", "wrought iron", "electrum"]
+       , "tungstensteel", "cobalt", "wrought iron", "electrum", "blue steel", "magnalium"]
     for (var k in materials) {
        var v = materials[k]
        var plate = v + " plate";
@@ -1065,6 +1104,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("molten redstone", {"redstone": 1}, "Fluid Extract", 144, warn_if_not("fluid extractor", LV));
     simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144, warn_if_not("fluid extractor", LV));
     simpl("molten rubber", {"rubber": 1}, "Fluid Extract", 144, warn_if_not("fluid extractor", LV));
+    simpl("molten polyethylene", {"polyethylene sheet": 1}, "Fluid Extract", 144, warn_if_not("fluid extractor", LV));
 
     simpl("redstone engine", { "piston": 1, "glass": 1, "plank": 3, "wood gear": 2});
     simpl("wood gear", {"stick": 4});
