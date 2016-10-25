@@ -165,7 +165,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("me chest", {"silver chest": 1, "good circuit": 2, "me cable": 2, "stainless steel plate": 4});
 
 
-
+    simpl("cell workbench", {"computer monitor": 1, "wool": 2, "aluminum plate": 5, "calculation processor": 1})
 
 	simpl("64k storage cell", {"universal storage housing": 1, "64k storage component": 1});
 	simpl("16k storage cell", {"universal storage housing": 1, "16k storage component": 1});
@@ -434,6 +434,7 @@ function RUN_RECIPES(TECH, simpl)
     simpl("activity detector", {"iron plate":1, "molten soldering alloy": 72, "redstone torch": 1}, "Assemble");
     simpl("fluid detector", {"iron plate":1, "molten soldering alloy": 72, "iron pressure plate": 1}, "Assemble");
     simpl("energy detector", {"iron plate":1, "molten soldering alloy": 72, "eu-reader": 1}, "Assemble");
+    simpl("computer monitor", {"aluminum plate": 4, "gt glass pane": 1, "blue dye": 1, "red dye": 1, "lime dye": 1, "glowstone": 1})
     simpl("eu-reader", {"glowstone":1, "basic circuit": 1, "copper cable x1": 4});
     //extra utilities
     simpl("drum", {"steel plate":6, "cauldron": 1, "iron ring": 1,"iron pressure plate":1});
