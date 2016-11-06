@@ -1050,6 +1050,7 @@ function RUN_RECIPES(TECH, simpl)
         var turbineblade = v + " turbine blade";
 
         simpl(turbineblade, assoc(plate2, 3, screw, 2))
+        simpl(plate2, assoc(plate, 2))
 
         if (TECH["extruder"] >= MV)
         {
