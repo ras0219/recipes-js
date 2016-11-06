@@ -1029,24 +1029,39 @@ function RUN_RECIPES(TECH, simpl)
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
        , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
        , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
-       , "tungstensteel", "cobalt", "wrought iron", "electrum", "blue steel", "magnalium"]
+       , "tungstensteel", "cobalt", "wrought iron", "electrum", "blue steel", "magnalium"
+       , "hss-e", "hss-g", "hss-s"]
     for (var k in materials) {
-       var v = materials[k]
-       var plate = v + " plate";
-       var rod = v + " rod";
-       var bolt = v + " bolt";
+        var v = materials[k]
+        var turbineblade = v + " turbine blade";
+        simpl(v + " small turbine", assoc(turbineblade, 4, "magnalium rod", 1))
+        simpl(v + " turbine", assoc(turbineblade, 8, "titanium rod", 1))
+        simpl(v + " large turbine", assoc(turbineblade, 12, "tungstensteel rod", 1))
+        simpl(v + " huge turbine", assoc(turbineblade, 16, "americium rod", 1))
+    }
 
-       if (TECH["extruder"] >= MV)
-       {
-           simpl(v+" gear", assoc(v, 4), "MV Extrude: Gear");
-           simpl(v+" fluid pipe", assoc(v, 3), "MV Extrude: Normal Pipe");
-		   simpl("large " + v+" fluid pipe", assoc(v, 6), "MV Extrude: Large Pipe");
-       }
-       else
-       {
-           simpl(v+" gear", assoc(plate, 4, rod, 4));
-           simpl(v+" fluid pipe", assoc(plate, 6), undefined, 2);
-       }
+    for (var k in materials) {
+        var v = materials[k]
+        var plate = v + " plate";
+        var plate2 = v + " plate x2";
+        var rod = v + " rod";
+        var bolt = v + " bolt";
+        var screw = v + " screw";
+        var turbineblade = v + " turbine blade";
+
+        simpl(turbineblade, assoc(plate2, 3, screw, 2))
+
+        if (TECH["extruder"] >= MV)
+        {
+            simpl(v+" gear", assoc(v, 4), "MV Extrude: Gear");
+            simpl(v+" fluid pipe", assoc(v, 3), "MV Extrude: Normal Pipe");
+            simpl("large " + v+" fluid pipe", assoc(v, 6), "MV Extrude: Large Pipe");
+        }
+        else
+        {
+            simpl(v+" gear", assoc(plate, 4, rod, 4));
+            simpl(v+" fluid pipe", assoc(plate, 6), undefined, 2);
+        }
 
         if (TECH["assembling machine"] >= LV)
         {
@@ -1054,13 +1069,13 @@ function RUN_RECIPES(TECH, simpl)
         }
         else
         {
-            simpl(v+" rotor", assoc(plate,4,v+" screw",1,v+" ring",1));
+            simpl(v+" rotor", assoc(plate,4,screw,1,v+" ring",1));
         }
 
        if (TECH["lathe"] > NONE)
-           simpl(v+" screw", assoc(bolt,1), "Lathe");
+           simpl(screw, assoc(bolt,1), "Lathe");
        else
-           simpl(v+" screw", assoc(bolt,2));
+           simpl(screw, assoc(bolt,2));
 
        // Bolts are hard
        if (TECH["cutting saw"] > NONE)
