@@ -187,6 +187,9 @@ function RUN_RECIPES(TECH, simpl)
     simpl("universal storage housing", {"aluminum plate": 1, "stainless steel plate": 2, "glass pane": 2, "certus quartz plate": 1, "quartzite screw": 2});
     simpl("1k storage component", {"nand": 4, "fluix dust": 4, "logic processor": 1});
 
+    simpl("blank pattern", {"pure certus quartz": 1, "glowstone plate": 3, "aluminum plate": 3, "quartz glass": 2});
+    simpl("quartz glass", {"glass": 1, "certus quartz dust": 1}, "Alloy Smelt")
+
     simpl("formation core", {"logic processor": 4, "certus quartz rod": 4, "pure fluix crystal": 1})
     simpl("annihilation core", {"logic processor": 4, "nether quartz rod": 4, "pure fluix crystal": 1})
 
