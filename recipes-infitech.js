@@ -159,11 +159,20 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("compressed bronze", { "bronze plate": 2, "industrial tnt": 2 }, "Implosion Compressor");
 
     //// Applied Energistics
-
+    simpl("me pattern terminal", {"me terminal": 1, "engineering processor": 1, "blank pattern": 1, "certus quartz screw": 2, "nether quartz plate": 2});
+    simpl("me terminal", {"illuminated panel": 1, "good circuit": 1, "certus quartz plate": 1, "quartzite screw": 1, "nether quartz rod": 4});
+    simpl("illuminated panel", {"glowstone plate": 2, "red alloy plate": 1, "aluminum plate": 1, "computer monitor": 1});
 
     simpl("me drive", {"me chest": 1, "advanced circuit": 1, "me cable": 2, "titanium plate": 4, "engineering processor": 1});
     simpl("me chest", {"silver chest": 1, "good circuit": 2, "me cable": 2, "stainless steel plate": 4});
+    simpl("molecular assembler", {"mv assembling machine": 1, "quite clear glass": 2, "titanium plate": 4, "annihilation core": 1, "formation core": 1});
+    simpl("me interface", {"mv casing": 1, "aluminum plate": 4, "gt glass pane": 2, "annihilation core": 1, "formation core": 1});
 
+    simpl("64k crafting storage", {"64k storage cell": 1, "crafting unit": 1});
+    simpl("16k crafting storage", {"16k storage cell": 1, "crafting unit": 1});
+    simpl("4k crafting storage", {"4k storage cell": 1, "crafting unit": 1});
+    simpl("1k crafting storage", {"1k storage cell": 1, "crafting unit": 1});
+    simpl("crafting unit", {"basic circuit": 2, "aluminum plate": 4, "logic processor": 1, "calculation processor": 1, "engineering processor": 1});
 
     simpl("cell workbench", {"computer monitor": 1, "wool": 2, "aluminum plate": 5, "calculation processor": 1})
 
@@ -172,14 +181,14 @@ function RUN_RECIPES(TECH, simpl)
 	simpl("4k storage cell", {"universal storage housing": 1, "4k storage component": 1});
     simpl("1k storage cell", {"universal storage housing": 1, "1k storage component": 1});
 
-
 	simpl("64k storage component",{"calculation processor":1,"advanced circuit":4,"16k storage component":4});
 	simpl("16k storage component",{"calculation processor":1,"good circuit":4,"4k storage component":4});
 	simpl("4k storage component",{"logic processor":1,"basic circuit":4,"1k storage component":4});
     simpl("universal storage housing", {"aluminum plate": 1, "stainless steel plate": 2, "glass pane": 2, "certus quartz plate": 1, "quartzite screw": 2});
     simpl("1k storage component", {"nand": 4, "fluix dust": 4, "logic processor": 1});
-    simpl("fluix dust", {"fluix crystal": 1}, "Macerate")
-    simpl("fluix crystal", {"charged certus quartz": 1, "nether quartz": 1, "redstone": 1}, "Mixer", 2)
+
+    simpl("formation core", {"logic processor": 4, "certus quartz rod": 4, "pure fluix crystal": 1})
+    simpl("annihilation core", {"logic processor": 4, "nether quartz rod": 4, "pure fluix crystal": 1})
 
     simpl("logic processor", {"printed logic circuit": 1, "printed silicon": 1, "molten redstone": 144}, "Assemble")
     simpl("engineering processor", {"printed engineering circuit": 1, "printed silicon": 1, "molten redstone": 144}, "Assemble")
@@ -190,6 +199,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("printed silicon", {"silicon plate": 1}, "Forming Press: Inscriber Silicon Press")
 
     simpl("me cable", {"certus quartz rod": 4, "fluix dust": 2, "quartz fiber": 3}, undefined, 3)
+    simpl("fluix dust", {"fluix crystal": 1}, "Macerate")
+    simpl("fluix crystal", {"charged certus quartz": 1, "nether quartz": 1, "redstone": 1}, "Mixer", 2)
     simpl("quartz fiber", {"certus quartz rod": 2}, "MV Wiremill", undefined, warn_if_not("wiremill", MV))
     simpl("certus quartz rod", {"certus quartz": 1, "recycled small certus quartz dust": -2}, "Lathe")
 
