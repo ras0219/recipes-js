@@ -509,7 +509,7 @@ function RUN_RECIPES(TECH, simpl)
     //// End OpenComputers
 
     //// IC2 nuclear
-    simpl("nuclear reactor", {"dense lead plate": 6, "reactor chamber": 3, "ev robot arm": 1, "energy flow circuit": 1});
+    simpl("nuclear reactor", {"dense lead plate": 6, "reactor chamber": 1, "ev robot arm": 1, "energy flow circuit": 1});
     simpl("reactor chamber", {"lead plate": 4, "ev hull": 1}, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
     simpl("component heat exchanger", {"heat exchanger": 1, "gold plate": 4});
     simpl("heat exchanger", {"basic circuit": 1, "tin plate": 3, "copper plate": 5});
