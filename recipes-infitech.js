@@ -168,22 +168,22 @@ function RUN_RECIPES(TECH, simpl)
     simpl("molecular assembler", {"mv assembling machine": 1, "quite clear glass": 2, "titanium plate": 4, "annihilation core": 1, "formation core": 1});
     simpl("me interface", {"mv casing": 1, "aluminum plate": 4, "gt glass pane": 2, "annihilation core": 1, "formation core": 1});
 
-    simpl("64k crafting storage", {"64k storage cell": 1, "crafting unit": 1});
-    simpl("16k crafting storage", {"16k storage cell": 1, "crafting unit": 1});
-    simpl("4k crafting storage", {"4k storage cell": 1, "crafting unit": 1});
-    simpl("1k crafting storage", {"1k storage cell": 1, "crafting unit": 1});
+    simpl("64k crafting storage", {"64k storage component": 1, "crafting unit": 1});
+    simpl("16k crafting storage", {"16k storage component": 1, "crafting unit": 1});
+    simpl("4k crafting storage", {"4k storage component": 1, "crafting unit": 1});
+    simpl("1k crafting storage", {"1k storage component": 1, "crafting unit": 1});
     simpl("crafting unit", {"basic circuit": 2, "aluminum plate": 4, "logic processor": 1, "calculation processor": 1, "engineering processor": 1});
 
     simpl("cell workbench", {"computer monitor": 1, "wool": 2, "aluminum plate": 5, "calculation processor": 1})
 
-	simpl("64k storage cell", {"universal storage housing": 1, "64k storage component": 1});
-	simpl("16k storage cell", {"universal storage housing": 1, "16k storage component": 1});
-	simpl("4k storage cell", {"universal storage housing": 1, "4k storage component": 1});
+    simpl("64k storage cell", {"universal storage housing": 1, "64k storage component": 1});
+    simpl("16k storage cell", {"universal storage housing": 1, "16k storage component": 1});
+    simpl("4k storage cell", {"universal storage housing": 1, "4k storage component": 1});
     simpl("1k storage cell", {"universal storage housing": 1, "1k storage component": 1});
 
-	simpl("64k storage component",{"calculation processor":1,"advanced circuit":4,"16k storage component":4});
-	simpl("16k storage component",{"calculation processor":1,"good circuit":4,"4k storage component":4});
-	simpl("4k storage component",{"logic processor":1,"basic circuit":4,"1k storage component":4});
+    simpl("64k storage component",{"calculation processor":1,"advanced circuit":4,"16k storage component":4});
+    simpl("16k storage component",{"calculation processor":1,"good circuit":4,"4k storage component":4});
+    simpl("4k storage component",{"logic processor":1,"basic circuit":4,"1k storage component":4});
     simpl("universal storage housing", {"aluminum plate": 1, "stainless steel plate": 2, "glass pane": 2, "certus quartz plate": 1, "quartzite screw": 2});
     simpl("1k storage component", {"nand": 4, "fluix dust": 4, "logic processor": 1});
 
@@ -509,8 +509,8 @@ function RUN_RECIPES(TECH, simpl)
     //// End OpenComputers
 
     //// IC2 nuclear
-    //simpl("nuclear reactor", {"dense lead plate": 4, "reactor chamber": 3, "generator": 1, "advanced circuit": 1});
-    //simpl("reactor chamber", {"lead plate": 4, "basic machine casing": 1});
+    simpl("nuclear reactor", {"dense lead plate": 6, "reactor chamber": 3, "ev robot arm": 1, "energy flow circuit": 1});
+    simpl("reactor chamber", {"lead plate": 4, "ev hull": 1}, "HV Assemble", undefined, warn_if_not("assembling machine", HV));
     simpl("component heat exchanger", {"heat exchanger": 1, "gold plate": 4});
     simpl("heat exchanger", {"basic circuit": 1, "tin plate": 3, "copper plate": 5});
     simpl("advanced heat vent", {"reactor heat vent": 2, "diamond": 1, "iron bars": 6});
