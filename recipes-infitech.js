@@ -286,22 +286,33 @@ function RUN_RECIPES(TECH, simpl)
 
     //simpl("machine chassis", {"basic capacitor":1,"iron":4,"iron bars":4});
     //simpl("octadic capacitor", { "vibrant alloy": 6, "glowstone block": 1, "double capacitor": 2 });
+	simpl("octadic capacitor", { "molten vibrant alloy": 864, "glowstone block": 1, "double capacitor": 2 },"Assembler");
+	simpl("molten vibrant alloy", { "vibrant alloy":1 },"fluid extractor",144);
+
     //simpl("vibrant alloy nugget", { "vibrant alloy": 1 }, undefined, 9);
     //simpl("vibrant alloy", { "energetic alloy": 1, "ender pearl": 1 }, "EIO Alloy Smelt");
+	simpl("vibrant alloy", { "energetic alloy": 1, "ender pearl": 1 }, "Alloy Smelt");
+	
     //simpl("double capacitor", { "basic capacitor": 2, "coal dust": 1, "energetic alloy": 6 });
+	simpl("double capacitor", { "basic capacitor": 2, "coal dust": 1, "molten energetic alloy": 864 },"Assembler");
+	simpl("molten energetic alloy", { "energetic alloy":1 },"fluid extractor",144);
     //simpl("basic capacitor", { "redstone": 2, "gold": 4, "copper": 1 });
+	simpl("basic capacitor", { "redstone": 2, "gold": 4, "small battery hull": 1 },"Assembler");
     //simpl("energetic alloy", {"gold":1, "redstone":1, "glowstone dust":1}, "EIO Alloy Smelt");
+	simpl("energetic alloy", {"gold":1, "blaze powder":1}, "Alloy Smelt");
 
     //simpl("basic gear", {"steel": 4, "steel rod": 4, "steel ring": 1});
 
     //simpl("dark steel armor plating", { "dark steel": 10, "electrical steel armor plating": 1 });
     //simpl("dark steel", { "iron": 1, "coal dust": 1, "obsidian": 1 });
+	simpl("dark steel", { "electrical steel": 1, "obsidian dust": 1},"Electric Blast Furnace");
     //simpl("soularium", { "soul sand": 1, "gold ingot": 1 });
 
     //simpl("electrical steel armor plating", { "electrical steel": 10, "conductive iron armor plating": 1 });
     //simpl("conductive iron armor plating", { "conductive iron": 10, "silicon armor plating": 1 });
     //simpl("silicon armor plating", { "silicon": 5, "iron": 4 });
     //simpl("conductive iron", { "redstone": 1, "iron": 1 });
+	simpl("electrical steel", { "steel": 3, "silicon": 1 }, "Electric Blast Furnace", 4);
     //simpl("electrical steel", { "iron": 1, "coal dust": 1, "silicon": 1 });
     //simpl("basic gear", { "cobblestone": 4, "stick": 4 });
     //simpl("redstone alloy", {"redstone":1,"silicon":1});
