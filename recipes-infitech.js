@@ -94,6 +94,32 @@ function RUN_RECIPES(TECH, simpl)
     , "blue steel frame box": 1
     })
 
+
+    // FUSION
+    simpl("fusion reactor tier 1 multi", { "superconducting coil block": 32, "luv energy hatch": 4, "luv input hatch": 2, "luv output hatch": 1,  "luv casing" : 120, "fusion control computer mk 1" : 1 });
+    simpl("fusion control computer mk 1", {"energy flow circuit": 4, "plutonium plate": 1, "iv field generator": 2, "nether star plate": 1, "fusion coil": 1})
+    simpl("fusion coil", { "superconducting coil block": 1, "iridium neutron reflector": 2, "energy flow circuit": 4, "mv field generator": 2});
+    simpl("iridium neutron reflector", { "thick neutron reflector": 8, "iridium reinforced plate": 1});
+    simpl("thick neutron reflector", { "neutron reflector": 4, "beryllium plate": 1});
+    simpl("neutron reflector", { "tin dust": 4, "coal dust": 4, "copper plate": 1 });
+    simpl("nether star plate", { "nether star dust": 1 }, "Compress");
+    simpl("nether star dust", { "nether star": 1 }, "Macerate");
+
+    simpl("iv field generator", {"energy flow circuit": 4, "quantum star": 1, "osmium wire x16": 4});
+    simpl("quantum star", {"nether star": 1, "radon": 1250}, "HV Chemical Bath")
+    simpl("mv field generator", {"good circuit": 4, "eye of ender": 1, "osmium wire x2": 4});
+    simpl("superconducting coil block", { "superconductor wire x2": 8});
+    simpl("superconductor wire x2", { "superconductor wire x1": 2});
+    simpl("superconductor wire x1", { "luv wire x1": 3, "superconductor coolant": 2, "lv pump": 2, "tiny tungstensteel fluid pipe": 2 }, undefined, 3);
+
+    simpl("iridium reinforced plate", { "iridium alloy ingot": 1, "industrial tnt": 8}, "Implosion Compressor");
+    simpl("iridium alloy ingot", {"advanced alloy": 4, "iridium plate": 4, "industrial diamond": 1});
+    simpl("advanced alloy", { "mixed metal ingot": 1 }, "Compress");
+
+    // processing array
+    simpl("processing array", {"energy flow circuit":4, "lapotronic energy orb":1, "ev hull": 1, "large stainless steel fluid pipe": 1, "ev robot arm": 2});
+    simpl("robust tungstensteel casing", {"tungstensteel plate":6, "tungstensteel frame box":1});
+
 	//clean stainless steel casing
 	simpl("distillation tower multi", {"distillation tower":1,"ulv input hatch":1,"mv output hatch":5,"mv output bus":1,"maintenance hatch":1,"hv energy hatch":1,"clean stainless steel casing":26}, "multiblock structure");
 	simpl("distillation tower",{"energy flow circuit":4, "ev hull":1, "ev pump":2, "large stainless steel fluid pipe":2});
@@ -114,8 +140,6 @@ function RUN_RECIPES(TECH, simpl)
 	simpl("bronze plated blast furnace", {"bronze plate":4,"furnace":4 });
 	simpl("bronze plated bricks", {"bronze plate":6, "bricks":1});
 	//controller block
-
-
 
     //// Power converters
     //simpl("energy bridge", { "dense lead plate": 2, "mv transformer": 1, "cobalt plate": 2, "glass fiber cable": 2, "cobalt cable x2": 2});
@@ -292,7 +316,7 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("vibrant alloy nugget", { "vibrant alloy": 1 }, undefined, 9);
     //simpl("vibrant alloy", { "energetic alloy": 1, "ender pearl": 1 }, "EIO Alloy Smelt");
 	simpl("vibrant alloy", { "energetic alloy": 1, "ender pearl": 1 }, "Alloy Smelt");
-	
+
     //simpl("double capacitor", { "basic capacitor": 2, "coal dust": 1, "energetic alloy": 6 });
 	simpl("double capacitor", { "basic capacitor": 2, "coal dust": 1, "molten energetic alloy": 864 },"Assembler");
 	simpl("molten energetic alloy", { "energetic alloy":1 },"fluid extractor",144);
@@ -389,25 +413,6 @@ function RUN_RECIPES(TECH, simpl)
     //simpl("axe of the stream", { "greatwood": 1, "thaumium axe": 1, "water shard": 2, "diamond": 1, "aqua essentia": 16, "arbor essentia": 8 }, "infusion")
     //simpl("thaumium axe", {"thaumium plate": 2, "thaumium": 1, "stick": 2})
     ////END THAUMCRAFT
-
-    //simpl("fusion reactor tier 1 multi", { "superconducting coil block": 32, "luv energy hatch": 4, "luv input hatch": 2, "luv output hatch": 1,  "luv casing" : 120, "fusion control computer mk 1" : 1 });
-    //simpl("fusion control computer mk 1", { "iv field generator": 2, "plutonium plate": 1, "nether star plate": 1, "energy flow circuit": 4, "fusion coil": 1});
-    //simpl("fusion coil", { "superconducting coil block": 1, "iridium neutron reflector": 2, "energy flow circuit": 4, "mv field generator": 2});
-    //simpl("iridium neutron reflector", { "thick neutron reflector": 8, "iridium reinforced plate": 1});
-    //simpl("thick neutron reflector", { "neutron reflector": 4, "beryllium plate": 1});
-    //simpl("neutron reflector", { "tin dust": 4, "coal dust": 4, "copper plate": 1 });
-    //simpl("nether star plate", { "nether star dust": 1 }, "Compress");
-    //simpl("nether star dust", { "nether star": 1 }, "Macerate");
-
-    //simpl("iv field generator", {"energy flow circuit": 4, "nether star": 1, "osmium wire x16": 4});
-    //simpl("mv field generator", {"good circuit": 4, "eye of ender": 1, "osmium wire x2": 4});
-    //simpl("superconducting coil block", { "superconductor wire x2": 8});
-    //simpl("superconductor wire x2", { "superconductor wire x1": 2});
-    //simpl("superconductor wire x1", { "luv wire x1": 3, "superconductor coolant": 2, "lv pump": 2, "tiny tungstensteel fluid pipe": 2 }, undefined, 3);
-
-    //simpl("iridium reinforced plate", { "iridium alloy ingot": 1, "industrial tnt": 8}, "Implosion Compressor");
-    //simpl("iridium alloy ingot", {"advanced alloy": 4, "iridium plate": 4, "industrial diamond": 1});
-    //simpl("advanced alloy", { "mixed metal ingot": 1 }, "Compress");
 
     simpl("electric blast furnace multi", { "electric blast furnace": 1, "cupronickel coil block": 16, "lv input bus": 1, "lv output bus":1,
        "maintenance hatch":1,
