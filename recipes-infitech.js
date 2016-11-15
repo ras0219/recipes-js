@@ -261,13 +261,14 @@ function RUN_RECIPES(TECH, simpl)
     //}
 
     //// BigReactors
-    //simpl("reactor controller", {"yellorium": 2, "redstone": 1, "diamond":1, "reactor casing": 4});
-    //simpl("reactor control rod", {"graphite":3,"yellorium":1,"redstone":1,"reactor casing":4});
-    //simpl("yellorium fuel rod", {"steel plate":4,"yellorium":2,"yellorium block":1,"reactor glass":2});
-    //simpl("reactor glass", {"reactor casing":1, "fused quartz":2});
-    //simpl("reactor access port", {"reactor casing":4,"chest":1,"piston":1});
-    //simpl("reactor coolant port", {"reactor casing":4,"bucket":1,"piston":1,"steel":2});
-    //simpl("reactor casing", {"steel plate": 6, "yellorium": 1, "graphite": 2}, undefined, 4);
+    simpl("reactor controller", {"yellorium": 2, "stainless steel plate": 2, "diamond":1, "reactor casing": 4});
+    simpl("reactor control rod", {"graphite":3,"yellorium":1,"redstone":1,"reactor casing":4});
+    simpl("yellorium fuel rod", {"steel plate":4, "graphite": 2, "stainless steel plate": 2, "yellorium":1});
+
+    simpl("reactor glass", {"reactor casing":1, "glass":2});
+    simpl("reactor access port", {"reactor casing":4,"chest":1,"piston":1});
+    simpl("reactor coolant port", {"reactor casing":4,"bucket":1,"piston":1,"iron":2});
+    simpl("reactor casing", {"steel plate": 4, "yellorium": 1, "graphite": 4}, undefined, 4);
 
     //// IC2 nuclear fuels
     //simpl("thorium fuel rod x2", {"thorium fuel rod x1": 2, "iron plate": 1});
