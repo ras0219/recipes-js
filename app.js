@@ -13,6 +13,10 @@ var recipes = {
     infitech2 : {
         name: "infitech 2",
         recipes : require('./recipes-infitech')
+    },
+    gregblock : {
+        name: "gregblock",
+        recipes : require('./recipes-gregblock')
     }
 };
 
