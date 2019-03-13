@@ -65,6 +65,14 @@ function RUN_RECIPES(TECH, simpl)
             return "warn";
     }
 
+    // Industrial Foregoing
+    simpl("plant sower", { "plastic": 2, "flower pot": 1, "piston": 2, "polyethelene hull": 1, "iron gear": 2, "redstone": 1});
+    simpl("plant fertilizer", { "plastic": 2, "glass bottle": 1, "leather": 2, "polyethelene hull": 1, "iron gear": 2, "redstone": 1});
+    simpl("plant gatherer", { "plastic": 2, "hoe": 1, "axe": 2, "polyethelene hull": 1, "gold gear": 2, "redstone": 1});
+    simpl("plant interator", { "plastic": 2, "hoe": 3, "polyethelene hull": 1, "gold gear": 2, "redstone": 1});
+    simpl("polyethelene hull", { "polyethlene sheet": 8 }, "Hammer");
+    simpl("plastic", { "polyethlene sheet": 2 }, "Hammer");
+
     // // Power converters
     // simpl("energy bridge", { "dense lead plate": 2, "mv transformer": 1, "cobalt plate": 2, "glass fiber cable": 2, "cobalt cable x2": 2});
     // simpl("eu hv consumer", { "ic2 mv transformer":1, "gold plate": 4, "insulated gold cable": 4});
