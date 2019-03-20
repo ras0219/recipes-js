@@ -340,9 +340,9 @@ function RUN_RECIPES(TECH, simpl)
     //     });
 
     // simpl("vacuum freezer multi", { "frost proof casing": 21, "vacuum freezer": 1, "lv input bus": 1, "lv output bus": 1, "maintenance hatch": 1, "mv energy hatch": 1 });
-    // simpl("vacuum freezer", { "frost proof casing": 1, "hv pump": 3, "gold cable x1": 2, "data control circuit": 3 });
+    simpl("vacuum freezer", { "frost proof casing": 1, "hv pump": 3, "gold cable x1": 2, "extreme circuit": 3 });
 
-    simpl("implosion compressor multi", {"implosion compressor":1, "lv energy hatch":1, "lv input bus":1, "lv output bus":1, "maintenance hatch":1,"lv muffler hatch":1, "solid steel casing":20});
+    simpl("implosion compressor multi", {"implosion compressor":1, "mv energy hatch":1, "lv input bus":1, "lv output bus":1, "solid steel casing":22});
     simpl("implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminum cable x1":2,"advanced circuit":3 });
 
     simpl("large steel boiler", { "advanced circuit": 4, "copper cable x1": 4, "steel firebox casing": 1 })
@@ -357,14 +357,14 @@ function RUN_RECIPES(TECH, simpl)
     simpl("steel turbine casing", { "blue steel frame": 1, "magnalium plate": 6}, "Assemble", 3)
     simpl("blue steel frame", { "blue steel rod": 5, "blue steel plate": 3 }, undefined, 4);
 
-    // simpl("electric blast furnace", { "heat proof casing": 1, "basic circuit": 3, "tin cable x1": 2, "furnace": 3});
-    // simpl("nichrome coil block", { "nichrome wire x2": 8 })
-    // simpl("kanthal coil block", { "kanthal wire x2": 8 })
-    // simpl("cupronickel coil block", { "cupronickel wire x2": 8 })
+    simpl("electric blast furnace", { "heat proof casing": 1, "basic circuit": 3, "tin cable x1": 2, "furnace": 3});
+    simpl("nichrome coil block", { "nichrome wire x2": 8 })
+    simpl("kanthal coil block", { "kanthal wire x2": 8 })
+    simpl("cupronickel coil block", { "cupronickel wire x2": 8 })
 
-    // simpl("heat proof casing", { "invar plate": 6, "invar frame box": 1 });
+    simpl("heat proof casing", { "invar plate": 6, "invar frame": 1 }, undefined, 3);
+    simpl("invar frame", { "invar rod": 5, "invar plate": 3 }, undefined, 4);
     // if (TECH["assembling machine"] > NONE)
-    //     simpl("invar frame box", { "invar rod": 4 }, "Assemble: Setting 4");
     // else
     //     simpl("invar frame box", { "invar rod": 8 }, undefined, 2);
 
@@ -596,7 +596,7 @@ function RUN_RECIPES(TECH, simpl)
 
     tiermats = {
         lv: {
-            // upcable: "copper cable x1",
+            upcable: "copper cable x1",
             cable: "tin cable x1",
             // cable4: "tin cable x4",
             circuit: "basic circuit",
@@ -606,7 +606,7 @@ function RUN_RECIPES(TECH, simpl)
             heatwire4: "copper wire x4",
             pipe: "medium bronze pipe",
             // lathediamond: "diamond",
-            // grinding: "diamond",
+            grinding: "diamond",
             rotor: "tin rotor",
             screw: "tin screw",
             gear: "steel gear",
@@ -617,7 +617,7 @@ function RUN_RECIPES(TECH, simpl)
             motorwire: "copper wire x1",
         },
         mv: {
-            // upcable: "gold cable x1",
+            upcable: "gold cable x1",
             cable: "copper cable x1",
             // cable4: "copper cable x4",
             circuit: "good circuit",
@@ -627,7 +627,7 @@ function RUN_RECIPES(TECH, simpl)
             heatwire4: "cupronickel wire x4",
             pipe: "medium steel pipe",
             // lathediamond: "industrial diamond",
-            // grinding: "industrial diamond",
+            grinding: "diamond",
             rotor: "bronze rotor",
             screw: "bronze screw",
             gear: "aluminum gear",
@@ -638,7 +638,7 @@ function RUN_RECIPES(TECH, simpl)
             motorwire: "copper wire x2",
         },
         hv: {
-            // upcable: "gold cable x1",
+            upcable: "aluminum cable x1",
             cable: "gold cable x1",
             // cable4: "copper cable x4",
             circuit: "advanced circuit",
@@ -648,7 +648,7 @@ function RUN_RECIPES(TECH, simpl)
             heatwire4: "kanthal wire x4",
             pipe: "medium stainless steel pipe",
             // lathediamond: "industrial diamond",
-            // grinding: "industrial diamond",
+            grinding: "diamond grinding head",
             rotor: "steel rotor",
             screw: "steel screw",
             gear: "stainless steel gear",
@@ -659,6 +659,9 @@ function RUN_RECIPES(TECH, simpl)
             motorwire: "copper wire x4",
         },
     }
+
+    simpl("hv battery buffer x4", {"hv hull": 1, "gold wire x4": 4, "chest": 1})
+
     // fill out basic stuff
     for (var k in tiermats)
     {
@@ -688,8 +691,9 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" wiremill", assoc(v.cable, 2, v.hull, 1, v.motor, 4, v.circuit, 2));
         simpl(k+" steam turbine", assoc(v.cable, 1, v.hull, 1, v.rotor, 2, v.motor, 2, v.circuit, 1, v.pipe, 2));
         simpl(k+" centrifuge", assoc(v.cable, 2, v.hull, 1, v.motor, 2, v.circuit, 4));
+        simpl(k+" thermal centrifuge", assoc(v.cable, 2, v.hull, 1, v.motor, 2, v.circuit, 2, v.heatwire4, 2));
         // simpl(k+" extractor", assoc(v.cable, 2, v.hull, 1, v.piston, 1, v.pump, 1, v.circuit, 2, "glass", 2));
-        // simpl(k+" macerator", assoc(v.cable, 3, v.hull, 1, v.piston, 1, v.motor, 1, v.circuit, 2, v.grinding, 1));
+        simpl(k+" macerator", assoc(v.cable, 3, v.hull, 1, v.piston, 1, v.motor, 1, v.circuit, 2, v.grinding, 1));
         simpl(k+" ore washing plant", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 2, v.circuit, 2, "glass", 1));
 
         simpl(k+" distillery", assoc("blaze rod", 1, "glass", 2, v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2));
@@ -729,7 +733,7 @@ function RUN_RECIPES(TECH, simpl)
         }
         else
         {
-            simpl(v.hull, assoc(v.cable, 2, v.casing, 1, "polyethylene plate", 2, v.plate, 1));
+            simpl(v.hull, assoc(v.cable, 2, v.casing, 1, "polyethylene plate", 2), "Assemble");
         }
         simpl(v.casing, assoc(v.plate, 8), "Wrench or Assemble: 8");
         simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.cable, 3, v.circuit, 1));
@@ -913,6 +917,7 @@ function RUN_RECIPES(TECH, simpl)
     }
 
     simpl("transistor", { "molten polyethylene": 144, "tin foil": 6, "silicon plate": 1}, "Assemble", 8, warn_if_not("assembling machine", LV))
+    simpl("capacitor", { "polyethylene plate": 1, "aluminum foil": 2}, "MV Assemble", 2, warn_if_not("assembling machine", MV))
 
     simpl("glass tube", { "glass dust": 1 }, "Alloy Smelt: Ball Mold")
     simpl("diode", { "glass pane": 2, "tin wire x1": 2, "black dye or ink": 2, "tiny gallium dust": 1 }, undefined, 4)
@@ -938,10 +943,10 @@ function RUN_RECIPES(TECH, simpl)
     // simpl("etched hv wiring", { "gold foil": 1 }, "MV Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", MV));
     // simpl("etched mv wiring", {"copper foil":1}, "Laser Engrave: Red Lens", undefined, warn_if_not("laser engraver", LV));
 
-    // simpl("diamond grinding head", {"industrial diamond": 1, "steel plate": 4, "diamond dust": 4});
+    simpl("diamond grinding head", {"diamond": 1, "steel plate": 4, "diamond dust": 4});
 
-    // simpl("frost proof casing", {"aluminum plate": 6, "aluminum frame box":1 });
-    // simpl("aluminum frame box", {"aluminum rod": 4});
+    simpl("frost proof casing", {"aluminum plate": 6, "aluminum frame box":1 }, undefined, 3);
+    simpl("aluminum frame box", {"aluminum plate": 3, "aluminum rod": 5}, undefined, 4);
 
     // if (TECH["extruder"] >= LV)
     //     simpl("rubber ring", {"rubber": 1 }, "Extrude: Ring", 4);
@@ -1099,13 +1104,19 @@ function RUN_RECIPES(TECH, simpl)
     for (var k in materials) {
         var v = materials[k]
 
-        // simpl(v +" foil", assoc(v + " plate", 1), "Bend: Setting 1", 4, warn_if_not("bending machine", LV));
-        simpl(v +" foil", assoc(v + " plate", 1), "Hammer+Cylinder", 2);
+        if (TECH["cluster mill"] > NONE)
+        {
+            simpl(v +" foil", assoc(v + " plate", 1), "Cluster Mill", 4);
+        }
+        else
+        {
+            simpl(v +" foil", assoc(v + " plate", 1), "Hammer+Cylinder", 2);
+        }
 
         if (TECH["bending machine"] > NONE)
         {
-            simpl("curved " +v + " plate", assoc(v+" plate",1), "Bend: Setting 1");
-            simpl(v + " plate", assoc(v,1), "Bend: Setting 1");
+            simpl("curved " +v + " plate", assoc(v+" plate",1), "Bend: 0");
+            simpl(v + " plate", assoc(v,1), "Bend: 0");
         }
         else
         {
@@ -1177,7 +1188,8 @@ function basictech() {
         "cutting saw" : techlevel.hv,
         "compressor" : techlevel.hv,
         "autoclave" : techlevel.hv,
-        "circuit assembler": techlevel.mv
+        "circuit assembler": techlevel.mv,
+        "cluster mill": techlevel.lv
     }
 }
 
