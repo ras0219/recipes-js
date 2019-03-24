@@ -339,6 +339,9 @@ function RUN_RECIPES(TECH, simpl)
     //     "heat proof casing":10
     //     });
 
+    simpl("distillation tower", {"extreme circuit": 4, "ev pump": 2, "large stainless steel pipe": 2, "ev machine casing": 1})
+
+    simpl("clean stainless steel casing", { "stainless steel frame": 1, "stainless steel plate": 6}, "Assemble", 3)
     // simpl("vacuum freezer multi", { "frost proof casing": 21, "vacuum freezer": 1, "lv input bus": 1, "lv output bus": 1, "maintenance hatch": 1, "mv energy hatch": 1 });
     simpl("vacuum freezer", { "frost proof casing": 1, "hv pump": 3, "gold cable x1": 2, "extreme circuit": 3 });
 
@@ -353,11 +356,13 @@ function RUN_RECIPES(TECH, simpl)
     simpl("steel firebox casing", { "steel plate": 4, "steel rod": 4, "steel frame": 1 }, undefined, 3);
     simpl("solid steel casing", { "steel plate": 6, "steel frame": 1 }, "Assemble", 3);
     simpl("steel frame", { "steel rod": 5, "steel plate": 3 }, undefined, 4);
+    simpl("stainless steel frame", { "stainless steel rod": 5, "stainless steel plate": 3 }, undefined, 4);
 
     simpl("steel turbine casing", { "blue steel frame": 1, "magnalium plate": 6}, "Assemble", 3)
     simpl("blue steel frame", { "blue steel rod": 5, "blue steel plate": 3 }, undefined, 4);
 
     simpl("electric blast furnace", { "heat proof casing": 1, "basic circuit": 3, "tin cable x1": 2, "furnace": 3});
+    simpl("multi smelter", { "heat proof casing": 1, "advanced circuit": 3, "annealed copper cable x1": 2, "furnace": 3});
     simpl("nichrome coil block", { "nichrome wire x2": 8 })
     simpl("kanthal coil block", { "kanthal wire x2": 8 })
     simpl("cupronickel coil block", { "cupronickel wire x2": 8 })
@@ -568,7 +573,7 @@ function RUN_RECIPES(TECH, simpl)
         //     gear: "titanium gear",
         //     smallgear: "small titanium gear",
         //     rod: "titanium rod",
-        //     magrod: "magnetic neodynium rod",
+        //     magrod: "magnetic neodymium rod",
         //     plate: "titanium plate",
         //     motorwire: "annealed copper wire x8",
         // },
@@ -588,7 +593,7 @@ function RUN_RECIPES(TECH, simpl)
         //     gear: "tungstensteel gear",
         //     smallgear: "small tungstensteel gear",
         //     rod: "tungstensteel rod",
-        //     magrod: "magnetic neodynium rod",
+        //     magrod: "magnetic neodymium rod",
         //     plate: "tungstensteel plate",
         //     motorwire: "annealed copper wire x16",
         // }
@@ -598,6 +603,7 @@ function RUN_RECIPES(TECH, simpl)
         lv: {
             upcable: "copper cable x1",
             cable: "tin cable x1",
+            ccable: "tin cable x1",
             // cable4: "tin cable x4",
             circuit: "basic circuit",
             upcircuit: "good circuit",
@@ -619,6 +625,7 @@ function RUN_RECIPES(TECH, simpl)
         mv: {
             upcable: "gold cable x1",
             cable: "copper cable x1",
+            ccable: "copper cable x1",
             // cable4: "copper cable x4",
             circuit: "good circuit",
             upcircuit: "advanced circuit",
@@ -640,6 +647,7 @@ function RUN_RECIPES(TECH, simpl)
         hv: {
             upcable: "aluminum cable x1",
             cable: "gold cable x1",
+            ccable: "gold cable x1",
             // cable4: "copper cable x4",
             circuit: "advanced circuit",
             upcircuit: "extreme circuit",
@@ -658,6 +666,50 @@ function RUN_RECIPES(TECH, simpl)
             plate: "stainless steel plate",
             motorwire: "copper wire x4",
         },
+        ev: {
+            upcable: "tungsten cable x1",
+            cable: "aluminum cable x1",
+            ccable: "aluminum cable x1",
+            // cable4: "aluminum cable x4",
+            circuit: "extreme circuit",
+            upcircuit: "elite circuit",
+            rarewire: "platinum wire x1",
+            heatwire2: "nichrome wire x2",
+            heatwire4: "nichrome wire x4",
+            pipe: "medium titanium pipe",
+            // lathediamond: ???
+            grinding: "diamond grinding head",
+            rotor: "stainless steel rotor",
+            screw: "stainless steel screw",
+            smallgear: "small titanium gear",
+            rod: "titanium rod",
+            magrod: "magnetic neodymium rod",
+            plate: "titanium plate",
+            motorwire: "annealed copper wire x8",
+            tcoil: "small coil",
+        },
+        iv: {
+            upcable: "tungsten cable x4",
+            cable: "platinum cable x1",
+            ccable: "tungsten cable x1",
+            // cable4: "tungsten cable x4",
+            circuit: "elite circuit",
+            upcircuit: "???",
+            rarewire: "osmium wire x1",
+            heatwire2: "nichrome wire x8",
+            heatwire4: "nichrome wire x16",
+            pipe: "medium tungstensteel pipe",
+            // lathediamond: "industrial diamond",
+            grinding: "diamond grinding head",
+            rotor: "tungstensteel rotor",
+            screw: "tungstensteel screw",
+            smallgear: "small tungstensteel gear",
+            rod: "tungstensteel rod",
+            magrod: "magnetic neodymium rod",
+            plate: "tungstensteel plate",
+            motorwire: "annealed copper wire x16",
+            tcoil: "small coil",
+        }
     }
 
     simpl("hv battery buffer x4", {"hv hull": 1, "gold wire x4": 4, "chest": 1})
@@ -678,6 +730,7 @@ function RUN_RECIPES(TECH, simpl)
 
         // simpl(k+" arc furnace", assoc(v.cable4, 2, v.hull, 1, v.plate, 3, v.circuit, 2, "graphite cell", 1));
         // simpl(k+" fluid canner", assoc(v.cable, 2, v.hull, 1, v.pump, 2, v.circuit, 2, "glass", 2));
+        simpl(k+" water pump", assoc(v.pipe, 2, v.hull, 1, v.pump, 4, v.circuit, 2));
         // simpl(k+" canning machine", assoc(v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2, "glass", 3));
         // simpl(k+" disassembling machine", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.robotarm, 4));
         simpl(k+" assembling machine", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 2, v.robotarm, 2));
@@ -689,7 +742,6 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" bending machine", assoc(v.cable, 1, v.hull, 1, v.piston, 2, v.motor, 2, v.circuit, 2));
         simpl(k+" lathe", assoc(v.cable, 3, v.hull, 1, v.piston, 1, v.motor, 1, v.circuit, 2, "diamond", 1));
         simpl(k+" wiremill", assoc(v.cable, 2, v.hull, 1, v.motor, 4, v.circuit, 2));
-        simpl(k+" steam turbine", assoc(v.cable, 1, v.hull, 1, v.rotor, 2, v.motor, 2, v.circuit, 1, v.pipe, 2));
         simpl(k+" centrifuge", assoc(v.cable, 2, v.hull, 1, v.motor, 2, v.circuit, 4));
         simpl(k+" thermal centrifuge", assoc(v.cable, 2, v.hull, 1, v.motor, 2, v.circuit, 2, v.heatwire4, 2));
         // simpl(k+" extractor", assoc(v.cable, 2, v.hull, 1, v.piston, 1, v.pump, 1, v.circuit, 2, "glass", 2));
@@ -701,12 +753,16 @@ function RUN_RECIPES(TECH, simpl)
 
         // simpl(k+" packager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
         simpl(k+" forming press", assoc(v.cable, 4, v.hull, 1, v.piston, 2, v.circuit, 2));
-        simpl(k+" diesel generator", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.piston, 2, v.circuit, 1, v.gear, 2));
+        if ("gear" in v)
+        {
+            simpl(k+" diesel generator", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.piston, 2, v.circuit, 1, v.gear, 2));
+            simpl(k+" gas turbine", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.rotor, 3, v.circuit, 2));
+            simpl(k+" steam turbine", assoc(v.cable, 1, v.hull, 1, v.rotor, 2, v.motor, 2, v.circuit, 1, v.pipe, 2));
+        }
         simpl(k+" chemical reactor", assoc(v.cable, 2, v.hull, 1, v.motor, 1, v.rotor, 1, v.circuit, 2, "glass", 2));
         // simpl(k+" chemical bath", assoc(v.cable, 1, v.hull, 1, v.conveyor, 1, v.pump, 1, v.circuit, 2, "glass", 2));
         simpl(k+" cutting machine", assoc(v.cable, 2, v.hull, 1, v.conveyor, 1, v.motor, 1, v.circuit, 2, "glass", 1, "diamond sawblade", 1));
         // simpl(k+" compressor", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.circuit, 2));
-        simpl(k+" gas turbine", assoc(v.cable, 1, v.hull, 1, v.motor, 2, v.rotor, 3, v.circuit, 2));
         simpl(k+" laser engraver", assoc(v.cable, 2, v.hull, 1, v.piston, 2, v.emitter, 1, v.circuit, 3));
 
         simpl(k+" air collector", assoc(v.pump, 2, v.hull, 1, v.circuit, 1, "item filter", 1, "iron bars", 4));
@@ -725,30 +781,38 @@ function RUN_RECIPES(TECH, simpl)
         // simpl(k+" input hatch", assoc(v.hull, 1, "glass", 1));
         // simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
 
-        simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1));
-
-        if (k == "lv" || k == "mv")
+        if ("transcoil" in v)
         {
-            simpl(v.hull, assoc(v.cable, 2, v.casing, 1, "wrought iron plate", 2, v.plate, 1));
+            simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1, v.transcoil, 2));
         }
         else
         {
-            simpl(v.hull, assoc(v.cable, 2, v.casing, 1, "polyethylene plate", 2), "Assemble");
+            simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1));
+        }
+
+        if ((k == "lv" || k == "mv") && TECH["polyethylene hulls"] == NONE)
+        {
+            simpl(v.hull, assoc(v.ccable, 2, v.casing, 1, "wrought iron plate", 2, v.plate, 1));
+        }
+        else
+        {
+            simpl(v.hull, assoc(v.ccable, 2, v.casing, 1, "molten polyethylene", 288), "Assemble");
         }
         simpl(v.casing, assoc(v.plate, 8), "Wrench or Assemble: 8");
-        simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.cable, 3, v.circuit, 1));
-        simpl(v.conveyor, assoc("rubber plate", 6, v.motor, 2, v.cable, 1));
-        simpl(v.piston, assoc(v.rod, 2, v.motor, 1, v.cable, 2, v.plate, 3, v.smallgear, 1));
+        simpl(v.robotarm, assoc(v.rod, 2, v.piston, 1, v.motor, 2, v.ccable, 3, v.circuit, 1));
+        simpl(v.conveyor, assoc("rubber plate", 6, v.motor, 2, v.ccable, 1));
+        simpl(v.piston, assoc(v.rod, 2, v.motor, 1, v.ccable, 2, v.plate, 3, v.smallgear, 1));
         if (k == "lv") {
-            simpl(v.pump, assoc(v.rotor, 1, v.screw, 1, v.cable, 1, "paper ring", 2, v.pipe, 1, v.motor, 1));
+            simpl(v.pump, assoc(v.rotor, 1, v.screw, 1, v.ccable, 1, "paper ring", 2, v.pipe, 1, v.motor, 1));
             simpl("lv motor", {"iron rod": 2, "magnetic iron rod":1, "tin cable x1": 2, "copper wire x1": 4});
         }
         else {
-            simpl(v.pump, assoc(v.rotor, 1, v.screw, 1, v.cable, 1, "rubber ring", 2, v.pipe, 1, v.motor, 1));
-            simpl(v.motor, assoc(v.rod, 2, v.magrod, 1, v.cable, 2, v.motorwire, 4));
+            simpl(v.pump, assoc(v.rotor, 1, v.screw, 1, v.ccable, 1, "rubber ring", 2, v.pipe, 1, v.motor, 1));
+            simpl(v.motor, assoc(v.rod, 2, v.magrod, 1, v.ccable, 2, v.motorwire, 4));
         }
     }
 
+    simpl("ev emitter", { "platinum rod": 4, "extreme circuit": 2, "ender pearl": 1, "aluminum cable x1": 2 });
     simpl("hv emitter", { "chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2 });
     simpl("mv emitter", { "electrum rod": 4, "good circuit": 2, "nether quartz": 1, "copper cable x1": 2 });
     // simpl("lv sensor", { "brass rod": 1, "basic circuit": 1, "quartzite": 1, "steel plate": 4 });
@@ -868,12 +932,32 @@ function RUN_RECIPES(TECH, simpl)
     //     simpl("nand", { "steel item casing": 1, "red alloy wire x1" : 2, "tin wire x1": 1 });
     // }
 
-    if (TECH["circuit assembler"] >= MV)
+    simpl("smd resistor", { "molten polyethylene": 144, "fine electrum wire":4, "carbon dust": 1}, "MV Assemble", 24, warn_if_not("assembling machine", MV))
+    simpl("smd capacitor", { "molten polyethylene": 144, "polyvinylchloride foil": 16, "aluminum foil": 4}, "MV Assemble", 64, warn_if_not("assembling machine", MV))
+    simpl("smd transistor", { "molten polyethylene": 288, "fine annealed copper wire": 6, "gallium plate": 1}, "MV Assemble", 32, warn_if_not("assembling machine", LV))
+
+    if (TECH["circuit assembler"] >= EV)
+    {
+        simpl("basic circuit", {"basic circuit C":1}, "DO NOTHING")
+        simpl("good circuit", {"good circuit C":1}, "DO NOTHING")
+        simpl("advanced circuit", {"advanced circuit nanoprocessor":1}, "DO NOTHING")
+        simpl("extreme circuit", {"extreme circuit nanoprocessor":1}, "DO NOTHING")
+        simpl("elite circuit", {"elite circuit nanocomputer": 1}, "DO NOTHING")
+    }
+    else if (TECH["circuit assembler"] >= HV)
+    {
+        simpl("elite circuit", {"elite circuit mainframe": 1}, "DO NOTHING")
+        simpl("basic circuit", {"basic circuit C":1}, "DO NOTHING")
+        simpl("good circuit", {"good circuit C":1}, "DO NOTHING")
+        simpl("advanced circuit", {"advanced circuit C":1}, "DO NOTHING")
+        simpl("extreme circuit", {"extreme circuit workstation":1}, "DO NOTHING")
+    }
+    else if (TECH["circuit assembler"] >= MV)
     {
         simpl("basic circuit", {"basic circuit C":1}, "DO NOTHING")
         simpl("good circuit", {"good circuit C":1}, "DO NOTHING")
         simpl("advanced circuit", {"advanced circuit C":1}, "DO NOTHING")
-        simpl("extreme circuit", {"extreme circuit C":1}, "DO NOTHING")
+        simpl("extreme circuit", {"extreme circuit workstation":1}, "DO NOTHING")
     }
     else if (TECH["circuit assembler"] >= LV)
     {
@@ -887,23 +971,39 @@ function RUN_RECIPES(TECH, simpl)
         simpl("good circuit", {"good circuit A":1}, "DO NOTHING")
     }
 
-    if (TECH["circuit assembler"] >= MV)
-    {
-        simpl("extreme circuit C", { "advanced circuit C": 3, "random access memory chip": 4, "fine electrum wire": 6, "plastic circuit board": 2, "smd diode": 4, "molten soldering alloy": 144}, "MV Circuit Assemble")
-        simpl("advanced circuit C", { "good circuit C": 2, "random access memory chip": 4, "fine red alloy wire": 12, "plastic circuit board": 1, "small coil": 4, "smd capacitor": 4, "molten soldering alloy": 144}, "MV Circuit Assemble")
-        simpl("good circuit C", { "resistor": 2, "central processing unit chip": 1, "fine red alloy wire": 2, "plastic circuit board": 1, "transistor": 2, "capacitor": 2, "molten soldering alloy": 72}, "MV Circuit Assemble")
-        simpl("basic circuit C", { "resistor": 4, "central processing unit chip": 4, "fine copper wire": 2, "plastic circuit board": 1, "transistor":4, "capacitor": 4, "molten soldering alloy": 72}, "MV Circuit Assemble", 4)
-    }
+    simpl("elite circuit nanocomputer", {"molten soldering alloy": 144, "smd diode": 4, "random access memory chip": 4, "fine electrum wire": 6, "extreme circuit nanoprocessor": 3, "nor memory chip": 4, "epoxy circuit board": 2}, "EV Circuit Assemble")
+    simpl("extreme circuit nanoprocessor", {"molten soldering alloy": 144, "smd capacitor": 4, "random access memory chip": 4, "fine electrum wire": 6, "advanced circuit nanoprocessor": 2, "small coil": 4, "epoxy circuit board": 1}, "EV Circuit Assemble")
+    simpl("advanced circuit nanoprocessor", {"molten soldering alloy": 72, "smd capacitor": 2, "smd resistor": 2, "fine electrum wire": 2, "nanocomponent cpu chip": 1, "smd transistor": 2, "epoxy circuit board": 1}, "EV Circuit Assemble")
+
+    simpl("elite circuit mainframe", {"molten soldering alloy": 288, "capacitor A": 24, "random access memory chip": 16, "annealed copper wire x1": 12, "extreme circuit workstation": 4, "small coil": 4, "aluminum frame": 1}, "HV Circuit Assemble")
+
+    simpl("extreme circuit workstation", { "advanced circuit C": 3, "random access memory chip": 4, "fine electrum wire": 6, "plastic circuit board": 2, "smd diode": 4, "molten soldering alloy": 144}, "MV Circuit Assemble")
+    simpl("advanced circuit C", { "good circuit C": 2, "random access memory chip": 4, "fine red alloy wire": 12, "plastic circuit board": 1, "small coil": 4, "smd capacitor": 4, "molten soldering alloy": 144}, "MV Circuit Assemble")
+    simpl("good circuit C", { "resistor A": 2, "central processing unit chip": 1, "fine red alloy wire": 2, "plastic circuit board": 1, "transistor A": 2, "capacitor A": 2, "molten soldering alloy": 72}, "MV Circuit Assemble")
+    simpl("basic circuit C", { "resistor A": 4, "central processing unit chip": 4, "fine copper wire": 2, "plastic circuit board": 1, "transistor A":4, "capacitor A": 4, "molten soldering alloy": 72}, "MV Circuit Assemble", 4)
 
     if (TECH["circuit assembler"] >= LV)
     {
-        simpl("advanced circuit B", { "good circuit B": 2, "transistor": 4, "integrated logic circuit chip": 3, "random access memory chip": 1, "fine electrum wire": 16, "molten soldering alloy": 72}, "Circuit Assemble")
-        simpl("good circuit B", { "basic circuit B": 3, "resistor": 4, "phenolic circuit board": 1, "fine electrum wire": 8, "molten soldering alloy": 72}, "Circuit Assemble")
-        simpl("basic circuit B", { "resistor": 2, "integrated logic circuit chip": 1, "fine copper wire": 1, "phenolic circuit board": 1, "molten soldering alloy": 72}, "Circuit Assemble")
+        simpl("advanced circuit B", { "good circuit B": 2, "transistor A": 4, "integrated logic circuit chip": 3, "random access memory chip": 1, "fine electrum wire": 16, "molten soldering alloy": 72}, "Circuit Assemble")
+        simpl("good circuit B", { "basic circuit B": 3, "resistor A": 4, "phenolic circuit board": 1, "fine electrum wire": 8, "molten soldering alloy": 72}, "Circuit Assemble")
+        simpl("basic circuit B", { "resistor A": 2, "integrated logic circuit chip": 1, "fine copper wire": 1, "phenolic circuit board": 1, "molten soldering alloy": 72}, "Circuit Assemble")
     }
 
     simpl("good circuit A", { "basic circuit A": 4, "diode": 1, "steel plate": 2, "red alloy cable x1": 2})
     simpl("basic circuit A", { "resistor": 2, "vacuum tube": 2, "red alloy cable x1": 3, "coated circuit board": 1, "steel plate": 1 })
+
+    if (TECH["smd components"] >= LV)
+    {
+        simpl("resistor A", {"smd resistor": 1}, "Alias")
+        simpl("capacitor A", {"smd capacitor": 1}, "Alias")
+        simpl("transistor A", {"smd transistor": 1}, "Alias")
+    }
+    else
+    {
+        simpl("resistor A", {"resistor": 1}, "Alias")
+        simpl("capacitor A", {"capacitor": 1}, "Alias")
+        simpl("transistor A", {"transistor": 1}, "Alias")
+    }
 
     if (TECH["assembling machine"] >= LV)
     {
@@ -921,6 +1021,8 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("glass tube", { "glass dust": 1 }, "Alloy Smelt: Ball Mold")
     simpl("diode", { "glass pane": 2, "tin wire x1": 2, "black dye or ink": 2, "tiny gallium dust": 1 }, undefined, 4)
+
+    simpl("molten polyethylene", {"polyethylene plate": 1}, "Fluid Extractor", 144)
 
     // //BEGIN INTERMEDIATE VANILLA
     // simpl("iron bars", {"iron rod": 6}, undefined, 8);
@@ -945,13 +1047,8 @@ function RUN_RECIPES(TECH, simpl)
 
     simpl("diamond grinding head", {"diamond": 1, "steel plate": 4, "diamond dust": 4});
 
-    simpl("frost proof casing", {"aluminum plate": 6, "aluminum frame box":1 }, undefined, 3);
-    simpl("aluminum frame box", {"aluminum plate": 3, "aluminum rod": 5}, undefined, 4);
-
-    // if (TECH["extruder"] >= LV)
-    //     simpl("rubber ring", {"rubber": 1 }, "Extrude: Ring", 4);
-    // else
-    //     simpl("rubber ring", {"rubber sheet": 1 });
+    simpl("frost proof casing", {"aluminum plate": 6, "aluminum frame":1 }, undefined, 3);
+    simpl("aluminum frame", {"aluminum plate": 3, "aluminum rod": 5}, undefined, 4);
 
     function assoc() {
         var obj = {};
@@ -970,29 +1067,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl("magnetic iron rod", {"iron rod": 1, "redstone": 4});
     }
     simpl("magnetic steel rod", {"steel rod": 1}, "Polarize", undefined, warn_if_not("polarizer", LV));
-    // simpl("magnetic neodynium rod", {"neodynium rod": 1}, "HV Polarize", undefined, warn_if_not("polarizer", HV));
-
-    // simpl("insulated hv cable", { "ic2 hv cable": 1, "rubber": 3 });
-    // simpl("insulated gold cable", { "ic2 gold cable": 1, "rubber": 2 });
-    // simpl("insulated copper cable", { "ic2 copper cable": 1, "rubber": 1 });
-    // simpl("insulated tin cable", { "ic2 tin cable": 1, "rubber": 1 });
-
-    // if (TECH["wiremill"] > NONE)
-    // {
-    //     simpl("ic2 hv cable", { "iron plate": 1 }, "Wiremill", 6);
-    //     simpl("ic2 gold cable", { "gold plate": 1 }, "Wiremill", 6);
-    //     simpl("ic2 copper cable", { "copper plate": 1 }, "Wiremill", 3);
-    //     simpl("ic2 tin cable", { "tin plate": 1 }, "Wiremill", 4);
-    // }
-    // else
-    // {
-    //     simpl("ic2 hv cable", { "iron plate": 1 }, undefined, 3);
-    //     simpl("ic2 gold cable", { "gold plate": 1 }, undefined, 4);
-    //     simpl("ic2 copper cable", { "copper plate": 1 }, undefined, 2);
-    //     simpl("ic2 tin cable", { "tin plate": 1 }, undefined, 3);
-    // }
-
-    // simpl("tiny tungstensteel fluid pipe", { "tungstensteel": 1 }, "HV Extrude: Tiny Pipe", 2, warn_if_not("extruder", HV));
+    simpl("magnetic neodymium rod", {"neodymium rod": 1}, "Polarize", undefined, warn_if_not("polarizer", LV));
 
     simple_materials = ["lead", "tin", "red alloy", "zinc", "cobalt", "soldering alloy"]
     materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "osmium", "tungsten", "kanthal", "nichrome", "cobalt", "zinc", "electrum"];
@@ -1008,7 +1083,18 @@ function RUN_RECIPES(TECH, simpl)
         }
         else
         {
-            simpl(v + " cable x1", assoc(v + " wire x1", 1, "molten rubber", 144), "Assemble");
+            if (TECH["rubber type"] <= LV)
+            {
+                simpl(v + " cable x1", assoc(v + " wire x1", 1, "molten rubber", 144), "Assemble");
+            }
+            else if (TECH["rubber type"] == MV)
+            {
+                simpl(v + " cable x1", assoc(v + " wire x1", 1, "molten styrene-butadiene rubber", 108), "Assemble");
+            }
+            else if (TECH["rubber type"] >= HV)
+            {
+                simpl(v + " cable x1", assoc(v + " wire x1", 1, "molten silicone rubber", 72), "Assemble");
+            }
         }
 
         simpl("fine " + v + " wire", assoc(v + " wire x1", 1), "Wiremill", 4);
@@ -1023,6 +1109,9 @@ function RUN_RECIPES(TECH, simpl)
             simpl(v + " wire x1", assoc(v + " plate", 1));
     }
 
+    simpl("molten rubber", {"rubber sheet": 1}, "Fluid extractor", 144)
+    simpl("molten styrene-butadiene rubber", {"styrene-butadiene rubber ring": 1}, "Fluid extractor", 36)
+    simpl("molten silicone rubber", {"silicone rubber rod": 1}, "Fluid extractor", 72)
 
     // materials = ["steel", "iron", "bronze", "tin"]
     // for (var k in materials)
@@ -1043,7 +1132,7 @@ function RUN_RECIPES(TECH, simpl)
     //     }
     // }
 
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum", "chrome", "titanium", "tungstensteel", "invar", "cobalt brass", "copper", "gold", "electrum", "blue steel", "magnalium"];
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodymium", "aluminum", "chrome", "titanium", "tungstensteel", "invar", "cobalt brass", "copper", "gold", "electrum", "blue steel", "magnalium"];
     for (var k in materials) {
         var v = materials[k]
         var plate = v + " plate";
@@ -1097,7 +1186,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl("small "+v+" gear", assoc(plate,1));
     }
 
-    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodynium", "aluminum"
+    materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodymium", "aluminum"
         , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
         , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
         , "tungstensteel", "cobalt", "wrought iron"]
@@ -1142,8 +1231,8 @@ function RUN_RECIPES(TECH, simpl)
     // }
     // if (TECH["fluid extractor"] > NONE)
     // {
-    //     simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144);
     // }
+    simpl("molten soldering alloy", {"soldering alloy": 1}, "Fluid Extract", 144);
 
     // simpl("redstone engine", { "piston": 1, "glass": 1, "plank": 3, "wood gear": 2});
     // simpl("wood gear", {"stick": 4});
@@ -1188,8 +1277,12 @@ function basictech() {
         "cutting saw" : techlevel.hv,
         "compressor" : techlevel.hv,
         "autoclave" : techlevel.hv,
-        "circuit assembler": techlevel.mv,
-        "cluster mill": techlevel.lv
+        "circuit assembler": techlevel.ev,
+        "cluster mill": techlevel.lv,
+        // These are more like "switches" rather than tech tiers
+        "smd components": techlevel.lv,
+        "polyethylene hulls": techlevel.lv,
+        "rubber type": techlevel.hv,
     }
 }
 
