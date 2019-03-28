@@ -325,8 +325,6 @@ function RUN_RECIPES(TECH, simpl)
     // simpl("iv field generator", {"energy flow circuit": 4, "nether star": 1, "osmium wire x16": 4});
     // simpl("mv field generator", {"good circuit": 4, "eye of ender": 1, "osmium wire x2": 4});
     // simpl("superconducting coil block", { "superconductor wire x2": 8});
-    // simpl("superconductor wire x2", { "superconductor wire x1": 2});
-    // simpl("superconductor wire x1", { "luv wire x1": 3, "superconductor coolant": 2, "lv pump": 2, "tiny tungstensteel fluid pipe": 2 }, undefined, 3);
 
     // simpl("iridium reinforced plate", { "iridium alloy ingot": 1, "industrial tnt": 8}, "Implosion Compressor");
     // simpl("iridium alloy ingot", {"advanced alloy": 4, "iridium plate": 4, "industrial diamond": 1});
@@ -338,6 +336,23 @@ function RUN_RECIPES(TECH, simpl)
     //     "lv energy hatch":3,
     //     "heat proof casing":10
     //     });
+
+    // for (var k = 5; k < 16; ++k)
+    // {
+    //     simpl("assembly line " + k, {
+    //         "distillation tower": 1,
+    //         "clean stainless steel casing": k*7+6,
+    //         "mv output hatch": k+1,
+    //         "mv input hatch": 1,
+    //         "mv output bus": 1,
+    //         "hv energy hatch": 1,
+    //     })
+    // }
+
+
+    simpl("large gas turbine multi mv", {"large gas turbine": 1, "mv rotor holder": 1, "ev energy output hatch": 1, "hv input hatch": 1, "stainless turbine casing": 30})
+    simpl("large gas turbine", { "extreme circuit": 2, "stainless steel gear": 4, "ev hull": 1, "large stainless steel pipe": 2 })
+    simpl("stainless turbine casing", {"steel turbine casing": 1, "stainless steel plate": 6}, "Assemble", 3)
 
     for (var k = 1; k < 9; ++k)
     {
@@ -387,6 +402,11 @@ function RUN_RECIPES(TECH, simpl)
     simpl("nichrome coil block", { "nichrome wire x2": 8 })
     simpl("kanthal coil block", { "kanthal wire x2": 8 })
     simpl("cupronickel coil block", { "cupronickel wire x2": 8 })
+    simpl("tungstensteel coil block", { "tungstensteel wire x2": 8 })
+    simpl("superconductor coil block", { "superconductor wire x2": 8 })
+
+    simpl("superconductor wire x2", { "superconductor wire x1": 2});
+    simpl("superconductor wire x1", { "luv wire x1": 3, "nitrogen": 2000, "lv pump": 1, "tungstensteel plate": 3 }, "Assemble HV", 3);
 
     simpl("heat proof casing", { "invar plate": 6, "invar frame": 1 }, undefined, 3);
     simpl("invar frame", { "invar rod": 5, "invar plate": 3 }, undefined, 4);
@@ -772,7 +792,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" distillery", assoc("blaze rod", 1, "glass", 2, v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2));
         simpl(k+" brewery", assoc("blaze rod", 1, "glass", 2, v.cable, 2, v.hull, 1, v.pump, 1, v.circuit, 2));
 
-        // simpl(k+" packager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
+        simpl(k+" packager", assoc(v.cable, 2, v.hull, 1, v.circuit, 2, v.conveyor, 1, v.robotarm, 1, "chest", 2));
         simpl(k+" forming press", assoc(v.cable, 4, v.hull, 1, v.piston, 2, v.circuit, 2));
         if ("gear" in v)
         {
@@ -803,15 +823,6 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" input hatch", assoc(v.hull, 1, "glass", 1));
         simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
 
-        if ("transcoil" in v)
-        {
-            simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1, v.transcoil, 2));
-        }
-        else
-        {
-            simpl(k+" transformer", assoc(v.hull, 1, v.cable, 4, v.upcable, 1));
-        }
-
         if ((k == "lv" || k == "mv") && TECH["polyethylene hulls"] == NONE)
         {
             simpl(v.hull, assoc(v.ccable, 2, v.casing, 1, "wrought iron plate", 2, v.plate, 1));
@@ -840,6 +851,11 @@ function RUN_RECIPES(TECH, simpl)
     simpl("mv emitter", { "electrum rod": 4, "good circuit": 2, "nether quartz": 1, "copper cable x1": 2 });
     // simpl("lv sensor", { "brass rod": 1, "basic circuit": 1, "quartzite": 1, "steel plate": 4 });
     simpl("lv emitter", { "brass rod": 4, "basic circuit": 2, "quartzite": 1, "tin cable x1": 2 });
+
+    simpl("lv-mv transformer", { "lv hull": 1, "tin cable x1": 4, "copper cable x1": 1})
+    simpl("mv-hv transformer", { "mv hull": 1, "copper cable x1": 4, "gold cable x1": 1})
+    simpl("hv-ev transformer", { "hv hull": 1, "gold cable x1": 4, "aluminum cable x1": 1, "small coil": 2})
+    simpl("ev-iv transformer", { "ev hull": 1, "aluminum cable x1": 4, "tungsten cable x1": 1, "small coil": 2})
 
     // simpl("luv energy hatch", { "luv hull": 1, "tungsten cable x4": 1 });
     // simpl("fusion casing", { "luv casing": 1, "tungstensteel plate": 6 });
@@ -1095,7 +1111,8 @@ function RUN_RECIPES(TECH, simpl)
     simpl("magnetic neodymium rod", {"neodymium rod": 1}, "Polarize", undefined, warn_if_not("polarizer", LV));
 
     simple_materials = ["lead", "tin", "red alloy", "zinc", "cobalt", "soldering alloy"]
-    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "osmium", "tungsten", "kanthal", "nichrome", "cobalt", "zinc", "electrum"];
+    complex_materials = ["tungstensteel"]
+    materials = ["aluminum", "gold", "silver", "annealed copper", "copper", "cupronickel", "tin", "lead", "red alloy", "osmium", "tungsten", "kanthal", "nichrome", "cobalt", "zinc", "electrum", "tungstensteel"];
     for (var k in materials)
     {
         var v = materials[k];
@@ -1103,6 +1120,10 @@ function RUN_RECIPES(TECH, simpl)
         simpl(v + " cable x4", assoc(v + " cable x2", 2));
         simpl(v + " cable x2", assoc(v + " cable x1", 2));
         if (simple_materials.includes(v))
+        {
+            simpl(v + " cable x1", assoc(v + " wire x1", 1, "black carpet", 1, "string", 1));
+        }
+        else if (complex_materials.includes(v))
         {
             simpl(v + " cable x1", assoc(v + " wire x1", 1, "black carpet", 1, "string", 1));
         }
