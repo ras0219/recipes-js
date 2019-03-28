@@ -103,6 +103,8 @@ Object.keys(recipes).forEach(function (key) {
     app.all("/" + key, make_response_function("[" + recipes[key].name + "]", recipes[key].recipes));
 });
 
+app.all("/gregblock_ores", function (req, res) { res.render('ores', { title: "gregblock"}) })
+
 var port = 3000
 if ('PORT' in process.env)
 {

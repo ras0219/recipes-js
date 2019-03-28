@@ -42,8 +42,10 @@ html(lang="en")
                             option(value="#{lval}" selected="selected")= lkey
                           else
                             option(value="#{lval}")= lkey
-        input(type="hidden", name="num_items", value="#{num_items}")
+        input(type="hidden" name="num_items" value="#{num_items}")
         input(type="submit" href="#")
+      form(action="#")
+        input(type="submit" href="#" value="Reset")
       if crafts
         hr
         a(id="craftingSection" name="craftingSection")
@@ -58,6 +60,7 @@ html(lang="en")
               th
               th Item
               th Qty
+              th 64s | Rem
           tbody
             - var ingkeys = Object.keys(final);
             - ingkeys.sort();
@@ -74,6 +77,7 @@ html(lang="en")
                     input(type="checkbox" id="startinging#{index}")
                   td= index
                   td= Number(final[index])
+                  td= Number(Math.floor(final[index] / 64.0)) + " | " + Number(final[index] % 64.0)
         if leftovers.length > 0
           h4 Leftover Ingredients
           table.table.table-striped
@@ -149,7 +153,7 @@ html(lang="en")
                   - for (var k in val[2]) {
                   -   obj2[k] = val[2][k] * numcrafts;
                   - }
-                  = numcrafts+" times using "
+                  = numcrafts+" times; total "
                   br.visible-sm.visible-xs
                   = JSON.stringify(obj2)
               else

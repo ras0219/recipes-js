@@ -339,7 +339,22 @@ function RUN_RECIPES(TECH, simpl)
     //     "heat proof casing":10
     //     });
 
+    for (var k = 1; k < 9; ++k)
+    {
+        simpl("distillation tower " + k + " fluids", {
+            "distillation tower": 1,
+            "clean stainless steel casing": k*7+6,
+            "mv output hatch": k+1,
+            "mv input hatch": 1,
+            "mv output bus": 1,
+            "hv energy hatch": 1,
+        })
+    }
+
     simpl("distillation tower", {"extreme circuit": 4, "ev pump": 2, "large stainless steel pipe": 2, "ev machine casing": 1})
+    simpl("large steam turbine multi ev", {"large steam turbine": 1, "ev rotor holder": 1, "ev energy output hatch": 1, "hv input hatch": 1, "hv output hatch": 1, "steel turbine casing": 29})
+    simpl("large steam turbine", { "advanced circuit": 2, "steel gear": 4, "hv hull": 1, "large steel pipe": 2 })
+    simpl("ev rotor holder", {"ev hull": 1, "nichrome wire x4": 4, "rubber ring": 1})
 
     simpl("clean stainless steel casing", { "stainless steel frame": 1, "stainless steel plate": 6}, "Assemble", 3)
     // simpl("vacuum freezer multi", { "frost proof casing": 21, "vacuum freezer": 1, "lv input bus": 1, "lv output bus": 1, "maintenance hatch": 1, "mv energy hatch": 1 });
@@ -349,8 +364,14 @@ function RUN_RECIPES(TECH, simpl)
     simpl("implosion compressor", { "obsidian":3,"solid steel casing":1,"aluminum cable x1":2,"advanced circuit":3 });
 
     simpl("large steel boiler", { "advanced circuit": 4, "copper cable x1": 4, "steel firebox casing": 1 })
+    simpl("large titanium boiler", { "elite circuit": 4, "gold cable x1": 4, "titanium firebox casing": 1 })
 
     // simpl("lv muffler hatch", { "lv hull": 1, "steel fluid pipe": 1 });
+
+    simpl("titanium pipe casing", { "titanium plate": 4, "medium titanium pipe": 4, "titanium frame": 1 }, undefined, 3);
+    simpl("titanium firebox casing", { "titanium plate": 4, "titanium rod": 4, "titanium frame": 1 }, undefined, 3);
+    simpl("titanium machine casing", { "titanium plate": 6, "titanium frame": 1 }, undefined, 3);
+    simpl("titanium frame", { "titanium rod": 5, "titanium plate": 3 }, undefined, 4);
 
     simpl("steel pipe casing", { "steel plate": 4, "medium steel pipe": 4, "steel frame": 1 }, undefined, 3);
     simpl("steel firebox casing", { "steel plate": 4, "steel rod": 4, "steel frame": 1 }, undefined, 3);
@@ -694,7 +715,7 @@ function RUN_RECIPES(TECH, simpl)
             ccable: "tungsten cable x1",
             // cable4: "tungsten cable x4",
             circuit: "elite circuit",
-            upcircuit: "???",
+            upcircuit: "master circuit",
             rarewire: "osmium wire x1",
             heatwire2: "nichrome wire x8",
             heatwire4: "nichrome wire x16",
@@ -774,12 +795,13 @@ function RUN_RECIPES(TECH, simpl)
         simpl(k+" electric furnace", assoc(v.hull, 1, v.heatwire2, 4, v.circuit, 2, v.cable, 2));
         simpl(k+" alloy smelter", assoc(v.hull, 1, v.heatwire4, 4, v.circuit, 2, v.cable, 2));
 
-        // simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
-        // simpl(k+" input bus", assoc(v.hull, 1, "chest", 1));
-        // simpl(k+" output bus", assoc(v.hull, 1, "chest", 1));
+        simpl(k+" energy hatch", assoc(v.cable, 1, v.hull, 1));
+        simpl(k+" energy output hatch", assoc(v.cable, 1, v.hull, 1));
+        simpl(k+" input bus", assoc(v.hull, 1, "chest", 1));
+        simpl(k+" output bus", assoc(v.hull, 1, "chest", 1));
 
-        // simpl(k+" input hatch", assoc(v.hull, 1, "glass", 1));
-        // simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
+        simpl(k+" input hatch", assoc(v.hull, 1, "glass", 1));
+        simpl(k+" output hatch", assoc(v.hull, 1, "glass", 1));
 
         if ("transcoil" in v)
         {
@@ -812,6 +834,7 @@ function RUN_RECIPES(TECH, simpl)
         }
     }
 
+    simpl("iv emitter", { "osmium rod": 4, "elite circuit": 2, "eye of ender": 1, "tungsten cable x1": 2 });
     simpl("ev emitter", { "platinum rod": 4, "extreme circuit": 2, "ender pearl": 1, "aluminum cable x1": 2 });
     simpl("hv emitter", { "chrome rod": 4, "advanced circuit": 2, "emerald": 1, "gold cable x1": 2 });
     simpl("mv emitter", { "electrum rod": 4, "good circuit": 2, "nether quartz": 1, "copper cable x1": 2 });
@@ -943,6 +966,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl("advanced circuit", {"advanced circuit nanoprocessor":1}, "DO NOTHING")
         simpl("extreme circuit", {"extreme circuit nanoprocessor":1}, "DO NOTHING")
         simpl("elite circuit", {"elite circuit nanocomputer": 1}, "DO NOTHING")
+        simpl("master circuit", {"master circuit mainframe": 1}, "DO NOTHING")
     }
     else if (TECH["circuit assembler"] >= HV)
     {
@@ -971,6 +995,7 @@ function RUN_RECIPES(TECH, simpl)
         simpl("good circuit", {"good circuit A":1}, "DO NOTHING")
     }
 
+    simpl("master circuit mainframe", {"molten soldering alloy": 288, "smd capacitor": 24, "random access memory chip": 16, "annealed copper wire x1": 12, "elite circuit nanocomputer": 4, "small coil": 4, "aluminum frame": 1}, "EV Circuit Assemble")
     simpl("elite circuit nanocomputer", {"molten soldering alloy": 144, "smd diode": 4, "random access memory chip": 4, "fine electrum wire": 6, "extreme circuit nanoprocessor": 3, "nor memory chip": 4, "epoxy circuit board": 2}, "EV Circuit Assemble")
     simpl("extreme circuit nanoprocessor", {"molten soldering alloy": 144, "smd capacitor": 4, "random access memory chip": 4, "fine electrum wire": 6, "advanced circuit nanoprocessor": 2, "small coil": 4, "epoxy circuit board": 1}, "EV Circuit Assemble")
     simpl("advanced circuit nanoprocessor", {"molten soldering alloy": 72, "smd capacitor": 2, "smd resistor": 2, "fine electrum wire": 2, "nanocomponent cpu chip": 1, "smd transistor": 2, "epoxy circuit board": 1}, "EV Circuit Assemble")
@@ -1189,7 +1214,7 @@ function RUN_RECIPES(TECH, simpl)
     materials = ["bronze", "iron", "tin", "steel", "stainless steel", "neodymium", "aluminum"
         , "chrome", "titanium", "invar", "cobalt brass", "copper", "gold", "red alloy", "battery alloy"
         , "thaumium", "silicon", "platinum", "lead", "zinc", "beryllium", "plutonium", "iridium"
-        , "tungstensteel", "cobalt", "wrought iron"]
+        , "tungstensteel", "cobalt", "wrought iron", "blue steel"]
     for (var k in materials) {
         var v = materials[k]
 
